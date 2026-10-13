@@ -169,6 +169,9 @@ These are research notes, not proofs: AI work, most of it without human review. 
 | 2 | *Newman's conjecture, kernel-checked: Λ ≥ 0 for the de Bruijn–Newman constant in Lean 4 along Dobner's proof* (v1.1.0 adds the Selberg class), [`papers/newman-lambda-nonneg/`](papers/newman-lambda-nonneg/) | [10.5281/zenodo.23287832](https://doi.org/10.5281/zenodo.23287832) (all versions; v1.1.0: 10.5281/zenodo.23292885) |
 | 3 | The Riemann–Roch-square criterion, [`papers/rr-square-criterion/`](papers/rr-square-criterion/) | not yet released |
 
+**arXiv: staged, not yet submitted.** Each paper has an arXiv source package and a submission sheet, and the author
+submits them. See [`papers/ARXIV_STAGING.md`](papers/ARXIV_STAGING.md). No arXiv identifiers exist yet; cite the Zenodo DOIs.
+
 ## 9. How to build and check
 
 The trust model is the usual one for formal proofs: **the Lean kernel is the only trusted component.** You still have to read
@@ -191,7 +194,7 @@ every change. On manual dispatch it also builds the HODGE-1 certificates and the
 The repository is laid out as follows:
 
 ```
-papers/          the three papers (LaTeX, PDF, build script)
+papers/          the three papers (LaTeX, PDF, build script, arXiv package and sheet)
 docs/            PROGRESS.md: the complete record
 formalization/   the theorem index and the pinned source commit
 telperion/       the Telperion engine, its tests, and six Lean islands under telperion/examples/

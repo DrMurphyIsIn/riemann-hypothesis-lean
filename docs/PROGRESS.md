@@ -355,6 +355,8 @@ them have had no human review. They are summarised because they record what was 
 | *Newman's conjecture, kernel-checked: Λ ≥ 0 … along Dobner's proof* (v1.1.0 adds the Selberg class) | concept 10.5281/zenodo.23287832; v1.1.0 10.5281/zenodo.23292885 |
 | The Riemann–Roch-square criterion | not yet released |
 
+arXiv: staged, not yet submitted (`papers/ARXIV_STAGING.md`). No arXiv identifiers are claimed.
+
 ## 9. How to build and check
 
 See `formalization/README.md` and `.github/workflows/verify.yml`. `scripts/materialize.sh` checks this repository's copy

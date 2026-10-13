@@ -1,8 +1,8 @@
 # The RR-square criterion paper (placeholder)
 
 This directory will hold the third paper: the conditional Riemann–Roch-square criterion for the Riemann
-Hypothesis, with `paper.tex`, `paper.pdf`, its build script and its DOI, in the same layout as the two papers
-beside it. The paper was still being written when this repository was assembled, so nothing is here yet.
+Hypothesis, in the same layout as the two papers beside it: `paper.tex`, `paper.pdf`, `make_arxiv.sh`, an arXiv
+source package `arxiv.tar.gz` that compiles standalone, and an `ARXIV.md` submission sheet (staged, not submitted). The paper was still being written when this repository was assembled, so nothing is here yet.
 
 Until it lands, the mathematics it describes can already be read and checked in Lean:
 
