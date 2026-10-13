@@ -1,0 +1,478 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[margin=1in]{geometry}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage[font=small,labelfont=bf]{caption}
+\usepackage{xcolor}
+\usepackage{listings}
+\setlength{\emergencystretch}{2.5em}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=black, citecolor=black, urlcolor=blue}
+\usepackage[capitalise,noabbrev]{cleveref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\lean}[1]{\texttt{#1}}
+\newcommand{\re}{\operatorname{Re}}
+\newcommand{\im}{\operatorname{Im}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Div}{\mathrm{Div}}
+\newcommand{\Prin}{\mathrm{Prin}}
+\newcommand{\Weil}{\mathcal{W}}
+\newcommand{\pf}{\mathrm{PF}}
+
+\definecolor{leanbg}{HTML}{F4F2EC}
+\lstdefinelanguage{Lean}{
+  morekeywords={theorem,lemma,def,structure,extends,where,noncomputable,import,namespace,end,open,by,fun,sorry,example},
+  sensitive=true, morecomment=[l]{--}, morecomment=[s]{/-}{-/}, morestring=[b]",
+}
+\lstset{language=Lean, basicstyle=\small\ttfamily, backgroundcolor=\color{leanbg},
+  frame=single, framerule=0pt, framesep=5pt, xleftmargin=5pt, xrightmargin=5pt,
+  breaklines=true, columns=fullflexible, keepspaces=true, showstringspaces=false,
+  literate={ℝ}{{$\mathbb{R}$}}1 {ℂ}{{$\mathbb{C}$}}1 {ℕ}{{$\mathbb{N}$}}1 {ℤ}{{$\mathbb{Z}$}}1
+           {∀}{{$\forall$}}1 {∃}{{$\exists$}}1 {→}{{$\to$}}1 {≠}{{$\neq$}}1 {≤}{{$\le$}}1 {≥}{{$\ge$}}1
+           {∧}{{$\wedge$}}1 {∨}{{$\vee$}}1 {¬}{{$\neg$}}1 {↔}{{$\leftrightarrow$}}1 {⊆}{{$\subseteq$}}1
+           {∈}{{$\in$}}1 {•}{{$\bullet$}}1 {⊕}{{$\oplus$}}1 {ι}{{$\iota$}}1 {χ}{{$\chi$}}1 {β}{{$\beta$}}1
+           {τ}{{$\tau$}}1 {ₗ}{{$_l$}}1 {⟨}{{$\langle$}}1 {⟩}{{$\rangle$}}1 {·}{{$\cdot$}}1}
+
+\title{A kernel-checked Riemann--Roch-square criterion\\ for the Riemann Hypothesis}
+\author{Peter W. Murphy}
+\date{October 13, 2026\\[2pt] \small Lean sources: Arda commit \texttt{50b1000254c6} \;$\cdot$\; \url{https://github.com/DrMurphyIsIn/Arda}}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+For a curve over a finite field, Weil's proof of the Riemann Hypothesis runs through the Hodge index theorem on the surface $C \times C$, and Grothendieck derived that inequality from Riemann--Roch on the surface. We isolate, in Lean~4, the dimension-level axioms that this argument uses and ask what an analogue over $\Q$ would have to supply. On a real vector space $V$ with a bilinear form $B$ and a degree class $f$, we state Riemann--Roch-square axioms: a degree on a larger divisor space vanishing on principal divisors, an effectivity clause, numerical triviality of principal divisors in $V$, and a Riemann--Roch index identity with Serre duality whose quadratic term is $B$. We prove that these axioms together with either a degree bound $h^0 \le \beta(\deg)$ or a no-zero-divisor clause imply the Hodge index ($B(v,f) = 0 \Rightarrow B(v,v) \le 0$). A countermodel shows that the extra clause cannot be dropped. Function-field instances test the axioms: a genus-2 curve over $\F_5$ satisfies them, with an exact sum-of-squares certificate; an off-circle fake zeta function does not; and an on-circle fake with a negative point count does, which shows that the axioms cannot see the effectivity of the Frobenius graphs. On the arithmetic side we prove a converse of Weil's criterion restricted to pole-free test functions (those whose Fourier transform vanishes at $\pm i/2$). We compose the two: a family of RR-square windows covering every pole-free test implies Mathlib's \texttt{RiemannHypothesis}. This is a conditional, kernel-checked reduction. Under RH such windows exist trivially (collapse), and this is also kernel-checked, so RH is equivalent to their existence and all the content is the construction of windows without reference to the zeros. No such construction is known. This is not progress on RH. Every theorem depends only on \texttt{propext}, \texttt{Classical.choice} and \texttt{Quot.sound}.
+\end{abstract}
+
+\section{Introduction}\label{sec:intro}
+
+\subsection{Weil's proof and the question over \texorpdfstring{$\Q$}{Q}}
+
+Let $C$ be a smooth projective curve of genus $g$ over $\F_q$, let $F$ be its $q$-Frobenius, and put $N_n = \#C(\F_{q^n})$. Weil \cite{Weil48} proved $|N_n - q^n - 1| \le 2g\,q^{n/2}$. That bound is the Riemann Hypothesis for the zeta function of $C$. In the form usually taught \cite[Ex.~V.1.10]{Hartshorne}, the proof goes as follows. On the surface $S = C \times C$, take the fibre classes $f_1, f_2$, the diagonal $\Delta$ and the graphs $\Gamma_n$ of $F^n$. Then $f_1^2 = f_2^2 = 0$, $f_1\cdot f_2 = 1$, $\Gamma_n \cdot f_1 = 1$, $\Gamma_n\cdot f_2 = q^n$, and $\Gamma_0\cdot\Gamma_n = \Delta\cdot\Gamma_n = N_n$. The class $h = f_1 + f_2$ is ample. The Hodge index theorem \cite[Thm.~V.1.9]{Hartshorne} says that the intersection form is negative semidefinite on the classes orthogonal to $h$:
+\begin{equation}\label{eq:hodge}
+D\cdot h = 0 \;\Longrightarrow\; D^2 \le 0 .
+\end{equation}
+Applied to $D = r\Delta + s\Gamma_n + t f_1 + u f_2$, \eqref{eq:hodge} gives the Castelnuovo--Severi inequality, and from it Weil's bound. Mattuck and Tate \cite{MT} gave a proof of the inequality from Riemann--Roch on $S$. Grothendieck \cite{Groth} then showed that the Hodge index theorem itself follows from Riemann--Roch: if $D\cdot h = 0$ and $D^2 > 0$, Riemann--Roch makes $h^0(nD) + h^0(K - nD)$ grow like $\tfrac12 n^2 D^2$. Ampleness of $h$ bounds the second term. So $nD$ is effective of degree $0$, hence numerically trivial, which contradicts $D^2 > 0$.
+
+Over $\Q$ there is no surface $\mathrm{Spec}\,\Z \times \mathrm{Spec}\,\Z$ of this kind. Weil's explicit formula \cite{Weil52} still supplies a quadratic form, and its positivity on a suitable class of test functions is equivalent to RH (Weil's criterion; see Bombieri \cite{Bombieri} for a modern account). Programmes that try to transport the function-field proof, such as Deninger's \cite{Deninger} and Connes and Consani's \cite{Connes99,ConnesEssay,CCArith,CCScaling,CCRR}, have long asked what geometric structure over $\Q$ would play the role of $C\times C$. This paper does not answer that question. It asks a narrower one that can be checked by a machine: \emph{which dimension-level properties of a would-be surface does Grothendieck's argument actually use, and do they suffice, when composed with the explicit formula, to give RH?}
+
+\subsection{What is proved}
+
+All statements below are Lean~4 theorems in the Arda repository \cite{Arda}, at commit \lean{50b100025}. Every one depends only on the axioms \lean{propext}, \lean{Classical.choice} and \lean{Quot.sound} (\cref{sec:verification}).
+
+\begin{enumerate}[leftmargin=*]
+\item \textbf{The pole-free Weil criterion} (\cref{sec:polefree}). RH holds if and only if $\re \Weil(g * \tilde g) \ge 0$ for every smooth compactly supported $g$ whose Fourier transform vanishes at $\pm i/2$. The forward half is classical. The converse on this restricted class is the new part, and it needs a weighted approximation argument.
+\item \textbf{RR-square axioms and the Hodge index} (\cref{sec:axioms}). Abstract Riemann--Roch-square axioms on a real vector space, together with either a degree bound or a no-zero-divisor clause, imply the Hodge index.
+\item \textbf{Countermodel} (\cref{sec:counter}). Without that clause the axioms have a model on $\R^3$ that violates the Hodge index.
+\item \textbf{Collapse} (\cref{sec:collapse}). With divisors equal to $V$, the axioms are satisfiable if and only if the Hodge index holds. A bare existence statement is therefore circular.
+\item \textbf{Windows} (\cref{sec:windows}). A family of RR-square windows covering every pole-free test implies RH (\lean{rh\_of\_rr\_windows}). Conversely RH gives such a family, built trivially, so RH $\Leftrightarrow$ such windows exist (\lean{rh\_iff\_exists\_rr\_windows}).
+\item \textbf{Function-field instances and fakes} (\cref{sec:ff}). A genus-2 curve over $\F_5$ satisfies the axioms on its graph span. An off-circle fake does not. An on-circle fake with $N_1 = -1$ does.
+\end{enumerate}
+
+\subsection{What is not proved}
+
+The criterion is \emph{conditional}. Items 5 and 4 together say exactly where the content sits. The implication ``windows $\Rightarrow$ RH'' is a theorem. But under RH the windows exist for trivial reasons: they are read off from Weil positivity and carry no geometry. So the existence of windows is equivalent to RH, and is not a weaker or more tractable statement. What would be new is a \emph{construction}: divisors, principal divisors, section dimensions and a degree, all defined without reference to the zeros of $\zeta$, for which the axioms are then proved. Nobody has such a construction, and we do not supply one. Nothing in this paper is progress on the Riemann Hypothesis.
+
+\section{The pole-free Weil criterion}\label{sec:polefree}
+
+\subsection{Setting}
+
+The Lean development uses the following vocabulary. It is shared with the earlier papers of the programme \cite{Murphy932,MurphyNewman} and stated in \lean{WeilExplicit}.
+\begin{itemize}[leftmargin=*]
+\item A \emph{Weil test} is a function $g : \R \to \C$ that is $C^\infty$ with compact support (\lean{IsWeilTest}).
+\item Its transform is $\hat g(z) = \int_\R g(u)\,e^{izu}\,du$ (\lean{paperFT}), an entire function.
+\item Its Hermitian autocorrelation is $(g*\tilde g)(u) = \int_\R g(v)\,\overline{g(v-u)}\,dv$ (\lean{autocorr}).
+\item The Weil functional is $\Weil(f) = A(f) - P(f)$ (\lean{weilForm}), where
+\[
+A(f) = H_f(0) + H_f(1) - f(0)\log\pi + \frac{1}{2\pi}\int_\R H_f(\tfrac12 + ir)\,\re\psi(\tfrac14 + \tfrac{ir}{2})\,dr,
+\]
+\[
+P(f) = \sum_{n\ge 1} \frac{\Lambda(n)}{\sqrt n}\bigl(f(\log n) + f(-\log n)\bigr),
+\]
+with $H_f(s) = \int f(u)\,e^{(s-1/2)u}\,du$ (\lean{weilKernel}) and $\psi = \Gamma'/\Gamma$.
+\end{itemize}
+The two terms $H_f(0)$ and $H_f(1)$ are the pole terms of the explicit formula, coming from the pole of $\zeta$ at $s = 1$ and its reflection. For $f = g*\tilde g$ they are $H_f(0) = \hat g(i/2)\,\overline{\hat g(-i/2)}$ and $H_f(1) = \hat g(-i/2)\,\overline{\hat g(i/2)}$ (\lean{RvMBridge6.weilKernel\_autocorr}). \lean{RiemannHypothesis} is Mathlib's statement.
+
+\begin{definition}[pole-free]
+A test $g$ is \emph{pole-free} if $\hat g(i/2) = \hat g(-i/2) = 0$ (\lean{RvMBridgePF.PoleFree}; the same definition as \lean{Hodge1.PoleFree2}).
+\end{definition}
+
+In the function-field dictionary the pole terms are the degree terms, the pairings with $f_1$ and $f_2$. Pole-free tests are the analogue of the primitive classes $D\cdot h = 0$ on which the Hodge index speaks.
+
+\subsection{The theorem}
+
+\begin{theorem}[\lean{RvMBridgePF.rh\_iff\_poleFree\_weil\_positivity}]\label{thm:pf}
+\[
+\mathrm{RH} \iff \forall g,\ \mathrm{IsWeilTest}\ g \to \mathrm{PoleFree}\ g \to 0 \le \re \Weil(g * \tilde g).
+\]
+\end{theorem}
+
+The forward half is \lean{RvMBridge5.rh\_implies\_weil\_positivity}, which drops the pole-free hypothesis entirely: under RH each zero contributes $m(\rho)|\hat g(\gamma_\rho)|^2 \ge 0$ to the zero side of the explicit formula. The converse is \lean{weil\_positivity\_poleFree\_implies\_rh} (file \lean{PFConverseC.lean}). Its proof follows the shape of the island's earlier converse on all tests (\lean{RvMBridge9.weil\_positivity\_implies\_rh}). That earlier argument uses Gaussian-type test families whose Hermitian transforms approximate
+\[
+G_{c,\lambda}(z) = (z-c)^2 \exp\bigl(-2\lambda (z-c)^2\bigr),
+\]
+and shows that an off-line zero makes the zero side of $G_{c,\lambda}$ negative for a suitable centre $c$ and width $\lambda$. Those approximants are not pole-free. Two changes repair this.
+
+\paragraph{Weighted approximation (\lean{weighted\_approx}, \lean{PFConverseA.lean}).} Let $g_n$ be the approximants of the earlier argument and put $t_n = g_n'' - \tfrac14 g_n$. Two integrations by parts give $\hat t_n(z) = -(z^2 + \tfrac14)\,\hat g_n(z)$, so $t_n$ is exactly pole-free. Its Hermitian transform is $q(z)\,H_{g_n}(z)$ with weight $q(z) = (z^2+\tfrac14)^2$, and it converges on the strip $|\im z| \le \tfrac12$ to $q\,G_{c,\lambda}$. A third derivative gives the bound $|\hat t_n(z)| \le 2M/(1+|z|)$, uniform in $n$, and hence a summable majorant $C/(1+|z|^2)$ for Tannery's theorem.
+
+\paragraph{Weighted dominance (\lean{weighted\_dominance}, \lean{PFConverseB.lean}).} If a nontrivial zero $\rho_0$ has $\re\rho_0 \ne \tfrac12$, then for some $c$ and some $\lambda \ge 1$,
+\[
+\re \sum_\rho m(\rho)\, q(\gamma_\rho)\, G_{c,\lambda}(\gamma_\rho) < 0, \qquad \gamma_\rho = (\rho - \tfrac12)/i .
+\]
+The weight costs little. $q(\gamma_\rho) = (\rho(1-\rho))^2$ is nonzero on the open strip, the centre is chosen generically, and a phase lemma absorbs the constant phase of $q$ at the dominant zero.
+
+Given these, the converse is a limit argument. Each $\re\Weil(t_n * \tilde t_n)$ is $\ge 0$ by hypothesis and equals the zero side of $q\,H_{g_n}$. Tannery passes to the limit, so the zero side of $q\,G_{c,\lambda}$ has nonnegative real part, which contradicts dominance.
+
+\begin{remark}
+\Cref{thm:pf} is a statement about which test class suffices for Weil's criterion. That RH is equivalent to Weil positivity on a class of tests is Weil's theorem \cite{Weil52}; see also \cite{Bombieri}. Restricting to tests that kill the pole terms is natural from the function-field side, and we do not claim that it is new as mathematics. What is new is the kernel-checked proof against Mathlib's \lean{RiemannHypothesis}.
+\end{remark}
+
+\section{RR-square axioms and the Hodge index}\label{sec:axioms}
+
+\subsection{The axioms}
+
+Fix real vector spaces $V$ (the \emph{graph span}) and $\Div$ (\emph{divisors}), a linear map $\iota : V \to \Div$, a bilinear form $B$ on $V$ and a vector $f \in V$ (the \emph{degree class}).
+
+\begin{definition}[\lean{RRSquare.RRAxioms}]\label{def:rr}
+An \emph{RR-square structure} on $(B, f, \iota)$ consists of
+\begin{itemize}[leftmargin=*]
+\item a linear map $\deg : \Div \to \R$ with $\deg(\iota v) = B(v,f)$;
+\item a subspace $\Prin \subseteq \Div$ with $\deg = 0$ on $\Prin$;
+\item functions $h^0, h^1 : \Div \to \R_{\ge 0}$, a canonical divisor $K \in \Div$, a function $a : V \to \R$ and a constant $\chi\in\R$;
+\end{itemize}
+subject to:
+\begin{enumerate}[label=(\textsc{\roman*}),leftmargin=*]
+\item \textbf{(RR)} for all $v\in V$ and $n\in\N$, with Serre duality $h^2(D) = h^0(K-D)$ substituted,
+\[
+h^0(\iota(nv)) - h^1(\iota(nv)) + h^0(K - \iota(nv)) = \tfrac12 n^2 B(v,v) - \tfrac12 n\, a(v) + \chi ;
+\]
+\item \textbf{(eff)} if $h^0(X) > 0$, then $X - E \in \Prin$ for some $E$ with $\deg E > 0$ or $E \in \Prin$;
+\item \textbf{(compat)} if $\iota v \in \Prin$ then $B(v,v) = 0$.
+\end{enumerate}
+The structure is \emph{bounded} (\lean{RRAxiomsBounded}) if in addition
+\begin{enumerate}[label=(\textsc{\roman*}),leftmargin=*,start=4]
+\item \textbf{(bound)} $h^0(X) \le \beta(\deg X)$ for some function $\beta:\R\to\R$;
+\end{enumerate}
+and it is a \emph{domain} (\lean{RRAxiomsDomain}) if instead
+\begin{enumerate}[label=(\textsc{\roman*}$'$),leftmargin=*,start=4]
+\item \textbf{(domain)} $h^0(X) > 0 \Rightarrow h^0(Y) \le h^0(X+Y)$ for all $X, Y$.
+\end{enumerate}
+\end{definition}
+
+The dimensions are real-valued, so ``type II'' dimensions in the sense of Connes and Consani are allowed. Clause (eff) is what is left of ``a divisor with sections is linearly equivalent to an effective one'': effective divisors of degree $0$ are principal. The Lean structure carries an effectivity predicate \lean{Eff} as well, but no proof uses it, and the registry shapes set it to \lean{True}. Clause (bound) is the abstract form of ``$h^0$ is bounded in terms of the degree against an ample class''. Clause (domain) is ``a nonzero section embeds $H^0(Y)$ into $H^0(X+Y)$'', that is, no zero divisors.
+
+\subsection{The Hodge index}
+
+\begin{theorem}[\lean{RRSquare.hodge\_index}; \lean{RRSquare.hodge\_index\_of\_domain}]\label{thm:hodge}
+If $(B,f,\iota)$ carries a bounded RR-square structure, or a domain RR-square structure, then $B(v,f) = 0 \Rightarrow B(v,v) \le 0$ for every $v\in V$.
+\end{theorem}
+
+\begin{proof}[Proof (Grothendieck's argument)]
+Suppose $B(v,f) = 0$ and $c = B(v,v) > 0$. First, sections force nullity (\lean{sections\_force\_null}): if $h^0(\iota(mv)) > 0$ for some $m \ge 1$, then (eff) gives $E$ with $\iota(mv) - E\in\Prin$. Degrees then give $\deg E = \deg \iota(mv) = m B(v,f) = 0$, so $E \in \Prin$. Hence $\iota(mv)\in\Prin$, and (compat) gives $m^2 c = 0$, a contradiction.
+
+\emph{Bounded case.} We have $\deg(K - \iota(mv)) = \deg K$, so $h^0(K - \iota(mv)) \le M := \beta(\deg K)$ for every $m$. Since $h^1 \ge 0$, (RR) gives
+\[
+h^0(\iota(mv)) \ge \tfrac12 m^2 c - \tfrac12 m\,a(v) + \chi - M ,
+\]
+and the right-hand side is $\ge 1$ for $m$ large. So $\iota(mv)$ has sections, a contradiction.
+
+\emph{Domain case.} Take $m$ large enough that the right-hand sides of (RR) at $v$ and at $-v$ both exceed $M := h^0(2K)$ by at least $1$. If $h^0(K - \iota(mv)) > 0$, then (domain) gives $h^0(K + \iota(mv)) \le h^0(2K) = M$. Now (RR) at $-v$ forces sections of $\iota(-mv)$, and $-v$ also has $B(-v,f) = 0$ and $B(-v,-v) = c$. Otherwise $h^0(K-\iota(mv)) = 0$, and (RR) at $v$ forces sections of $\iota(mv)$. Either way we reach a contradiction.
+\end{proof}
+
+Apart from (bound) or (domain), the only inequality in the proof is $h^1 \ge 0$. Every other step is an identity or a degree computation. In this sense the sign has a single source, as it does on $C\times C$, where it is ampleness of $f_1+f_2$ carried through Riemann--Roch.
+
+\begin{remark}[on the domain clause]
+In Connes and Consani's characteristic-one setting \cite{CCScaling}, sections are $\R_{\max}$-valued functions, multiplication of sections is pointwise addition, and the real dimension is a normalised topological dimension. Adding a fixed section is then an isometric embedding for the sup metric. Monotonicity of covering dimension on subspaces of separable metric spaces \cite[Thms.~1.1.2, 1.7.7]{Engelking} then suggests that (domain) holds automatically there. This argument is in the programme's research notes \cite{Arda}. It is \emph{not} formalized, and we record it only as a heuristic for why the domain form is worth having. The degree bound, by contrast, holds on the periodic orbits $C_p$ of the scaling site by Connes and Consani's Riemann--Roch theorem there \cite{CCScaling}, but no square of the scaling site is constructed.
+\end{remark}
+
+\section{The countermodel}\label{sec:counter}
+
+The derivation that motivated the axioms concluded from $h^0(nv) + h^0(K-nv) \to \infty$ that $nv$ must have sections. That step is wrong without (bound) or (domain): the growth can sit entirely in $h^0(K - nv)$. That divisor has the fixed degree $\deg K$, so (eff) is satisfied without contradiction.
+
+\begin{theorem}[\lean{RRSquare.countermodel}]
+There is an RR-square structure, neither bounded nor a domain, on $V = \R^3$ with
+\[
+B(x,y) = x_0y_1 + x_1y_0 + x_2y_2, \qquad f = (1,1,0),
+\]
+and a vector $v = (0,0,1)$ with $\deg(\iota v) = 0$, $B(v,f) = 0$ and $B(v,v) = 1 > 0$.
+\end{theorem}
+
+The construction is a hyperbolic plane plus one positive direction. Take $\Div = \R^3\times\R$, $\iota = $ inclusion in the first factor, $\deg(x, s) = x_0 + x_1 + s$, $\Prin = 0$ and $K = (0,1)$. Let $h^0(X) = |B(X_1,X_1)|/2 + 1$ when $\deg X > 0$, $h^0(0) = 1$, and $h^0(X) = 0$ otherwise. Define $h^1$ on the graph span so that (RR) holds with $a = 0$ and $\chi = 0$, and check $h^1 \ge 0$ by cases on the sign of the degree. Then $h^0(K - m e_3) = m^2/2 + 1$ grows without bound at the fixed degree $1$. That is precisely what (bound) forbids, and (domain) fails as well. The moral: the clause ``degree bounds dimension, or sections have no zero divisors'' is load-bearing. Any candidate surface must supply one of them explicitly.
+
+\section{Collapse: why the target is a construction}\label{sec:collapse}
+
+\begin{theorem}[\lean{RRSquare.collapse}; registry shape \lean{rr\_square\_collapse}]\label{thm:collapse}
+Let $B$ be symmetric with $B(f,f) > 0$. Then a bounded RR-square structure on $(B, f, \mathrm{id}_V)$ (so $\Div = V$) exists if and only if $B(v,f) = 0 \Rightarrow B(v,v)\le 0$ for all $v$.
+\end{theorem}
+
+\begin{proof}
+($\Rightarrow$) is \cref{thm:hodge}. For ($\Leftarrow$), the Hodge index gives Cauchy--Schwarz in the form $B(f,f)B(X,X) \le B(X,f)^2$ (\lean{cauchy\_schwarz\_of\_hodge}). The model \lean{trivialModel} takes $\Prin = 0$, $K = 0$, $a = 0$, $\chi = 0$ and
+\[
+h^0(X) = \begin{cases} B(X,f)^2/(2B(f,f)) + 1 & B(X,f) > 0,\\ 1 & X = 0,\\ 0 & \text{otherwise,}\end{cases}
+\qquad h^1(X) = h^0(X) + h^0(-X) - \tfrac12 B(X,X).
+\]
+Cauchy--Schwarz gives $h^1 \ge 0$, and the degree bound holds with $\beta(d) = d^2/(2B(f,f)) + 1$ for $d > 0$ and $\beta(d) = 1$ otherwise.
+\end{proof}
+
+A still simpler model, \lean{RvMBridgePF.RRSquare.collapse\_bounded} (\lean{PFConverseD.lean}), shows that \emph{every} negative semidefinite $B$ carries a bounded structure with $\Div = V$, $f = 0$, $h^0 = 0$ and $h^1(X) = -\tfrac12 B(X,X)$.
+
+\Cref{thm:collapse} is the guard against misreading the rest of the paper. On the graph span alone, the axioms are \emph{equivalent} to the sign they are meant to produce. So a statement of the form ``there exist $\Div$, $\Prin$, $h^0$, $h^1$, \dots\ satisfying the axioms'' is Weil's criterion in another notation. The informal clause ``constructed without reference to the zeros'' carries all of the content of an RR-square conjecture, and it cannot be typed as an existence statement. A non-circular instance needs a divisor space $\Div \supsetneq V$ with principal divisors, section spaces and a degree defined geometrically, with the axioms then proved from that geometry.
+
+\section{Windows}\label{sec:windows}
+
+\subsection{Windows imply RH}
+
+\begin{definition}[\lean{RvMBridgePF.RRWindow}]
+An \emph{RR-square window} consists of
+\begin{itemize}[leftmargin=*]
+\item data $(V,\Div,B,f,\iota)$ carrying a bounded or a domain RR-square structure;
+\item a map $\tau : V \to (\R\to\C)$ from the graph span to test functions;
+\item a constant $c > 0$;
+\end{itemize}
+such that
+\begin{itemize}[leftmargin=*]
+\item \textbf{(diag)} $B(v,v) = -c\,\re\Weil(\tau v * \widetilde{\tau v})$ for all $v$;
+\item \textbf{(pole)} if $\tau v$ is pole-free then $B(v,f) = 0$.
+\end{itemize}
+\end{definition}
+
+The sign in (diag) is the dictionary sign. On $C\times C$ the restriction of the intersection form to the primitive graph span is a negative multiple of Weil's form, so Hodge-index negativity is Weil positivity.
+
+\begin{theorem}[\lean{RvMBridgePF.rh\_of\_rr\_windows}; registry shape \lean{rr\_windows\_imply\_rh}]\label{thm:windows}
+Let $(W_i)_{i\in I}$ be a family of RR-square windows such that every pole-free Weil test $g$ equals $\tau_i(v)$ for some $i$ and some $v \in V_i$. Then \lean{RiemannHypothesis} holds.
+\end{theorem}
+
+\begin{proof}
+On one window (\lean{RRWindow.weil\_positive}): if $\tau v$ is pole-free, then (pole) gives $B(v,f) = 0$ and \cref{thm:hodge} gives $B(v,v)\le 0$. By (diag) and $c > 0$, $\re\Weil(\tau v * \widetilde{\tau v}) \ge 0$. Covering gives positivity on every pole-free test, and \cref{thm:pf} gives RH.
+\end{proof}
+
+\begin{lstlisting}
+theorem rh_of_rr_windows {ι' : Type} (W : ι' → RRWindow)
+    (hcover : ∀ g : ℝ → ℂ, WeilExplicit.IsWeilTest g → PoleFree g →
+      ∃ i : ι', ∃ v : (W i).V, (W i).τ v = g) :
+    RiemannHypothesis
+\end{lstlisting}
+
+The registry shape \lean{rr\_windows\_imply\_rh} (\lean{RegRRChain.lean}) states the same theorem with every field of every window spelled out as an explicit hypothesis. That makes each assumption visible to a reader of the statement. Weil positivity is not among its hypotheses: the proof derives it on each window from the Hodge index. A one-window version on the \lean{weil\_form\_enclosure} island, \lean{RRSquare.weil\_positive\_of\_rr} (\lean{RRSquareLink.lean}), states the per-window step in that island's vocabulary. There, pole-freeness is phrased as $H_g(0) = H_g(1) = 0$, which is $\hat g(\pm i/2) = 0$, since $H_g(s) = \hat g(-i(s-\tfrac12))$. The two islands use different Mathlib pins, and no Lean lemma links the two definitions. The composition in \cref{thm:windows} uses only the \lean{rvm\_bridge} definitions.
+
+\subsection{The trivial converse}
+
+\begin{theorem}[\lean{RvMBridgePF.rr\_windows\_of\_rh}, \lean{RvMBridgePF.rh\_iff\_exists\_rr\_windows}]\label{thm:iff}
+RH implies that a covering family of RR-square windows exists. Hence
+\[
+\mathrm{RH} \iff \exists\,(I, (W_i)_{i\in I})\ \text{covering every pole-free Weil test}.
+\]
+\end{theorem}
+
+\begin{proof}
+Index the windows by the Weil tests $g$ themselves. Under RH, $w_g = \re\Weil(g*\tilde g) \ge 0$ by the forward half of Weil's criterion. The window \lean{lineWindow} has $V = \Div = \R$, $\tau(v) = v\,g$, $B(x,y) = -w_g\,xy$, $f = 0$ and $c = 1$. It is carried by \lean{collapse\_bounded}, and (diag) holds because $\Weil$ is quadratic under real scaling (\lean{re\_weilForm\_autocorr\_real\_mul}).
+\end{proof}
+
+This direction is trivial, and that is the point of stating it. The windows it builds have no sections ($h^0 = 0$), no effective divisors and no ample class ($f = 0$, so (pole) is vacuous). They are Weil positivity relabelled. \Cref{thm:iff} turns \cref{thm:collapse} into a statement about RH itself: the existence of RR-square windows is not weaker than RH, it \emph{is} RH. The window definition permits $f = 0$. Requiring $B(f,f) > 0$ would not change the conclusion, because \cref{thm:collapse} supplies models with an ample degree class whenever the Hodge index holds. We have not formalized that variant of \cref{thm:iff}.
+
+\section{Function-field instances and fakes}\label{sec:ff}
+
+To see what the axioms detect, we evaluate them on the Frobenius graph spans of curves, and of polynomials that only look like zeta numerators. For a polynomial $P(T) = \prod_{j}(1-\alpha_j T)$ of degree $2g$ with $q$-symmetry, put $N_n = q^n + 1 - \sum_j \alpha_j^n$ and $N_0 := 2 - 2g$. On $V = \mathrm{span}\{f_1, f_2, \Gamma_0,\dots,\Gamma_4\}\cong\R^7$, define the Gram matrix
+\[
+\Gamma_m\cdot\Gamma_n = q^{\min(m,n)} N_{|m-n|},\quad \Gamma_n\cdot f_1 = 1,\quad \Gamma_n\cdot f_2 = q^n,\quad f_1^2 = f_2^2 = 0,\quad f_1\cdot f_2 = 1,
+\]
+with degree class $h = f_1+f_2$, so $h^2 = 2$. For a genuine curve these are the intersection numbers on $C\times C$. The script \lean{ff\_gram.py} computes them in exact rational arithmetic, finds an $LDL^\top$ certificate when one exists, and \lean{gen\_lean.py} emits \lean{RRSquareFF.lean}.
+
+\paragraph{A genuine curve.} $C : y^2 = x^5 + x^3 + 3x + 2$ over $\F_5$ has genus $2$ and
+\[
+P(T) = 1 - 3T + 7T^2 - 15T^3 + 25T^4, \qquad (N_1,\dots,N_4) = (3, 31, 117, 619).
+\]
+All inverse roots have $|\alpha| = \sqrt5$. The Hodge index holds on the graph span by the exact identity (\lean{G2F5\_cert})
+\[
+2B(v,v) - B(v,h)^2 = -\sum_{i=1}^{5} d_i\,\ell_i(v)^2,\qquad (d_i) = \bigl(1,\ 8,\ \tfrac{71}{2},\ \tfrac{10500}{71},\ \tfrac{2289}{5}\bigr),
+\]
+with explicit rational linear forms $\ell_i$, checked by \lean{ring}. Hence \lean{G2F5\_hodge}, and by \cref{thm:collapse}, \lean{G2F5\_model}: the bounded axioms are satisfiable on this span.
+
+\paragraph{An off-circle fake.} Over $\F_3$, $P(T) = 1 - 7T + 19T^2 - 21T^3 + 9T^4$ has inverse roots of modulus $\approx 0.595\sqrt3$ and $\approx 1.681\sqrt3$, and $(N_1,\dots,N_4) = (-3,-1,21,131)$. The vector $v = (8,6,-6,-4,1,6,-2)$ has $B(v,h) = 0$ and $B(v,v) = 1510 > 0$ (\lean{FK2\_hodge\_fails}), so \cref{thm:hodge} rules out any bounded structure (\lean{FK2\_no\_model}). The axioms see the failure of RH for this polynomial, already on a span of rank $7$.
+
+\paragraph{An on-circle fake.} Over $\F_2$, $P(T) = 1 - 4T + 8T^2 - 8T^3 + 4T^4 = (1-2T+2T^2)^2$ has inverse roots $1\pm i$, each of modulus exactly $\sqrt2$, but $N_1 = -1$. No curve has a negative point count. Its graph span still passes the Hodge index by an exact certificate (\lean{FK3\_hodge}) and carries a bounded model (\lean{FK3\_model}). Yet $\Gamma_0\cdot\Gamma_1 = N_1 = -1 < 0$ (\lean{FK3\_graphs\_meet\_negatively}): two distinct ``graphs'' meet negatively, which is impossible for distinct irreducible effective curves.
+
+\medskip
+The lesson of the pair is that the axioms, as stated, see the \emph{spectrum} (RH for $P$) but not \emph{effectivity of the graphs}. The arithmetic that separates $\zeta$ from impostors such as the Davenport--Heilbronn function, namely the Euler product, could enter only through the construction of a square. It does not enter through the axioms. If wanted, ``graphs are effective, and distinct effective prime divisors meet nonnegatively'' would have to be a further axiom, and the fake above violates it decidably.
+
+\section{The HODGE-1 frontier, as context}\label{sec:hodge1}
+
+The same \lean{rvm\_bridge} island carries outright, unconditional Weil positivity on short windows of pole-free tests \cite{Arda,RHLean}. These are finite-window verification statements. For tests supported in $[-L, L]$ with $2L \le \log 3$, only the prime $2$ enters $P(f)$, and an exact one-prime identity (\lean{Hodge1.re\_weilForm\_eq\_archW\_sub\_prime}) together with kernel certificates gives
+\[
+0 \le \re\Weil(g*\tilde g)\quad\text{for pole-free } g \text{ supported in } [-L,L],\ L \le 5493/10000
+\]
+(\lean{Hodge1.weil\_positivity\_poleFree2\_window5493}). Composed with \cref{thm:pf}, this gives
+\begin{lstlisting}
+theorem rh_iff_poleFree2_outside_window5493 :
+    RiemannHypothesis ↔
+      ∀ g : ℝ → ℂ, WeilExplicit.IsWeilTest g → PoleFree2 g →
+        ¬ (tsupport g ⊆ Icc (-(5493 / 10000 : ℝ)) (5493 / 10000)) →
+        0 ≤ (WeilExplicit.weilForm (WeilExplicit.autocorr g)).re
+\end{lstlisting}
+The right-hand side is exactly what is open. We include it to locate the RR-square criterion. An RR-square window construction would have to deliver positivity on precisely the tests this statement leaves over, those that reach past the first prime, and window certificates of the HODGE-1 kind are not known to extend to them. (The four HODGE-1 nodes are granted, judged by the Lean kernel or nanoda, and read back by a separate AI session \cite{RHLean}.) The positivity margin on a window of half-width $L$ is itself a sum over the zeros, so such certificates are verification of RH up to a height that grows only like $e^{2L}$ \cite{RHLean}.
+
+\section{What this is not}\label{sec:not}
+
+\paragraph{Not Weil's proof.} Over $\F_q$ the surface exists, Riemann--Roch on it is a theorem, and \cref{thm:hodge} is Grothendieck's argument \cite{Groth} in abstract form. Our axioms record what that argument consumes. They do not supply a surface over $\Q$.
+
+\paragraph{Not Bombieri's or Yoshida's positivity.} Bombieri \cite{Bombieri} studied Weil's quadratic functional on $L^2[-t,t]$ and proved, after Yoshida, that it is positive definite for $t$ small. The HODGE-1 windows of \cref{sec:hodge1} are kernel-checked statements of the same kind, on pole-free tests and a specific window. They are not a route to RH.
+
+\paragraph{Not Connes's trace formula.} Connes \cite{Connes99,ConnesEssay} reformulated RH as positivity in a trace formula on the adele class space. Weil positivity is again the target there, and \cref{thm:pf} is a statement in that circle of ideas, restricted to pole-free tests. Connes and Consani proved the archimedean case of a positivity statement in a semi-local trace-formula framework \cite{CCArch}, which has been formalized separately in the same programme \cite{RHLean}. It contains no primes.
+
+\paragraph{Not the arithmetic site or its square.} Connes and Consani constructed the arithmetic site and its scaling site \cite{CCArith,CCScaling}. They proved a Riemann--Roch theorem on the periodic orbits $C_p$ of the scaling site \cite{CCScaling} and a Riemann--Roch theorem for $\overline{\mathrm{Spec}\,\Z}$ \cite{CCRR}. They also studied the square of the arithmetic site and its Frobenius correspondences \cite{CCArith}. As far as our reading goes, none of these supplies a Riemann--Roch identity \emph{on a square} whose quadratic term is Weil's form, together with (eff), (compat) and (bound) or (domain). Assigning Weil's form to the graph span as an intersection pairing \emph{by fiat} is, by \cref{thm:collapse}, equivalent to the criterion and so carries no content. We state this as a reading of the cited papers, not as a theorem about them.
+
+\paragraph{Local mechanisms reduce to Weil.} The programme's research notes \cite{Arda} record a number of attempts to obtain the sign from local data. All of them are negative or reduce back to Weil's criterion; none is formalized beyond what is listed in \cref{sec:verification}. We mention two because they bear on the axioms.
+\begin{enumerate}[leftmargin=*]
+\item Cartwright's Hodge index for tropical surfaces \cite{Cartwright} counts one positive direction per vertex star, against principal relations. The local prime term of Weil's form has a periodic symbol with a positive set of positive measure, so it has infinitely many positive directions even on one window. The archimedean term has finitely many, about $2Lr_0/\pi$ with $r_0 \approx 6.29$, but this count grows with $L$. Neither has exactly one, so the explicit formula's own place-by-place split is not a decomposition of Cartwright's kind.
+\item Every construction we examined that produced a sign controlled the modulus $\sqrt p$ of the local Frobenius data but not their phases. Those were also invariant under twists that do not distinguish $\zeta$ from impostors.
+\end{enumerate}
+These are internal, unreviewed notes. We cite them only to explain why the criterion is stated as it is, and claim nothing from them.
+
+\section{Verification}\label{sec:verification}
+
+\subsection{Sources and environments}
+
+All Lean files are in the Arda repository \cite{Arda} at commit \lean{50b100025} (full hash in \cite{Arda}; the merge of pull request \#726, 13 October 2026; no tag). There are two Lean~4 \cite{Lean} environments, both on Mathlib \cite{Mathlib}.
+
+\begin{center}\small
+\begin{tabular}{@{}lll@{}}
+\toprule
+island & toolchain & dependencies \\
+\midrule
+\lean{weil\_form\_enclosure} & Lean \lean{v4.32.0} & Mathlib \lean{v4.32.0} (\lean{81a5d257}) \\
+\lean{rvm\_bridge} & Lean \lean{v4.33.0-rc2} & Mathlib \lean{51e6992e}; Zeta23 \lean{fbdc36bb} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent Both islands live under \lean{telperion/examples/}\allowbreak\lean{<island>/lean}. The RR-square core is written on the first island (\lean{RRSquare.lean}, \lean{RRSquareFF.lean}, \lean{RRSquareLink.lean}) and ported verbatim, in the parts needed, to the second (\lean{PFConverseC.lean}, section B), where it is composed with the pole-free converse. The modules are:
+\begin{itemize}[leftmargin=*]
+\item \lean{PFConverseA}, \lean{PFConverseB}, \lean{PFConverseC}: the pole-free converse, the RR core port and \lean{rh\_of\_rr\_windows};
+\item \lean{PFConverseD}: the trivial converse;
+\item \lean{RegRRChain}: the five registry-shape theorems;
+\item \lean{AxiomGuardRRSquare}, \lean{AxiomGuardRvMBridge}: the axiom guards.
+\end{itemize}
+
+\subsection{Axiom output}
+
+Every theorem named in this paper prints \lean{[propext, Classical.choice, Quot.sound]} under \lean{\#print axioms}. The guard outputs were read from Arda's CI logs (workflow \lean{telperion-lean-e2e}). The source of each file at the run's commit is byte-identical to the file at \lean{50b100025}.
+
+\begin{center}\small
+\begin{tabular}{@{}p{0.48\linewidth}p{0.47\linewidth}@{}}
+\toprule
+theorems & CI job (commit) \\
+\midrule
+the 13 anchors of \lean{AxiomGuardRRSquare.lean}: \lean{hodge\_index}, \lean{hodge\_index\_of\_domain}, \lean{countermodel}, \lean{cauchy\_schwarz\_of\_hodge}, \lean{collapse}, \lean{G2F5\_hodge}, \lean{G2F5\_model}, \lean{FK3\_hodge}, \lean{FK3\_model}, \lean{FK3\_graphs\_meet\_negatively}, \lean{FK2\_hodge\_fails}, \lean{FK2\_no\_model}, \lean{weil\_positive\_of\_rr} & \lean{weil-form-enclosure-compiles}, run 38435167339, job 115427862652 (\lean{b17b3c68}) \\
+\addlinespace
+\lean{weighted\_approx}, \lean{weighted\_dominance}, \lean{weil\_positivity\_poleFree\_implies\_rh}, \lean{rh\_iff\_poleFree\_weil\_positivity}, \lean{RRSquare.hodge\_index(\_of\_domain)} (port), \lean{rh\_of\_rr\_windows}, \lean{collapse\_bounded}, \lean{rr\_windows\_of\_rh}, \lean{rh\_iff\_exists\_rr\_windows} & \lean{rvm-bridge-compiles}, run 38455871515, job 115512665734 (\lean{355dff3d}, a head of PR \#726) \\
+\addlinespace
+\lean{rr\_square\_hodge\_index}, \lean{rr\_square\_hodge\_index\_domain}, \lean{rr\_square\_collapse}, \lean{polefree\_weil\_converse}, \lean{rr\_windows\_imply\_rh} & \lean{rvm-bridge-compiles}, run 38456520167, job 115513153403 (\lean{8c0a3c51}, PR \#728) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent The CI runs on the merge commit \lean{50b100025} itself were still in progress when this paper was written. The axiom-check script fails on any \lean{sorryAx} and on a short count of axiom lines. Neither island contains \lean{sorry}, \lean{admit} or a user \lean{axiom}.
+
+\subsection{Registry status}
+
+The five registry-shape theorems are nodes of the Arda missions registry. They live in the directory \lean{telperion/missions/mirrormere/nodes}, and they are:
+\begin{itemize}[leftmargin=*]
+\item \lean{MM\_rr\_square\_hodge\_index};
+\item \lean{MM\_rr\_square\_hodge\_index\_domain};
+\item \lean{MM\_rr\_square\_collapse};
+\item \lean{MM\_polefree\_weil\_converse};
+\item \lean{MM\_rr\_windows\_imply\_rh}.
+\end{itemize}
+Their status is: \emph{granted} (PR \#729); \emph{independent read-back by a parallel AI session} (PR \#728; an AI read-back, not an operator read-back); \emph{Comparator judge pending}. No second-kernel (nanoda) record exists yet for these nodes. \lean{rh\_iff\_exists\_rr\_windows} is axiom-guarded in CI but is not a registry node.
+
+\subsection{Reproducing}
+
+\begin{lstlisting}
+git clone https://github.com/DrMurphyIsIn/Arda && cd Arda
+git checkout 50b1000254c6bb74bf12d21fa66483bd9fc14aeb
+cd telperion/examples/weil_form_enclosure/lean
+lake exe cache get && lake build
+lake env lean AxiomGuardRRSquare.lean
+cd ../../rvm_bridge/lean
+lake exe cache get && lake build
+lake env lean AxiomGuardRvMBridge.lean
+\end{lstlisting}
+\noindent Both islands list the relevant modules and guards in their \lean{defaultTargets}, so a bare \lean{lake build} compiles them. The function-field data can be regenerated with \lean{python3 ff\_gram.py \&\& python3 gen\_lean.py} in \lean{telperion/examples/weil\_form\_enclosure/rr\_square} (it needs \lean{sympy} and \lean{numpy}); this rewrites \lean{RRSquareFF.lean}.
+
+\subsection{What is checked and what is trusted}
+
+The Lean kernel checks every implication in this paper. What it cannot check is whether the formal statements say what the prose says. The main places where they could diverge are:
+\begin{itemize}[leftmargin=*]
+\item the definition of $\Weil$ (\lean{weilForm}) as the explicit formula's prime and archimedean sides;
+\item the forward half of Weil's criterion, \lean{rh\_implies\_weil\_positivity}, which ties $\Weil$ to the zeros;
+\item Mathlib's \lean{RiemannHypothesis}.
+\end{itemize}
+Each was audited in the programme's earlier work \cite{RHLean}. The read-back of the five nodes was done by an AI session other than the authoring one. No human operator read-back and no second-kernel replay exists for them yet.
+
+\section*{Acknowledgements}
+
+The function-field proof is Weil's and the Hodge index from Riemann--Roch is Grothendieck's; this paper states their dimension-level content as axioms and checks the logic, and claims nothing beyond that. The \lean{rvm\_bridge} island's explicit formula, Weil's criterion on all tests and the Gaussian dominance argument were formalized by the Arda project in September and October 2026; Mathlib supplies \lean{RiemannHypothesis} and the analysis. The formalization, the registry tooling and this paper were produced with extensive use of an AI coding assistant (Claude, Anthropic) under the direction of the author; the Lean kernel is the sole trusted component, and every claim here is either a kernel-checked theorem or labelled otherwise. The read-back of the five registry statements was done by a separate AI session, not by the author.
+
+\begin{thebibliography}{99}\small
+
+\bibitem{Weil48} A.~Weil, \emph{Sur les courbes alg\'ebriques et les vari\'et\'es qui s'en d\'eduisent}, Hermann, Paris, 1948.
+
+\bibitem{Weil52} A.~Weil, Sur les ``formules explicites'' de la th\'eorie des nombres premiers, \emph{Comm.\ S\'em.\ Math.\ Univ.\ Lund}, tome suppl\'ementaire (1952), 252--265.
+
+\bibitem{MT} A.~Mattuck and J.~Tate, On the inequality of Castelnuovo--Severi, \emph{Abh.\ Math.\ Sem.\ Univ.\ Hamburg} 22 (1958), 295--299.
+
+\bibitem{Groth} A.~Grothendieck, Sur une note de Mattuck--Tate, \emph{J.\ reine angew.\ Math.} 200 (1958), 208--215.
+
+\bibitem{Hartshorne} R.~Hartshorne, \emph{Algebraic Geometry}, Graduate Texts in Mathematics 52, Springer, 1977.
+
+\bibitem{Bombieri} E.~Bombieri, Remarks on Weil's quadratic functional in the theory of prime numbers, I, \emph{Atti Accad.\ Naz.\ Lincei Rend.\ Lincei (9) Mat.\ Appl.} 11 (2000), 183--233.
+
+\bibitem{Deninger} C.~Deninger, Some analogies between number theory and dynamical systems on foliated spaces, \emph{Doc.\ Math.}, Extra Vol.\ ICM 1998, I, 163--186.
+
+\bibitem{Connes99} A.~Connes, Trace formula in noncommutative geometry and the zeros of the Riemann zeta function, \emph{Selecta Math.\ (N.S.)} 5 (1999), 29--106.
+
+\bibitem{ConnesEssay} A.~Connes, An essay on the Riemann Hypothesis, in \emph{Open Problems in Mathematics}, Springer, 2016; arXiv:1509.05576.
+
+\bibitem{CCArith} A.~Connes and C.~Consani, Geometry of the arithmetic site, \emph{Adv.\ Math.} 291 (2016), 274--329; arXiv:1502.05580.
+
+\bibitem{CCScaling} A.~Connes and C.~Consani, Geometry of the scaling site, \emph{Selecta Math.\ (N.S.)} 23 (2017), 1803--1850; arXiv:1603.03191.
+
+\bibitem{CCArch} A.~Connes and C.~Consani, Weil positivity and trace formula, the archimedean place, \emph{Selecta Math.\ (N.S.)} 27 (2021), no.~4; arXiv:2006.13771.
+
+\bibitem{CCRR} A.~Connes and C.~Consani, Riemann--Roch for $\overline{\mathrm{Spec}\,\mathbb{Z}}$, \emph{Bull.\ Sci.\ Math.} (2023); arXiv:2205.01391.
+
+\bibitem{Cartwright} D.~Cartwright, Combinatorial tropical surfaces, arXiv:1506.02023.
+
+\bibitem{Engelking} R.~Engelking, \emph{Dimension Theory}, North-Holland, 1978.
+
+\bibitem{Murphy932} P.~W. Murphy, A kernel-checked bound $\Lambda \le 9/32$ for the de Bruijn--Newman constant from OpenAI's quasi-Riemann hypothesis, 2026, \url{https://github.com/DrMurphyIsIn/qrh-debruijn-newman}, doi:10.5281/zenodo.23269134.
+
+\bibitem{MurphyNewman} P.~W. Murphy, Newman's conjecture, kernel-checked: $\Lambda \ge 0$ for the de Bruijn--Newman constant in Lean~4 along Dobner's proof, 2026, \url{https://github.com/DrMurphyIsIn/newman-lambda-nonneg}, doi:10.5281/zenodo.23292885.
+
+\bibitem{Arda} P.~W. Murphy, Arda: the Telperion engine and the missions registry, \url{https://github.com/DrMurphyIsIn/Arda}, commit \texttt{50b1000254c6bb74bf12d21fa66483bd9fc14aeb}. The Lean sources are in \texttt{telperion/examples/weil\_form\_enclosure/lean} and \texttt{telperion/examples/rvm\_bridge/lean}; the research notes are \texttt{telperion/research/rr\_square/RR\_SQUARE\_STATEMENT\_2026-10-12.md} and \texttt{TROPICAL\_SQUARE\_2026-10-12.md}.
+
+\bibitem{RHLean} P.~W. Murphy, \texttt{riemann-hypothesis-lean}: kernel-checked results on the Riemann Hypothesis, programme record \texttt{docs/PROGRESS.md} (2026), synchronised to Arda commit \texttt{50b100025}.
+
+\bibitem{Lean} L.~de Moura and S.~Ullrich, The Lean 4 theorem prover and programming language, in \emph{Automated Deduction -- CADE 28}, LNCS 12699, Springer (2021), 625--635.
+
+\bibitem{Mathlib} The mathlib Community, The Lean mathematical library, in \emph{CPP 2020}, ACM (2020), 367--381.
+
+\end{thebibliography}
+
+\end{document}

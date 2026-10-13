@@ -344,8 +344,20 @@ them have had no human review. They are summarised because they record what was 
 - **LY-1: torus Lee–Yang, NO-GO.** Lee–Yang / Hermite–Biehler conditions over the whole Bohr torus fail for ζ's own lifts.
   They are invariant under the unimodular twists z_p ↦ e^{iθ_p}z_p, so they cannot single out ζ. This gave the "twist guard"
   G5 that later candidates must pass. The heat flow acts as a Curie–Weiss coupling with no feature at Λ.
-- **TWOLEG (in progress).** The search for a "two-leg" object over ℚ: an analogue of C × C with partial Frobenii, carrying a
-  sign that constrains phases and not just moduli. Phase 0 is a landscape survey. Nothing has been concluded.
+- **TWOLEG (two gates, both negative).** The search for a "two-leg" object over ℚ: an analogue of C × C with partial
+  Frobenii.
+  - On curves, Weil's Hodge-index sign constrains only the moduli of the Frobenius eigenvalues. "T_N ⪰ 0 for all N" is
+    equivalent to |z| = 1 for any phases. The phases are pinned because the Gram entries are DERIVED intersection
+    numbers (fixed-point counts). So twist sensitivity is a property of the derivation, not of the sign.
+  - The proved local terms (at each p and at ∞) reproduce the Weil Gram. Every local piece is indefinite.
+  - The gluing data splits into three parts: a blind product formula; effectivity, which is strictly weaker than RH but
+    insufficient (a new fake, P = 1 − 5T + 5T² over F₅, passes it and fails RH); and a global datum equivalent to RH.
+  - Borger's Witt-vector "Spec ℤ × Spec ℤ" gives a derived prime side: its ghost graphs meet with Δ-row Λ(n)n^{−1/2}.
+    But the surface around it is the ruled cyclotomic surface A¹_ℤ ⊃ μ_∞ (q-Witt, Habiro), with no derived Δ² and no
+    archimedean term.
+  - The precise missing piece is an arithmetic analogue of the absolute point Spec k over which Spec ℤ × Spec ℤ would be
+    a genuine product.
+  - Research notes from AI sessions; not reviewed.
 
 ## 8. Papers and DOIs
 

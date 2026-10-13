@@ -1,17 +1,53 @@
 {
   "title": "Kernel-checked results on the Riemann Hypothesis: de Bruijn-Newman bounds and a conditional Riemann-Roch-square criterion",
-  "creators": [{"name": "Murphy, Peter W."}],
-  "description": "Lean 4 formalizations, papers and a vendored copy of the Telperion certificate engine, collecting kernel-checked results around the Riemann Hypothesis. The Riemann Hypothesis is open and is not proved here. Unconditional: 0 <= Lambda <= 0.2811857 for the de Bruijn-Newman constant (dbn_newman along Dobner's proof, selberg_newman and selberg_newman_sharp for the extended Selberg class, dbn_real_zeros_of_qrh_unconditional from OpenAI's quasi-Riemann hypothesis, dbn_real_zeros_ge_2811857 from Baiying Liu's half-plane), each judged by Comparator with nanoda; pole-free one-prime Weil positivity for test functions supported in [-0.5493, 0.5493] (Hodge1.weil_positivity_poleFree2_window5493). Equivalences and conditional results: RH iff Weil positivity on pole-free tests (RvMBridgePF.rh_iff_poleFree_weil_positivity); RH iff that positivity for tests not supported in the window (Hodge1.rh_iff_poleFree2_outside_window5493); and the Riemann-Roch-square criterion: a family of RR-square windows covering every pole-free test implies RH (RvMBridgePF.rh_of_rr_windows), together with the abstract Hodge-index theorems, a countermodel and function-field instances. No RR-square family is constructed. All theorems depend only on propext, Classical.choice and Quot.sound. OpenAI's and Liu's code is fetched at pinned commits and not redistributed. Not refereed. Licensing: mathematics Apache-2.0, papers and prose CC-BY-4.0, Telperion engine BSL 1.1.",
+  "creators": [
+    {
+      "name": "Murphy, Peter W."
+    }
+  ],
+  "description": "Lean 4 formalizations, papers and a vendored copy of the Telperion certificate engine, collecting kernel-checked results around the Riemann Hypothesis. The Riemann Hypothesis is open and is not proved here. Unconditional: 0 <= Lambda <= 0.2811857 for the de Bruijn-Newman constant (dbn_newman along Dobner's proof, selberg_newman and selberg_newman_sharp for the extended Selberg class, dbn_real_zeros_of_qrh_unconditional from OpenAI's quasi-Riemann hypothesis, dbn_real_zeros_ge_2811857 from Baiying Liu's half-plane), each judged by Comparator with nanoda; pole-free one-prime Weil positivity for test functions supported in [-0.5493, 0.5493] (Hodge1.weil_positivity_poleFree2_window5493). Equivalences and conditional results: RH iff Weil positivity on pole-free tests (RvMBridgePF.rh_iff_poleFree_weil_positivity); RH iff that positivity for tests not supported in the window (Hodge1.rh_iff_poleFree2_outside_window5493); and the Riemann-Roch-square criterion: a family of RR-square windows covering every pole-free test implies RH (RvMBridgePF.rh_of_rr_windows), and conversely RH gives such windows trivially (RvMBridgePF.rh_iff_exists_rr_windows), so all content is a construction without reference to the zeros, together with the abstract Hodge-index theorems, a countermodel and function-field instances. No RR-square family is constructed. All theorems depend only on propext, Classical.choice and Quot.sound. OpenAI's and Liu's code is fetched at pinned commits and not redistributed. Not refereed. Licensing: mathematics Apache-2.0, papers and prose CC-BY-4.0, Telperion engine BSL 1.1.",
   "license": "Apache-2.0",
   "upload_type": "software",
-  "keywords": ["Riemann Hypothesis", "de Bruijn-Newman constant", "Newman's conjecture", "Weil's positivity criterion", "Hodge index", "Lean 4", "formal verification"],
-  "version": "v0.1.0",
+  "keywords": [
+    "Riemann Hypothesis",
+    "de Bruijn-Newman constant",
+    "Newman's conjecture",
+    "Weil's positivity criterion",
+    "Hodge index",
+    "Lean 4",
+    "formal verification"
+  ],
+  "version": "v1.0.0",
   "related_identifiers": [
-    {"identifier": "https://github.com/DrMurphyIsIn/riemann-hypothesis-lean", "relation": "isSupplementTo", "scheme": "url"},
-    {"identifier": "https://github.com/DrMurphyIsIn/Arda/tree/50b1000254c6bb74bf12d21fa66483bd9fc14aeb", "relation": "isDerivedFrom", "scheme": "url"},
-    {"identifier": "10.5281/zenodo.23269134", "relation": "references", "scheme": "doi"},
-    {"identifier": "10.5281/zenodo.23287832", "relation": "references", "scheme": "doi"},
-    {"identifier": "arXiv:2005.05142", "relation": "references", "scheme": "arxiv"},
-    {"identifier": "arXiv:2610.12234", "relation": "references", "scheme": "arxiv"}
+    {
+      "identifier": "https://github.com/DrMurphyIsIn/riemann-hypothesis-lean",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    },
+    {
+      "identifier": "https://github.com/DrMurphyIsIn/Arda/tree/50b1000254c6bb74bf12d21fa66483bd9fc14aeb",
+      "relation": "isDerivedFrom",
+      "scheme": "url"
+    },
+    {
+      "identifier": "10.5281/zenodo.23269134",
+      "relation": "references",
+      "scheme": "doi"
+    },
+    {
+      "identifier": "10.5281/zenodo.23287832",
+      "relation": "references",
+      "scheme": "doi"
+    },
+    {
+      "identifier": "arXiv:2005.05142",
+      "relation": "references",
+      "scheme": "arxiv"
+    },
+    {
+      "identifier": "arXiv:2610.12234",
+      "relation": "references",
+      "scheme": "arxiv"
+    }
   ]
 }

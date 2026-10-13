@@ -6,7 +6,7 @@ authors:
     given-names: Peter W.
 repository-code: "https://github.com/DrMurphyIsIn/riemann-hypothesis-lean"
 license: Apache-2.0
-version: v0.1.0
+version: v1.0.0
 date-released: 2026-10-13
 doi: 10.5281/zenodo.PLACEHOLDER
 identifiers:
