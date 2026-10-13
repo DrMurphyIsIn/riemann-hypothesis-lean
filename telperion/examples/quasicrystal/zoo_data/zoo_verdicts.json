@@ -1,0 +1,937 @@
+{
+  "t_max": 100.0,
+  "objects": [
+    "zeta",
+    "dh",
+    "l_chi5",
+    "delta",
+    "lattice",
+    "ksly",
+    "random"
+  ],
+  "clauses": [
+    [
+      "support_density",
+      "(A-i/B-i) support density"
+    ],
+    [
+      "atomic_spectrum",
+      "(A-ii/B-ii) atomic spectrum on prime Lambda_log"
+    ],
+    [
+      "atomic_spectrum_loose",
+      "(C-ii) atomic spectrum on any log-lattice"
+    ],
+    [
+      "weight_positivity",
+      "(B-iii) weight positivity + decay [KILLER]"
+    ],
+    [
+      "multiplicativity",
+      "(B-mult) multiplicative amplitude generation [W3a KILLER]"
+    ],
+    [
+      "signed_decay",
+      "(C-iii) signed decay only"
+    ],
+    [
+      "defect_bounded",
+      "(D-ii) bounded defect k"
+    ],
+    [
+      "temperedness",
+      "(A-iv..D) temperedness"
+    ]
+  ],
+  "matrix": {
+    "zeta": {
+      "support_density": {
+        "verdict": "PASS",
+        "detail": "count=29, model~28.1, ratio=1.03, envelope<=300",
+        "variants": [
+          "A",
+          "B",
+          "Bm",
+          "C",
+          "D"
+        ],
+        "name": "(A-i/B-i) support density"
+      },
+      "atomic_spectrum": {
+        "verdict": "CONDITIONAL",
+        "detail": "pure-point at log-prime freqs is RH-adjacent (GW image of reality)",
+        "variants": [
+          "A",
+          "B",
+          "Bm",
+          "D"
+        ],
+        "name": "(A-ii/B-ii) atomic spectrum on prime Lambda_log"
+      },
+      "atomic_spectrum_loose": {
+        "verdict": "CONDITIONAL",
+        "detail": "pure-point at log-prime freqs is RH-adjacent (GW image of reality)",
+        "variants": [
+          "C"
+        ],
+        "name": "(C-ii) atomic spectrum on any log-lattice"
+      },
+      "weight_positivity": {
+        "verdict": "PASS",
+        "detail": "GW prime side (log p)p^{-k/2} > 0 (unconditional, arithmetic)",
+        "variants": [
+          "B"
+        ],
+        "name": "(B-iii) weight positivity + decay [KILLER]"
+      },
+      "multiplicativity": {
+        "verdict": "PASS",
+        "detail": "amplitudes multiplicatively generated (trivial twist): b(composite)=0, b(p^m)=(log p) constant in m => a(p^m)=(log p)p^{-m/2}=(log p)w(p)^m, w(p)=p^{-1/2} (Euler product; unconditional/arithmetic)",
+        "variants": [
+          "Bm"
+        ],
+        "name": "(B-mult) multiplicative amplitude generation [W3a KILLER]"
+      },
+      "signed_decay": {
+        "verdict": "CONDITIONAL",
+        "detail": "signed decay holds; pure-pointness still RH-conditional",
+        "variants": [
+          "C"
+        ],
+        "name": "(C-iii) signed decay only"
+      },
+      "defect_bounded": {
+        "verdict": "CONDITIONAL",
+        "detail": "finite k at each height (Alpoge-Furman); k=0 <=> RH -- unconditionally PARTIAL",
+        "variants": [
+          "D"
+        ],
+        "name": "(D-ii) bounded defect k"
+      },
+      "temperedness": {
+        "verdict": "PASS",
+        "detail": "finite-order tempered",
+        "variants": [
+          "A",
+          "B",
+          "Bm",
+          "C",
+          "D"
+        ],
+        "name": "(A-iv..D) temperedness"
+      }
+    },
+    "dh": {
+      "support_density": {
+        "verdict": "PASS",
+        "detail": "count=53, model~53.7, ratio=0.99, envelope<=300",
+        "variants": [
+          "A",
+          "B",
+          "Bm",
+          "C",
+          "D"
+        ],
+        "name": "(A-i/B-i) support density"
+      },
+      "atomic_spectrum": {
+        "verdict": "FAIL",
+        "detail": "spectrum on conductor-5 log-lattice, not the PRIME log-lattice (fragile sep., A2 s6)",
+        "variants": [
+          "A",
+          "B",
+          "Bm",
+          "D"
+        ],
+        "name": "(A-ii/B-ii) atomic spectrum on prime Lambda_log"
+      },
+      "atomic_spectrum_loose": {
+        "verdict": "PASS",
+        "detail": "spectrum on a (conductor-5) log-lattice -- loose C-reading admits it",
+        "variants": [
+          "C"
+        ],
+        "name": "(C-ii) atomic spectrum on any log-lattice"
+      },
+      "weight_positivity": {
+        "verdict": "FAIL",
+        "detail": "no Euler product: F'/F mixes chi(p),chi-bar(p) -> complex/sign-varying, positivity fails",
+        "variants": [
+          "B"
+        ],
+        "name": "(B-iii) weight positivity + decay [KILLER]"
+      },
+      "multiplicativity": {
+        "verdict": "FAIL",
+        "detail": "generation law breaks: nonzero amplitude at COMPOSITE n=6 (b(6)=+1.9364+0.0000i); no Euler product => not multiplicatively generated",
+        "variants": [
+          "Bm"
+        ],
+        "name": "(B-mult) multiplicative amplitude generation [W3a KILLER]"
+      },
+      "signed_decay": {
+        "verdict": "PASS",
+        "detail": "signed amplitudes decay within the envelope (positivity not required)",
+        "variants": [
+          "C"
+        ],
+        "name": "(C-iii) signed decay only"
+      },
+      "defect_bounded": {
+        "verdict": "FAIL",
+        "detail": "unbounded defect: 4 off-line pairs certified, k(T)->inf",
+        "variants": [
+          "D"
+        ],
+        "name": "(D-ii) bounded defect k"
+      },
+      "temperedness": {
+        "verdict": "PASS",
+        "detail": "finite-order tempered",
+        "variants": [
+          "A",
+          "B",
+          "Bm",
+          "C",
+          "D"
+        ],
+        "name": "(A-iv..D) temperedness"
+      }
+    },
+    "l_chi5": {
+      "support_density": {
+        "verdict": "PASS",
+        "detail": "count=54, model~53.7, ratio=1.00, envelope<=300",
+        "variants": [
+          "A",
+          "B",
+          "Bm",
+          "C",
+          "D"
+        ],
+        "name": "(A-i/B-i) support density"
+      },
+      "atomic_spectrum": {
+        "verdict": "CONDITIONAL",
+        "detail": "pure-point at log-prime freqs is GRH-conditional for L(chi) (same status as zeta: dual comb pure-pointness <=> zero reality)",
+        "variants": [
+          "A",
+          "B",
+          "Bm",
+          "D"
+        ],
+        "name": "(A-ii/B-ii) atomic spectrum on prime Lambda_log"
+      },
+      "atomic_spectrum_loose": {
+        "verdict": "CONDITIONAL",
+        "detail": "pure-point at log-prime freqs is GRH-conditional for L(chi) (same status as zeta: dual comb pure-pointness <=> zero reality)",
+        "variants": [
+          "C"
+        ],
+        "name": "(C-ii) atomic spectrum on any log-lattice"
+      },
+      "weight_positivity": {
+        "verdict": "FAIL",
+        "detail": "L-function prime layer (log p)chi(p)^m p^{-m/2} is UNIMODULAR COMPLEX (character twist), not strictly-positive-real: bare (B-iii) is zeta-unique / over-sharp -- see B-mult-twisted",
+        "variants": [
+          "B"
+        ],
+        "name": "(B-iii) weight positivity + decay [KILLER]"
+      },
+      "multiplicativity": {
+        "verdict": "PASS",
+        "detail": "amplitudes multiplicatively generated with a UNIMODULAR CHARACTER twist: b(composite)=0, b(p^m)=(log p) chi(p)^m => a(p^m)=(log p)chi(p)^m p^{-m/2} (Euler product with |chi(p)|=1; B-mult-twisted, unconditional/arithmetic) (ramified primes p|conductor with no atom: [5])",
+        "variants": [
+          "Bm"
+        ],
+        "name": "(B-mult) multiplicative amplitude generation [W3a KILLER]"
+      },
+      "signed_decay": {
+        "verdict": "CONDITIONAL",
+        "detail": "signed decay holds; pure-pointness still GRH-conditional",
+        "variants": [
+          "C"
+        ],
+        "name": "(C-iii) signed decay only"
+      },
+      "defect_bounded": {
+        "verdict": "CONDITIONAL",
+        "detail": "finite k at each height (Alpoge-Furman extends to primitive Dirichlet L-functions); k=0 <=> GRH for L(chi) -- PARTIAL",
+        "variants": [
+          "D"
+        ],
+        "name": "(D-ii) bounded defect k"
+      },
+      "temperedness": {
+        "verdict": "PASS",
+        "detail": "finite-order tempered",
+        "variants": [
+          "A",
+          "B",
+          "Bm",
+          "C",
+          "D"
+        ],
+        "name": "(A-iv..D) temperedness"
+      }
+    },
+    "delta": {
+      "support_density": {
+        "verdict": "PASS",
+        "detail": "count=56, model~56.3, ratio=1.00, envelope<=300",
+        "variants": [
+          "A",
+          "B",
+          "Bm",
+          "C",
+          "D"
+        ],
+        "name": "(A-i/B-i) support density"
+      },
+      "atomic_spectrum": {
+        "verdict": "CONDITIONAL",
+        "detail": "pure-point at log-prime freqs is GRH-conditional for L(chi) (same status as zeta: dual comb pure-pointness <=> zero reality)",
+        "variants": [
+          "A",
+          "B",
+          "Bm",
+          "D"
+        ],
+        "name": "(A-ii/B-ii) atomic spectrum on prime Lambda_log"
+      },
+      "atomic_spectrum_loose": {
+        "verdict": "CONDITIONAL",
+        "detail": "pure-point at log-prime freqs is GRH-conditional for L(chi) (same status as zeta: dual comb pure-pointness <=> zero reality)",
+        "variants": [
+          "C"
+        ],
+        "name": "(C-ii) atomic spectrum on any log-lattice"
+      },
+      "weight_positivity": {
+        "verdict": "FAIL",
+        "detail": "GL(2) prime layer (log p)(alpha^m+beta^m)p^{-m/2} is a real but SIGN-VARYING Newton power sum (tau(2) < 0), not strictly positive: (B-iii) is zeta-unique / over-sharp",
+        "variants": [
+          "B"
+        ],
+        "name": "(B-iii) weight positivity + decay [KILLER]"
+      },
+      "multiplicativity": {
+        "verdict": "FAIL",
+        "detail": "prime-layer twist |t(2)|=0.5303 != 1 (not a unimodular character twist)",
+        "variants": [
+          "Bm"
+        ],
+        "name": "(B-mult) multiplicative amplitude generation [W3a KILLER]"
+      },
+      "signed_decay": {
+        "verdict": "CONDITIONAL",
+        "detail": "signed decay holds; pure-pointness still GRH-conditional",
+        "variants": [
+          "C"
+        ],
+        "name": "(C-iii) signed decay only"
+      },
+      "defect_bounded": {
+        "verdict": "CONDITIONAL",
+        "detail": "finite k at each height (Alpoge-Furman extends to primitive Dirichlet L-functions); k=0 <=> GRH for L(chi) -- PARTIAL",
+        "variants": [
+          "D"
+        ],
+        "name": "(D-ii) bounded defect k"
+      },
+      "temperedness": {
+        "verdict": "PASS",
+        "detail": "finite-order tempered",
+        "variants": [
+          "A",
+          "B",
+          "Bm",
+          "C",
+          "D"
+        ],
+        "name": "(A-iv..D) temperedness"
+      }
+    },
+    "lattice": {
+      "support_density": {
+        "verdict": "PASS",
+        "detail": "count=100, model~100.0, ratio=1.00, envelope<=300",
+        "variants": [
+          "A",
+          "B",
+          "Bm",
+          "C",
+          "D"
+        ],
+        "name": "(A-i/B-i) support density"
+      },
+      "atomic_spectrum": {
+        "verdict": "PASS",
+        "detail": "atomic pure-point spectrum (integer_lattice)",
+        "variants": [
+          "A",
+          "B",
+          "Bm",
+          "D"
+        ],
+        "name": "(A-ii/B-ii) atomic spectrum on prime Lambda_log"
+      },
+      "atomic_spectrum_loose": {
+        "verdict": "PASS",
+        "detail": "atomic pure-point spectrum (integer_lattice)",
+        "variants": [
+          "C"
+        ],
+        "name": "(C-ii) atomic spectrum on any log-lattice"
+      },
+      "weight_positivity": {
+        "verdict": "PASS",
+        "detail": "positive-mass atoms (positive_single)",
+        "variants": [
+          "B"
+        ],
+        "name": "(B-iii) weight positivity + decay [KILLER]"
+      },
+      "multiplicativity": {
+        "verdict": "FAIL",
+        "detail": "no multiplicative prime-layer (not an Euler-product amplitude sequence); B-mult excludes generic/non-arithmetic combs",
+        "variants": [
+          "Bm"
+        ],
+        "name": "(B-mult) multiplicative amplitude generation [W3a KILLER]"
+      },
+      "signed_decay": {
+        "verdict": "PASS",
+        "detail": "signed amplitudes decay within the envelope (positivity not required)",
+        "variants": [
+          "C"
+        ],
+        "name": "(C-iii) signed decay only"
+      },
+      "defect_bounded": {
+        "verdict": "PASS",
+        "detail": "no off-line pairs (defect k=0)",
+        "variants": [
+          "D"
+        ],
+        "name": "(D-ii) bounded defect k"
+      },
+      "temperedness": {
+        "verdict": "PASS",
+        "detail": "finite-order tempered",
+        "variants": [
+          "A",
+          "B",
+          "Bm",
+          "C",
+          "D"
+        ],
+        "name": "(A-iv..D) temperedness"
+      }
+    },
+    "ksly": {
+      "support_density": {
+        "verdict": "PASS",
+        "detail": "count=32, model~31.8, ratio=1.01, envelope<=300",
+        "variants": [
+          "A",
+          "B",
+          "Bm",
+          "C",
+          "D"
+        ],
+        "name": "(A-i/B-i) support density"
+      },
+      "atomic_spectrum": {
+        "verdict": "PASS",
+        "detail": "atomic pure-point spectrum (exp_poly_freqs)",
+        "variants": [
+          "A",
+          "B",
+          "Bm",
+          "D"
+        ],
+        "name": "(A-ii/B-ii) atomic spectrum on prime Lambda_log"
+      },
+      "atomic_spectrum_loose": {
+        "verdict": "PASS",
+        "detail": "atomic pure-point spectrum (exp_poly_freqs)",
+        "variants": [
+          "C"
+        ],
+        "name": "(C-ii) atomic spectrum on any log-lattice"
+      },
+      "weight_positivity": {
+        "verdict": "PASS",
+        "detail": "positive-mass atoms (positive_ly)",
+        "variants": [
+          "B"
+        ],
+        "name": "(B-iii) weight positivity + decay [KILLER]"
+      },
+      "multiplicativity": {
+        "verdict": "FAIL",
+        "detail": "no multiplicative prime-layer (not an Euler-product amplitude sequence); B-mult excludes generic/non-arithmetic combs",
+        "variants": [
+          "Bm"
+        ],
+        "name": "(B-mult) multiplicative amplitude generation [W3a KILLER]"
+      },
+      "signed_decay": {
+        "verdict": "PASS",
+        "detail": "signed amplitudes decay within the envelope (positivity not required)",
+        "variants": [
+          "C"
+        ],
+        "name": "(C-iii) signed decay only"
+      },
+      "defect_bounded": {
+        "verdict": "PASS",
+        "detail": "no off-line pairs (defect k=0)",
+        "variants": [
+          "D"
+        ],
+        "name": "(D-ii) bounded defect k"
+      },
+      "temperedness": {
+        "verdict": "PASS",
+        "detail": "finite-order tempered",
+        "variants": [
+          "A",
+          "B",
+          "Bm",
+          "C",
+          "D"
+        ],
+        "name": "(A-iv..D) temperedness"
+      }
+    },
+    "random": {
+      "support_density": {
+        "verdict": "PASS",
+        "detail": "count=100, model~100.0, ratio=1.00, envelope<=300",
+        "variants": [
+          "A",
+          "B",
+          "Bm",
+          "C",
+          "D"
+        ],
+        "name": "(A-i/B-i) support density"
+      },
+      "atomic_spectrum": {
+        "verdict": "FAIL",
+        "detail": "no atomic diffraction spectrum (Poisson-random)",
+        "variants": [
+          "A",
+          "B",
+          "Bm",
+          "D"
+        ],
+        "name": "(A-ii/B-ii) atomic spectrum on prime Lambda_log"
+      },
+      "atomic_spectrum_loose": {
+        "verdict": "FAIL",
+        "detail": "no atomic diffraction spectrum (Poisson-random)",
+        "variants": [
+          "C"
+        ],
+        "name": "(C-ii) atomic spectrum on any log-lattice"
+      },
+      "weight_positivity": {
+        "verdict": "FAIL",
+        "detail": "no atomic spectrum; weights undefined/sign-random",
+        "variants": [
+          "B"
+        ],
+        "name": "(B-iii) weight positivity + decay [KILLER]"
+      },
+      "multiplicativity": {
+        "verdict": "FAIL",
+        "detail": "no multiplicative prime-layer (not an Euler-product amplitude sequence); B-mult excludes generic/non-arithmetic combs",
+        "variants": [
+          "Bm"
+        ],
+        "name": "(B-mult) multiplicative amplitude generation [W3a KILLER]"
+      },
+      "signed_decay": {
+        "verdict": "FAIL",
+        "detail": "no atomic spectrum -> no decaying amplitude sequence",
+        "variants": [
+          "C"
+        ],
+        "name": "(C-iii) signed decay only"
+      },
+      "defect_bounded": {
+        "verdict": "FAIL",
+        "detail": "not even defect-crystalline (no atomic spectrum)",
+        "variants": [
+          "D"
+        ],
+        "name": "(D-ii) bounded defect k"
+      },
+      "temperedness": {
+        "verdict": "PASS",
+        "detail": "finite-order tempered",
+        "variants": [
+          "A",
+          "B",
+          "Bm",
+          "C",
+          "D"
+        ],
+        "name": "(A-iv..D) temperedness"
+      }
+    }
+  },
+  "variant_kill": {
+    "A": {
+      "zeta": {
+        "fails": [],
+        "killed": false,
+        "survives": true
+      },
+      "dh": {
+        "fails": [
+          "atomic_spectrum"
+        ],
+        "killed": true,
+        "survives": false
+      },
+      "l_chi5": {
+        "fails": [],
+        "killed": false,
+        "survives": true
+      },
+      "delta": {
+        "fails": [],
+        "killed": false,
+        "survives": true
+      },
+      "lattice": {
+        "fails": [],
+        "killed": false,
+        "survives": true
+      },
+      "ksly": {
+        "fails": [],
+        "killed": false,
+        "survives": true
+      },
+      "random": {
+        "fails": [
+          "atomic_spectrum"
+        ],
+        "killed": true,
+        "survives": false
+      }
+    },
+    "B": {
+      "zeta": {
+        "fails": [],
+        "killed": false,
+        "survives": true
+      },
+      "dh": {
+        "fails": [
+          "atomic_spectrum",
+          "weight_positivity"
+        ],
+        "killed": true,
+        "survives": false
+      },
+      "l_chi5": {
+        "fails": [
+          "weight_positivity"
+        ],
+        "killed": true,
+        "survives": false
+      },
+      "delta": {
+        "fails": [
+          "weight_positivity"
+        ],
+        "killed": true,
+        "survives": false
+      },
+      "lattice": {
+        "fails": [],
+        "killed": false,
+        "survives": true
+      },
+      "ksly": {
+        "fails": [],
+        "killed": false,
+        "survives": true
+      },
+      "random": {
+        "fails": [
+          "atomic_spectrum",
+          "weight_positivity"
+        ],
+        "killed": true,
+        "survives": false
+      }
+    },
+    "Bm": {
+      "zeta": {
+        "fails": [],
+        "killed": false,
+        "survives": true
+      },
+      "dh": {
+        "fails": [
+          "atomic_spectrum",
+          "multiplicativity"
+        ],
+        "killed": true,
+        "survives": false
+      },
+      "l_chi5": {
+        "fails": [],
+        "killed": false,
+        "survives": true
+      },
+      "delta": {
+        "fails": [
+          "multiplicativity"
+        ],
+        "killed": true,
+        "survives": false
+      },
+      "lattice": {
+        "fails": [
+          "multiplicativity"
+        ],
+        "killed": true,
+        "survives": false
+      },
+      "ksly": {
+        "fails": [
+          "multiplicativity"
+        ],
+        "killed": true,
+        "survives": false
+      },
+      "random": {
+        "fails": [
+          "atomic_spectrum",
+          "multiplicativity"
+        ],
+        "killed": true,
+        "survives": false
+      }
+    },
+    "C": {
+      "zeta": {
+        "fails": [],
+        "killed": false,
+        "survives": true
+      },
+      "dh": {
+        "fails": [],
+        "killed": false,
+        "survives": true
+      },
+      "l_chi5": {
+        "fails": [],
+        "killed": false,
+        "survives": true
+      },
+      "delta": {
+        "fails": [],
+        "killed": false,
+        "survives": true
+      },
+      "lattice": {
+        "fails": [],
+        "killed": false,
+        "survives": true
+      },
+      "ksly": {
+        "fails": [],
+        "killed": false,
+        "survives": true
+      },
+      "random": {
+        "fails": [
+          "atomic_spectrum_loose",
+          "signed_decay"
+        ],
+        "killed": true,
+        "survives": false
+      }
+    },
+    "D": {
+      "zeta": {
+        "fails": [],
+        "killed": false,
+        "survives": true
+      },
+      "dh": {
+        "fails": [
+          "atomic_spectrum",
+          "defect_bounded"
+        ],
+        "killed": true,
+        "survives": false
+      },
+      "l_chi5": {
+        "fails": [],
+        "killed": false,
+        "survives": true
+      },
+      "delta": {
+        "fails": [],
+        "killed": false,
+        "survives": true
+      },
+      "lattice": {
+        "fails": [],
+        "killed": false,
+        "survives": true
+      },
+      "ksly": {
+        "fails": [],
+        "killed": false,
+        "survives": true
+      },
+      "random": {
+        "fails": [
+          "atomic_spectrum",
+          "defect_bounded"
+        ],
+        "killed": true,
+        "survives": false
+      }
+    }
+  },
+  "object_meta": {
+    "zeta": {
+      "density_count": 29,
+      "offline_pairs": 0,
+      "spectrum": "prime_log_lattice",
+      "weights": "positive_prime"
+    },
+    "dh": {
+      "density_count": 53,
+      "offline_pairs": 1,
+      "spectrum": "single_modulus_log",
+      "weights": "complex_char_mixed"
+    },
+    "l_chi5": {
+      "density_count": 54,
+      "offline_pairs": 0,
+      "spectrum": "prime_log_lattice",
+      "weights": "twisted_prime"
+    },
+    "delta": {
+      "density_count": 56,
+      "offline_pairs": 0,
+      "spectrum": "prime_log_lattice",
+      "weights": "satake_deg2"
+    },
+    "lattice": {
+      "density_count": 100,
+      "offline_pairs": 0,
+      "spectrum": "integer_lattice",
+      "weights": "positive_single"
+    },
+    "ksly": {
+      "density_count": 32,
+      "offline_pairs": 0,
+      "spectrum": "exp_poly_freqs",
+      "weights": "positive_ly"
+    },
+    "random": {
+      "density_count": 100,
+      "offline_pairs": 0,
+      "spectrum": "none",
+      "weights": "iid_random"
+    }
+  },
+  "trust": "arb/interval orchestration (certified inventories); NOT kernel",
+  "conjecture1_proved": false,
+  "forged_controls": [
+    {
+      "control": "superdense_support",
+      "clause": "support_density",
+      "genuine": "PASS",
+      "forged_verdict": "FAIL",
+      "flipped": true,
+      "detail": "count=100000, model~50.0, ratio=2000.00, envelope<=300"
+    },
+    {
+      "control": "nonlattice_atom",
+      "clause": "atomic_spectrum",
+      "genuine": "PASS",
+      "forged_verdict": "FAIL",
+      "flipped": true,
+      "detail": "no atomic diffraction spectrum (Poisson-random)"
+    },
+    {
+      "control": "negative_weight_at_log2",
+      "clause": "weight_positivity",
+      "genuine": "PASS",
+      "forged_verdict": "FAIL",
+      "flipped": true,
+      "detail": "no Euler product: F'/F mixes chi(p),chi-bar(p) -> complex/sign-varying, positivity fails"
+    },
+    {
+      "control": "O1_atom_large_u",
+      "clause": "signed_decay",
+      "genuine": "PASS",
+      "forged_verdict": "FAIL",
+      "flipped": true,
+      "detail": "no atomic spectrum -> no decaying amplitude sequence"
+    },
+    {
+      "control": "growing_defect",
+      "clause": "defect_bounded",
+      "genuine": "PASS",
+      "forged_verdict": "FAIL",
+      "flipped": true,
+      "detail": "unbounded defect: 17 off-line pairs certified, k(T)->inf"
+    },
+    {
+      "control": "nontempered_weights",
+      "clause": "temperedness",
+      "genuine": "PASS",
+      "forged_verdict": "FAIL",
+      "flipped": true,
+      "detail": "non-tempered (exponential weights)"
+    },
+    {
+      "control": "broken_multiplicativity",
+      "clause": "multiplicativity",
+      "genuine": "PASS",
+      "forged_verdict": "FAIL",
+      "flipped": true,
+      "detail": "genuine zeta B-mult=PASS; corrupt a(2)=1.3 -> FAIL: generation law breaks: nonzero amplitude at COMPOSITE n=6 (b(6)=+0.8959+0.0000i); no Euler product => not multiplicatively generated"
+    },
+    {
+      "control": "broken_character_twist",
+      "clause": "multiplicativity",
+      "genuine": "PASS",
+      "forged_verdict": "FAIL",
+      "flipped": true,
+      "detail": "genuine L(chi) B-mult-twisted=PASS; corrupt chi(2)=0.5 -> FAIL: generation law breaks: nonzero amplitude at COMPOSITE n=6 (b(6)=+1.7918+0.8959i); no Euler product => not multiplicatively generated"
+    },
+    {
+      "control": "corrupt_dh_offline_flag",
+      "clause": "defect_bounded",
+      "genuine": "FAIL",
+      "forged_verdict": "PASS",
+      "flipped": true,
+      "detail": "genuine DH defect=FAIL; with off-line flag corrupted -> PASS"
+    }
+  ],
+  "w3a_notes": [
+    "W3c L-COLUMN CONFIRMED: L(chi) (a genuine Euler product) PASSES B-mult-twisted but FAILS bare (B-iii) positivity (complex character twist); DH = the non-multiplicative SUM of L(chi),L(chi-bar) STILL FAILS B-mult. => B-mult-twisted selects the ARITHMETIC CLASS (not zeta alone), and the class-not-description objection to W3a's zeta-uniqueness is resolved.",
+    "B-mult STRICTLY sharper than B: ksly (generic Lee-Yang FQ) survives B but is excluded by B-mult -- the multiplicativity primitive carves out the arithmetic FQs (Euler-product amplitudes) from the generic Lee-Yang class."
+  ],
+  "a2_findings": [
+    "A1b FALSIFICATION CONFIRMED: clause (B-mult-twisted) REJECTS L(s,Delta), a tempered degree-2 Selberg element (Deligne). Reason: prime-layer twist |t(2)|=0.5303 != 1 (not a unimodular character twist). Kernel proof of the rejection (an IFF -- the clause holds for a degree-2 layer iff the Satake determinant VANISHES, i.e. only in degree <= 1): lean/SatakeDegreeTwo.lean, node MM_satake_degree_two_rejects_delta. The clause is a GL(1) predicate mistaken for an arithmetic-class one."
+  ],
+  "governance_failures": []
+}

@@ -1,0 +1,39 @@
+import E6Bridge7
+#print axioms RvMBridge7.phi
+#print axioms RvMBridge7.wsq
+#print axioms RvMBridge7.term
+#print axioms RvMBridge7.zeroSide_gauss_eq
+#print axioms RvMBridge7.norm_gaussTest
+#print axioms RvMBridge7.norm_term
+#print axioms RvMBridge7.re_gaussTest
+#print axioms RvMBridge7.exists_lam_trig
+#print axioms RvMBridge7.exists_lam_re_gaussTest
+#print axioms RvMBridge7.windowSet
+#print axioms RvMBridge7.windowSet_finite
+#print axioms RvMBridge7.window
+#print axioms RvMBridge7.mem_window
+#print axioms RvMBridge7.self_mem_window
+#print axioms RvMBridge7.badOf
+#print axioms RvMBridge7.eq_badOf_of_phi_eq
+#print axioms RvMBridge7.badSet
+#print axioms RvMBridge7.badOf_mem_badSet
+#print axioms RvMBridge7.exists_generic_centre
+#print axioms RvMBridge7.eq_or_eq_reflect_of_phi_eq
+#print axioms RvMBridge7.exists_maximiser_gap
+#print axioms RvMBridge7.phi_neg_of_not_mem_window
+#print axioms RvMBridge7.majorant
+#print axioms RvMBridge7.majorant_nonneg
+#print axioms RvMBridge7.summable_majorant
+#print axioms RvMBridge7.norm_term_le_majorant
+#print axioms RvMBridge7.constA
+#print axioms RvMBridge7.constB
+#print axioms RvMBridge7.constA_nonneg
+#print axioms RvMBridge7.constB_nonneg
+#print axioms RvMBridge7.tsum_majorant
+#print axioms RvMBridge7.tail_bound
+#print axioms RvMBridge7.re_zeroSide_le
+#print axioms RvMBridge7.gaussian_dominance
+#print axioms RvMBridge7.weil_positivity_implies_rh_of_approx
+#print axioms Zeta23.zetaSeam
+#check @RvMBridge7.gaussian_dominance
+#check @RvMBridge7.weil_positivity_implies_rh_of_approx

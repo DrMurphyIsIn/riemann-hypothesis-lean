@@ -1,0 +1,37 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below, and cite the papers in papers/ and the original authors credited in NOTICE.md (de Bruijn, Newman, Rodgers-Tao, Dobner, OpenAI, Liu)."
+title: "Kernel-checked results on the Riemann Hypothesis: de Bruijn-Newman bounds and a conditional Riemann-Roch-square criterion"
+authors:
+  - family-names: Murphy
+    given-names: Peter W.
+repository-code: "https://github.com/DrMurphyIsIn/riemann-hypothesis-lean"
+license: Apache-2.0
+version: v0.1.0
+date-released: 2026-10-13
+doi: 10.5281/zenodo.PLACEHOLDER
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.PLACEHOLDER
+    description: "Zenodo archive of this release (placeholder until the deposition is made)"
+  - type: doi
+    value: 10.5281/zenodo.23269134
+    description: "qrh-debruijn-newman, all versions (Lambda <= 9/32 and Lambda <= 0.2811857)"
+  - type: doi
+    value: 10.5281/zenodo.23287832
+    description: "newman-lambda-nonneg, all versions (Lambda >= 0 and the extended Selberg class)"
+keywords:
+  - Riemann Hypothesis
+  - de Bruijn-Newman constant
+  - Newman's conjecture
+  - Weil's positivity criterion
+  - Hodge index
+  - Lean 4
+  - formal verification
+abstract: >-
+  Kernel-checked Lean 4 results around the Riemann Hypothesis, which remains open. Unconditional:
+  0 <= Lambda <= 0.2811857 for the de Bruijn-Newman constant (Newman's conjecture along Dobner's proof, also for
+  the extended Selberg class; the upper bound from OpenAI's and Liu's zero-free half-planes via de Bruijn's
+  theorem), and pole-free Weil positivity on the window of half-width 0.5493. Conditional or equivalences:
+  RH is equivalent to Weil positivity on pole-free tests and to that positivity outside the window, and a
+  family of Riemann-Roch-square windows covering every pole-free test would imply RH; no such family is
+  constructed. Packaged with the three papers and a vendored copy of the Telperion certificate engine.

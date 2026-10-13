@@ -1,0 +1,67 @@
+# DRAFT, NOT ACTIVE.  To activate, an owner copies this file to
+# .github/workflows/oai-qrh-bridge.yml.  Until a workflow like this runs `lake build` on the
+# bridge, `mission verify` treats telperion/examples/oai_qrh_bridge as an orphan island, and the
+# gate refuses to grant any node whose artifact lives there.
+#
+# Cost: OpenAI's QRH closure is about 2,924 modules (486k lines) on top of Mathlib.  Without a
+# cache, expect several CPU-hours and a .lake of about 19 GB.  That is why the trigger is manual
+# plus a weekly schedule, not every push.  Mathlib comes from `lake exe cache get`; OpenAI's own
+# modules are compiled.  The actions/cache step keeps .lake between runs.
+name: oai-qrh-bridge
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 6 * * 0"
+  push:
+    paths:
+      - "telperion/examples/oai_qrh_bridge/**"
+      - "telperion/examples/dbn/lean/DBN*.lean"
+jobs:
+  build-and-judge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 600
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install elan
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Materialize openai/math at the pinned commit
+        working-directory: telperion/examples/oai_qrh_bridge
+        run: ./materialize.sh
+      - uses: actions/cache@v4
+        with:
+          path: telperion/examples/oai_qrh_bridge/work/oai/.lake
+          key: oai-qrh-${{ hashFiles('telperion/examples/oai_qrh_bridge/OAI_PIN') }}
+      - name: Resolve and patch OpenAI's dependencies, fetch Mathlib oleans
+        working-directory: telperion/examples/oai_qrh_bridge/work/oai
+        run: |
+          lake update
+          lake exe cache get
+      - name: Build the bridge (lake build ArdaQRHBridge AxiomGuardQRHBridge)
+        working-directory: telperion/examples/oai_qrh_bridge/work/oai
+        shell: bash
+        run: |
+          lake build ArdaQRHBridge AxiomGuardQRHBridge ArdaDBNUnconditional ArdaDBNChallenge ArdaDBNChallengeTampered
+          lake env lean AxiomGuardQRHBridge.lean | tee axioms.out
+          ! grep -q sorryAx axioms.out
+          grep -q "'qrh_seven_eighths' depends on axioms: \[propext, Classical.choice, Quot.sound\]" axioms.out
+          lake env lean AxiomGuardDBNUnconditional.lean | tee axioms2.out
+          ! grep -q sorryAx axioms2.out
+      # Comparator (nanoda on), with a comparator build whose tag matches v4.34.1; wire the binaries
+      # the same way missions-comparator.yml does for the other islands. The positive challenges must be
+      # accepted, and the negative control (lean/negative_control/, a tampered DBN.Phi) must be REJECTED:
+      # a run that accepts it means the challenge no longer pins the definitions, and the job fails.
+      - name: Comparator (nanoda on), positive challenges and negative control
+        working-directory: telperion/examples/oai_qrh_bridge/work/oai
+        shell: bash
+        run: |
+          for cfg in qrh_seven_eighths dbn_real_zeros_of_qrh_unconditional; do
+            lake env comparator $cfg.comparator.json 2>&1 | tee cmp_$cfg.out
+            grep -q "Your solution is okay!" cmp_$cfg.out
+          done
+          if lake env comparator tampered.comparator.json > cmp_tampered.out 2>&1 \
+             && grep -q "Your solution is okay!" cmp_tampered.out; then
+            echo "negative control was ACCEPTED: the challenge does not pin DBN.Phi"; exit 1
+          fi
+          grep -q "does not match" cmp_tampered.out

@@ -1,0 +1,7 @@
+# The development repository and commit this repository's telperion/ copy (engine, tests, examples and the
+# six Lean islands) was taken from. scripts/materialize.sh clones it and checks the copy against it.
+source_repo=https://github.com/DrMurphyIsIn/Arda.git
+source_commit=b17b3c68fe67e314e1051f4dab46f7d527a7b62a
+source_date=2026-10-13
+source_title="Merge pull request #724 from DrMurphyIsIn/registry/comparator-records-hodge1"
+islands="dbn oai_qrh_bridge liu_dbn_bridge rvm_bridge weil_form_enclosure quasicrystal"

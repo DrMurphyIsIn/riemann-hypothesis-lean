@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+.lake/
+work/
+.DS_Store
+papers/*/paper.aux
+papers/*/paper.log
+papers/*/paper.out
+papers/*/build.log
+papers/*/arxiv/

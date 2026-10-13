@@ -1,0 +1,76 @@
+import E6Bridge13
+#print axioms RvMBridge11.GaussianExplicitFormula
+#print axioms RvMBridge11.gaussA
+#print axioms RvMBridge11.gaussA_pos
+#print axioms RvMBridge11.autocorrGauss
+#print axioms RvMBridge11.bumpR
+#print axioms RvMBridge11.R₀
+#print axioms RvMBridge11.lam₀
+#print axioms RvMBridge11.integral_sq_mul_exp_neg_mul_sq
+#print axioms RvMBridge11.integral_sq_mul_cexp_neg_mul_sq
+#print axioms RvMBridge11.re_digamma_quarter_ge
+#print axioms RvMBridge11.re_digamma_quarter_ge_two
+#print axioms RvMBridge11.gaussPhi_mul_conj
+#print axioms RvMBridge11.autocorr_gaussPhi_eq_integral
+#print axioms RvMBridge11.integral_sq_sub_mul_cexp
+#print axioms RvMBridge11.gaussK_mul_conj
+#print axioms RvMBridge11.autocorr_gaussPhi
+#print axioms RvMBridge11.autocorrGauss_zero
+#print axioms RvMBridge11.abs_one_sub_two_mul_exp_le
+#print axioms RvMBridge11.norm_autocorrGauss_le
+#print axioms RvMBridge11.autocorr_gaussPhi_funext
+#print axioms RvMBridge11.prime_term_bound
+#print axioms RvMBridge11.norm_primeSide_le
+#print axioms RvMBridge11.norm_integral_autocorrGauss_mul_exp_le
+#print axioms RvMBridge11.weilKernel_zero_eq
+#print axioms RvMBridge11.weilKernel_one_eq
+#print axioms RvMBridge11.norm_weilKernel_zero_le
+#print axioms RvMBridge11.norm_weilKernel_one_le
+#print axioms RvMBridgeGauss.integral_sq_mul_cexp_gaussian_fourier
+#print axioms RvMBridge11.weilKernel_line_eq
+#print axioms RvMBridge11.cpow_pi_div_a
+#print axioms RvMBridge11.weilKernel_autocorrGauss_line
+#print axioms RvMBridge11.psiR
+#print axioms RvMBridge11.psiR_eq
+#print axioms RvMBridge11.psiR_ge
+#print axioms RvMBridge11.psiR_ge_two
+#print axioms RvMBridge11.continuous_psiR
+#print axioms RvMBridge11.bumpR_nonneg
+#print axioms RvMBridge11.continuous_bumpR
+#print axioms RvMBridge11.integrable_bumpR
+#print axioms RvMBridge11.integrable_bumpR_mul_psiR
+#print axioms RvMBridge11.bumpR_le
+#print axioms RvMBridge11.integral_bumpR
+#print axioms RvMBridge11.R₀_pos
+#print axioms RvMBridge11.setIntegral_bumpR_le
+#print axioms RvMBridge11.integral_bumpR_mul_psiR_ge
+#print axioms RvMBridge11.integral_archIntegrand_eq
+#print axioms RvMBridge11.re_archSide_ge
+#print axioms RvMBridge11.re_weilForm_gauss_nonneg
+#print axioms RvMBridge11.gaussian_positivity_small_lam_of
+#print axioms RvMBridge11.gaussian_positivity_small_lam_explicit_of
+#print axioms RvMBridge11.gaussianExplicitFormula
+#print axioms RvMBridge11.gaussian_positivity_small_lam
+#print axioms RvMBridge11.gaussian_positivity_small_lam_explicit
+#print axioms RvMBridge11.prime_term_bound_uniform
+#print axioms RvMBridge11.norm_primeSide_le_uniform
+#print axioms RvMBridge11.re_digamma_quarter_ge_log
+#print axioms RvMBridge11.psiR_ge_log
+#print axioms RvMBridge11.gaussA_half
+#print axioms RvMBridge11.bumpR_half
+#print axioms RvMBridge11.integral_indicator_bumpR_tail_le
+#print axioms RvMBridge11.integral_bumpR_mul_psiR_ge_envelope
+#print axioms RvMBridge11.envelopeX
+#print axioms RvMBridge11.envelopeC
+#print axioms RvMBridge11.envelopeX_nonneg
+#print axioms RvMBridge11.re_weilForm_gauss_nonneg_of_large_c
+#print axioms RvMBridge11.gaussian_positivity_envelope
+#print axioms RvMBridge11.gaussian_positivity_envelope'
+#print axioms RvMBridge13.gaussianExplicitFormula
+#print axioms RvMBridge13.gaussian_positivity_small_lam
+#print axioms RvMBridge13.rh_iff_gaussian_positivity_above_lam₀
+#check @RvMBridge11.gaussian_positivity_envelope'
+#check @RvMBridge11.gaussian_positivity_small_lam
+#check @RvMBridge11.re_digamma_quarter_ge_log
+#check @RvMBridge11.integral_indicator_bumpR_tail_le
+#check @RvMBridge11.norm_primeSide_le_uniform

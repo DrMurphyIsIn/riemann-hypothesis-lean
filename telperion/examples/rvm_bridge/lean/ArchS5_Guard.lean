@@ -1,0 +1,150 @@
+import ArchS5_Spectral
+import ArchS5_HSRank
+
+/-! Stage S5 axiom guard: every top-level theorem of ArchS5_*.lean must print exactly
+    [propext, Classical.choice, Quot.sound].
+  Run: lake build ArchS5_Spectral && lake env lean ArchS5_Guard.lean -/
+
+-- ArchS5_KernelOp
+#print axioms ArchS5.eLpNorm_two_sq
+#print axioms ArchS5.kernelApply_congr_right
+#print axioms ArchS5.kernelApply_congr_left_of_ae_ae
+#print axioms ArchS5.kernelApply_congr_left
+#print axioms ArchS5.enorm_kernelApply_le
+#print axioms ArchS5.lintegral_eLpNorm_section_sq
+#print axioms ArchS5.eLpNorm_kernelApply_le
+#print axioms ArchS5.stronglyMeasurable_kernelApply
+#print axioms ArchS5.memLp_kernelApply
+#print axioms ArchS5.ae_memLp_section
+#print axioms ArchS5.ae_integrable_section_mul
+#print axioms ArchS5.kernelApply_add_right
+#print axioms ArchS5.kernelApply_smul_right
+#print axioms ArchS5.kernelApply_add_left
+#print axioms ArchS5.kernelApply_smul_left
+#print axioms ArchS5.memLp_kernelApply_Lp
+#print axioms ArchS5.intOpAux_ae_eq
+#print axioms ArchS5.norm_intOpAux_le
+#print axioms ArchS5.intOpAux_add_right
+#print axioms ArchS5.intOpAux_smul_right
+#print axioms ArchS5.intOpAux_add_left
+#print axioms ArchS5.intOpAux_smul_left
+#print axioms ArchS5.intOp_apply
+#print axioms ArchS5.intOp_ae_eq
+#print axioms ArchS5.intOp_apply_eq_iff
+#print axioms ArchS5.norm_intOp_apply_le
+#print axioms ArchS5.norm_intOp_le
+#print axioms ArchS5.norm_intOpL_le
+#print axioms ArchS5.intOp_add
+#print axioms ArchS5.intOp_sub
+#print axioms ArchS5.intOp_neg
+#print axioms ArchS5.intOp_smul
+#print axioms ArchS5.norm_intOp_sub_le
+#print axioms ArchS5.lipschitzWith_intOp
+#print axioms ArchS5.continuous_intOp
+-- ArchS5_Adjoint
+#print axioms ArchS5.eLpNorm_two_tensor
+#print axioms ArchS5.memLp_two_tensor
+#print axioms ArchS5.memLp_conj
+#print axioms ArchS5.integrable_conj_mul_kernel_mul
+#print axioms ArchS5.inner_intOp_eq_integral
+#print axioms ArchS5.inner_intOp_left_eq_integral
+#print axioms ArchS5.memLp_kernelAdjoint
+#print axioms ArchS5.kernelAdjoint_ae_eq
+#print axioms ArchS5.inner_intOp_kernelAdjoint
+#print axioms ArchS5.adjoint_intOp
+#print axioms ArchS5.kernelAdjoint_kernelAdjoint
+#print axioms ArchS5.kernelAdjoint_eq_self
+#print axioms ArchS5.isSelfAdjoint_intOp
+#print axioms ArchS5.isSymmetric_intOp
+-- ArchS5_Compact
+#print axioms ArchS5.intOp_indicator_rect
+#print axioms ArchS5.isCompactOperator_rankOne
+#print axioms ArchS5.isCompactOperator_intOp_rect
+#print axioms ArchS5.indicatorConstLp_compl_eq
+#print axioms ArchS5.isCompactOperator_intOp_indicator
+#print axioms ArchS5.isCompactOperator_intOp
+-- ArchS5_Rayleigh
+#print axioms ArchS5.abs_iSup_sub_iSup_le
+#print axioms ArchS5.abs_iInf_sub_iInf_le
+#print axioms ArchS5.bddAbove_rayleighQuotient
+#print axioms ArchS5.bddBelow_rayleighQuotient
+#print axioms ArchS5.rayleighQuotient_le_topEig
+#print axioms ArchS5.re_inner_le_topEig_mul
+#print axioms ArchS5.le_topEig_of
+#print axioms ArchS5.topEig_le_of_forall
+#print axioms ArchS5.topEig_le_of_forall'
+#print axioms ArchS5.topEig_eq_iSup_sphere
+#print axioms ArchS5.abs_topEig_le_norm
+#print axioms ArchS5.rayleighQuotient_sub_le
+#print axioms ArchS5.abs_topEig_sub_le
+#print axioms ArchS5.topEig_le_add_norm_sub
+#print axioms ArchS5.topEig_mono
+#print axioms ArchS5.norm_sq_apply_le_of_nonneg
+#print axioms ArchS5.exists_eigenvector_topEig
+#print axioms ArchS5.hasEigenvalue_topEig
+#print axioms ArchS5.exists_isMaxOn_sphere
+#print axioms ArchS5.eigenvalue_le_topEig
+-- ArchS5_MinMax
+#print axioms ArchS5.rayleighInf_le
+#print axioms ArchS5.abs_rayleighInf_le
+#print axioms ArchS5.bddAbove_rayleighInf
+#print axioms ArchS5.abs_rayleighInf_sub_le
+#print axioms ArchS5.abs_minmaxEig_sub_le
+#print axioms ArchS5.minmaxEig_le_add_norm_sub
+#print axioms ArchS5.abs_minmaxEig_le_norm
+#print axioms ArchS5.exists_ne_zero_of_finrank_pos
+#print axioms ArchS5.le_minmaxEig
+#print axioms ArchS5.exists_mem_orthogonal_of_finrank_lt
+#print axioms ArchS5.minmaxEig_le
+#print axioms ArchS5.minmaxEig_eq_of_bounds
+#print axioms ArchS5.rayleighInf_span_singleton
+#print axioms ArchS5.minmaxEig_one
+-- ArchS5_Spectral
+#print axioms ArchS5.abs_topEig_intOp_sub_le
+#print axioms ArchS5.abs_minmaxEig_intOp_sub_le
+#print axioms ArchS5.intOp_orthogonalComplement_iSup_eigenspaces_eq_bot
+#print axioms ArchS5.finiteDimensional_eigenspace_intOp
+#print axioms ArchS5.exists_eigenvector_topEig_intOp
+#print axioms ArchS5.volI_prod
+#print axioms ArchS5.ae_mem_Icc_prod
+#print axioms ArchS5.memLp_of_continuous
+#print axioms ArchS5.kernelOfContinuous_ae_eq
+#print axioms ArchS5.intOp_kernelOfContinuous_ae_eq
+#print axioms ArchS5.kernelOfContinuous_sub
+#print axioms ArchS5.norm_kernelOfContinuous_le
+#print axioms ArchS5.abs_topEig_kernelOfContinuous_sub_le
+#print axioms ArchS5.abs_minmaxEig_kernelOfContinuous_sub_le
+#print axioms ArchS5.isHermitianKernel_kernelOfContinuous
+#print axioms ArchS5.intOp_kernelOfContinuous_compact_selfAdjoint
+-- ArchS5_HS
+#print axioms ArchS5.kernelApply_eq_inner_sectionConj
+#print axioms ArchS5.norm_sectionConj
+#print axioms ArchS5.enorm_kernelApply_sq_eq
+#print axioms ArchS5.ofReal_norm_sectionConj_sq
+#print axioms ArchS5.sum_enorm_kernelApply_sq_le
+#print axioms ArchS5.sum_eLpNorm_intOp_sq_le
+#print axioms ArchS5.norm_sq_eq_toReal_eLpNorm
+#print axioms ArchS5.sum_norm_intOp_sq_le
+#print axioms ArchS5.summable_norm_intOp_sq
+#print axioms ArchS5.tsum_norm_intOp_sq_le
+#print axioms ArchS5.hasSum_norm_inner_sq
+#print axioms ArchS5.tsum_enorm_kernelApply_sq_eq
+#print axioms ArchS5.tsum_eLpNorm_intOp_sq_eq
+#print axioms ArchS5.hasSum_norm_intOp_sq
+#print axioms ArchS5.norm_eigen
+#print axioms ArchS5.sum_eigenvalue_sq_le
+#print axioms ArchS5.summable_eigenvalue_sq
+#print axioms ArchS5.tsum_eigenvalue_sq_le
+#print axioms ArchS5.tsum_real_eigenvalue_sq_le
+#print axioms ArchS5.card_mul_sq_le_of_eigen
+#print axioms ArchS5.tsum_eigenvalue_sq_compl_le
+-- ArchS5_HSRank
+#print axioms ArchS5.re_inner_sum_eigen
+#print axioms ArchS5.norm_sum_sq_orthonormal
+#print axioms ArchS5.card_le_of_eigen_gt
+#print axioms ArchS5.card_le_of_eigen_gt_intOp
+#print axioms ArchS5.tensorKernel_ae_eq
+#print axioms ArchS5.intOp_tensorKernel
+#print axioms ArchS5.intOp_tensorKernel_mem_span
+#print axioms ArchS5.intOp_sum_tensorKernel_mem_span
+#print axioms ArchS5.card_le_of_eigen_gt_tensor

@@ -1,0 +1,18 @@
+import E6Bridge29
+#print axioms RvMBridge29.cosh_mul_cos_le_one_window
+#print axioms RvMBridge29.inv_add_inv_two_sq_le
+#print axioms RvMBridge29.abs_arg_add_abs_log_le
+#print axioms RvMBridge29.abs_arg_add_abs_log_le_sharp
+#print axioms RvMBridge29.pair_re_nonneg_of_far_sharp
+#print axioms RvMBridge29.pair_re_nonneg_of_line_below_sharp
+#print axioms RvMBridge29.liLimit_re_nonneg_of_line_below_sharp
+#print axioms RvMBridge29.archSide_add_finiteSide_re_nonneg_of_line_below_sharp
+#print axioms RvMBridge28.cosh_mul_cos_le_one_of_abs_le
+#print axioms RvMBridge28.abs_arg_wOf_le
+#print axioms RvMBridge28.abs_log_norm_wOf_le
+#print axioms RvMBridge28.le_abs_arg_wOf
+#print axioms RvMBridge28.pair_re_eq
+#print axioms RvMBridge28.pow_add_inv_pow_eq_cosh
+#print axioms RvMBridge28.pair_re_nonneg_of_on_line
+#print axioms RvMBridge28.liLimit_re_nonneg_of_pairs
+#print axioms RvMBridge27.liValue

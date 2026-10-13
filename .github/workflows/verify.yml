@@ -1,0 +1,183 @@
+# Kernel-check the headline theorems on GitHub-hosted runners, adapted from the development repository's CI
+# (telperion-lean-e2e.yml, oai-qrh-bridge.yml, liu-dbn-bridge.yml at the pinned commit).
+#
+#   copy-check            clone Arda at formalization/ARDA_SOURCE; telperion/ must match it up to the comment
+#                         rewording listed in CENSORING.md (scripts/check_telperion_copy.py)
+#   rr-square             weil_form_enclosure: RRSquare*, 13 anchors
+#   dbn                   dbn island: Newman, the Selberg class, de Bruijn
+#   rvm-bridge            rvm_bridge light build: Weil's criterion on pole-free tests, rh_of_rr_windows
+#   hodge1-heavy          rvm_bridge HODGE-1 certificates, one module at a time (manual dispatch: ~2 h)
+#   qrh-bridge            Lambda <= 9/32; fetches openai/math at its pin (manual dispatch: several CPU-hours cold)
+#   liu-bridge            Lambda <= 0.2811857; fetches openai/math and Liu's Lean at their pins (manual dispatch;
+#                         a separate runner, since each workspace needs about 19 GB)
+#
+# Every guard is checked by scripts/axiom_check.sh: a floor on the number of axiom lines, no sorryAx, only
+# propext / Classical.choice / Quot.sound, and each headline theorem printed by name.
+name: verify
+
+on:
+  push:
+    branches: [main]
+    paths: ["telperion/examples/**", "formalization/**", "scripts/**", "CENSORING.md", ".github/workflows/verify.yml"]
+  pull_request:
+    paths: ["telperion/**", "formalization/**", "scripts/**", "CENSORING.md", ".github/workflows/verify.yml"]
+  workflow_dispatch:
+    inputs:
+      heavy:
+        description: "Also run hodge1-heavy, qrh-bridge and liu-bridge"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  copy-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Clone Arda at the pin and check the copy (comments, docstrings and listed prose only)
+        run: scripts/materialize.sh
+
+  rr-square:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    defaults: { run: { shell: bash, working-directory: telperion/examples/weil_form_enclosure/lean } }
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install elan
+        run: |
+          curl https://elan.lean-lang.org/elan-init.sh -sSf | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - run: lake exe cache get
+      - run: lake build
+      - name: Axiom guards
+        run: |
+          lake env lean AxiomGuardRRSquare.lean 2>&1 | tee rr.out
+          ../../../../scripts/axiom_check.sh rr.out 13 RRSquare.hodge_index RRSquare.hodge_index_of_domain \
+            RRSquare.countermodel RRSquare.collapse RRSquare.weil_positive_of_rr RRSquare.FF.G2F5_hodge
+          lake env lean AxiomGuardWeilForm.lean 2>&1 | tee weil.out
+          ../../../../scripts/axiom_check.sh weil.out 5
+
+  dbn:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    defaults: { run: { shell: bash, working-directory: telperion/examples/dbn/lean } }
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install elan
+        run: |
+          curl https://elan.lean-lang.org/elan-init.sh -sSf | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - run: lake exe cache get
+      - name: No sorry or admit in the island
+        run: "! grep -rnwE 'sorry|admit' --include='*.lean' --exclude-dir=.lake ."
+      - run: lake build
+      - name: Axiom guard
+        run: |
+          lake env lean AxiomGuardDBN.lean 2>&1 | tee dbn.out
+          ../../../../scripts/axiom_check.sh dbn.out 30 dbn_newman selberg_newman selberg_newman_sharp \
+            dbn_newman_of_sharp dbn_debruijn_real_zeros
+
+  rvm-bridge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    defaults: { run: { shell: bash, working-directory: telperion/examples/rvm_bridge/lean } }
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install elan
+        run: |
+          curl https://elan.lean-lang.org/elan-init.sh -sSf | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Mathlib cache (through the Zeta23 dependency)
+        run: lake exe cache get
+      - run: lake build
+      - name: Axiom guard
+        run: |
+          lake env lean AxiomGuardRvMBridge.lean 2>&1 | tee rvm.out
+          ../../../../scripts/axiom_check.sh rvm.out 45 RvMBridgePF.weil_positivity_poleFree_implies_rh \
+            RvMBridgePF.rh_iff_poleFree_weil_positivity RvMBridgePF.rh_of_rr_windows \
+            RvMBridgePF.weighted_approx RvMBridgePF.weighted_dominance
+
+  hodge1-heavy:
+    if: github.event_name == 'workflow_dispatch' && inputs.heavy
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    defaults: { run: { shell: bash, working-directory: telperion/examples/rvm_bridge/lean } }
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install elan
+        run: |
+          curl https://elan.lean-lang.org/elan-init.sh -sSf | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - run: lake exe cache get
+      - run: lake build
+      - name: Build the HODGE-1 certificate modules one at a time (each <= 10.4 GB RSS)
+        run: |
+          set -euo pipefail
+          while read -r m; do [ -z "$m" ] && continue; echo "::group::$m"; lake build "$m"; echo "::endgroup::"; done < hodge1_heavy_modules.txt
+      - name: Axiom guard
+        run: |
+          lake env lean Hodge1_Guard.lean 2>&1 | tee hodge1.out
+          ../../../../scripts/axiom_check.sh hodge1.out 41 Hodge1.re_weilForm_eq_archW_sub_prime \
+            Hodge1.weil_positivity_poleFree2_window45 Hodge1.weil_positivity_poleFree2_window5493 \
+            Hodge1.rh_iff_poleFree2_outside_window5493
+
+  qrh-bridge:
+    if: github.event_name == 'workflow_dispatch' && inputs.heavy
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    defaults: { run: { shell: bash } }
+    steps:
+      - uses: actions/checkout@v4
+      - name: Free disk space
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /usr/local/.ghcup /opt/hostedtoolcache/CodeQL || true
+          df -h / | tail -1
+      - name: Install elan
+        run: |
+          curl https://elan.lean-lang.org/elan-init.sh -sSf | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Materialize (openai/math at its pin, checked; nothing of OpenAI's is stored here)
+        working-directory: telperion/examples/oai_qrh_bridge
+        run: ./materialize.sh
+      - name: Build
+        working-directory: telperion/examples/oai_qrh_bridge/work/oai
+        run: |
+          lake update && lake exe cache get
+          lake build ArdaQRHBridge AxiomGuardQRHBridge ArdaDBNUnconditional
+      - name: Axiom guards
+        working-directory: telperion/examples/oai_qrh_bridge/work/oai
+        run: |
+          lake env lean AxiomGuardDBNUnconditional.lean 2>&1 | tee qrh.out
+          ../../../../../scripts/axiom_check.sh qrh.out 8 dbn_real_zeros_of_qrh_unconditional qrh_seven_eighths
+
+  liu-bridge:
+    if: github.event_name == 'workflow_dispatch' && inputs.heavy
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    defaults: { run: { shell: bash } }
+    steps:
+      - uses: actions/checkout@v4
+      - name: Free disk space
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /usr/local/.ghcup /opt/hostedtoolcache/CodeQL || true
+          df -h / | tail -1
+      - name: Install elan
+        run: |
+          curl https://elan.lean-lang.org/elan-init.sh -sSf | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Materialize (openai/math and Liu at their pins, every file checked; nothing of theirs is stored here)
+        working-directory: telperion/examples/liu_dbn_bridge
+        run: ./liu_materialize.sh
+      - name: Build
+        working-directory: telperion/examples/liu_dbn_bridge/work/oai
+        run: |
+          lake update && lake exe cache get
+          lake build ArdaLiuBridge ArdaDBNLiu AxiomGuardLiuBridge
+      - name: Axiom guard
+        working-directory: telperion/examples/liu_dbn_bridge/work/oai
+        run: |
+          lake env lean AxiomGuardLiuBridge.lean 2>&1 | tee liu.out
+          ../../../../../scripts/axiom_check.sh liu.out 14 dbn_real_zeros_of_liu_unconditional dbn_real_zeros_ge_2811857

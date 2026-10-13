@@ -1,0 +1,41 @@
+/- ArchS2 axiom guard: every declaration must print exactly [propext, Classical.choice, Quot.sound]. -/
+import ArchS2_QTrick
+
+#print axioms ArchS2.paperFT_I_half
+#print axioms ArchS2.paperFT_zero
+#print axioms ArchS2.contDiff_expHalf
+#print axioms ArchS2.contDiff_expNegHalf
+#print axioms ArchS2.contDiff_tilt
+#print axioms ArchS2.continuous_tilt
+#print axioms ArchS2.hasDerivAt_expHalf
+#print axioms ArchS2.expHalf_mul_expNegHalf
+#print axioms ArchS2.hasDerivAt_tiltPrim
+#print axioms ArchS2.deriv_tiltPrim
+#print axioms ArchS2.contDiff_tiltPrim
+#print axioms ArchS2.hasDerivAt_qLift
+#print axioms ArchS2.qLift_rel
+#print axioms ArchS2.tilt_eq_zero_of_not_mem
+#print axioms ArchS2.qLift_eq_zero_left
+#print axioms ArchS2.tiltPrim_eq_right
+#print axioms ArchS2.qLift_eq_zero_right
+#print axioms ArchS2.tsupport_qLift
+#print axioms ArchS2.isWeilTest_qLift
+#print axioms ArchS2.integrable_mul_phase
+#print axioms ArchS2.hasDerivAt_phase
+#print axioms ArchS2.differentiable_of_test
+#print axioms ArchS2.contDiff_deriv_of_test
+#print axioms ArchS2.paperFT_deriv
+#print axioms ArchS2.paperFT_lift
+#print axioms ArchS2.poleFree_of_lift
+#print axioms ArchS2.tsupport_lift_subset
+#print axioms ArchS2.isWeilTest_of_lift
+#print axioms ArchS2.tsupport_of_lift
+#print axioms ArchS2.poleFree_iff_exists_lift
+#print axioms ArchS2.hasDerivAt_expNegHalf
+#print axioms ArchS2.lift_unique
+#print axioms ArchS2.hsq_lift
+#print axioms ArchS2.integral_lift
+#print axioms ArchS2.paperFT_zero_lift_iff
+#print axioms ArchS2.poles_vanish_of_lift
+#print axioms ArchS2.archSide_autocorr_lift
+#print axioms ArchS2.poleFree_window_lift

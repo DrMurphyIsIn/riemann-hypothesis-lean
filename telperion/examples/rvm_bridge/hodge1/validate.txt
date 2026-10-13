@@ -1,0 +1,4 @@
+P25 even head matrix built in 0.2s
+P25 even head eigenvalue (pencil, piLo G): 4.7041165e-5  (KWin2_Par25 header: 4.70e-5)
+psdCert(headMat P25 0 16 45e-6) = True  [kernel: certE25 true]  (1.3s)
+psdCert(headMat P25 0 16 5e-5)  = False  [kernel: certE25_negative_control false]  (0.8s)

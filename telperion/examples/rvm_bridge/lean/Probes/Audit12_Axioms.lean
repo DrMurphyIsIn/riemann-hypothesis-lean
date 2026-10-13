@@ -1,0 +1,39 @@
+import E6Bridge12
+#print axioms RvMBridge12.WindowOnLine
+#print axioms RvMBridge12.windowOnLine_of_all_on_line
+#print axioms RvMBridge12.winSet
+#print axioms RvMBridge12.tailWeight
+#print axioms RvMBridge12.tailWeight_nonneg
+#print axioms RvMBridge12.summable_tailWeight
+#print axioms RvMBridge12.tsum_tailWeight
+#print axioms RvMBridge12.lamThreshold
+#print axioms RvMBridge12.one_le_lamThreshold
+#print axioms RvMBridge12.re_term_of_on_line
+#print axioms RvMBridge12.re_term_nonneg_of_on_line
+#print axioms RvMBridge12.term_eq_zero_of_not_nontrivial
+#print axioms RvMBridge12.re_term_nonneg
+#print axioms RvMBridge12.near_term_ge
+#print axioms RvMBridge12.gaussian_positivity_of_all_on_line
+#print axioms RvMBridge12.summable_term_subtype
+#print axioms RvMBridge12.zeroSide_split
+#print axioms RvMBridge12.re_window_ge_term
+#print axioms RvMBridge12.phi_le_of_far
+#print axioms RvMBridge12.norm_term_le_tail
+#print axioms RvMBridge12.tail_bound_window
+#print axioms RvMBridge12.tail_le_near_of_threshold
+#print axioms RvMBridge12.gaussian_positivity_of_window
+#print axioms RvMBridge12.gaussian_positivity_of_window_two
+#print axioms RvMBridgeGauss.zeroWindowSet
+#print axioms RvMBridgeGauss.zeroWindowSet_finite
+#print axioms RvMBridgeGauss.zeroWindow
+#print axioms RvMBridgeGauss.mem_zeroWindow
+#print axioms RvMBridge12.windowSum
+#print axioms RvMBridge12.windowSum_nonneg
+#print axioms RvMBridge12.tailEnvelope
+#print axioms RvMBridge12.tailEnvelope_nonneg
+#print axioms RvMBridge12.re_window_eq_windowSum
+#print axioms RvMBridge12.gaussian_positivity_of_window_dominance
+#print axioms RvMBridge12.re_zeroSide_ge_windowSum_sub
+#print axioms RvMBridge12.near_term_le_windowSum
+#check @RvMBridge12.gaussian_positivity_of_window
+#check @RvMBridge12.gaussian_positivity_of_window_dominance

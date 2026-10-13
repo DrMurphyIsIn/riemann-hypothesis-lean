@@ -1,0 +1,41 @@
+/- Axiom audit for E6Bridge30 (the Gaussian window, 2026-09-22).  Expected on every line:
+   [propext, Classical.choice, Quot.sound].  conjecture1_proved = False. -/
+import E6Bridge30
+#print axioms RvMBridge30.re_gaussTest_I_half
+#print axioms RvMBridge30.re_gaussTest_neg_I_half
+#print axioms RvMBridge30.pole_floor
+#print axioms RvMBridge30.bumpR_le'
+#print axioms RvMBridge30.setIntegral_bumpR_le'
+#print axioms RvMBridge30.psiR_neg
+#print axioms RvMBridge30.psiR_mono
+#print axioms RvMBridge30.serF_nonneg
+#print axioms RvMBridge30.serF_antitoneOn
+#print axioms RvMBridge30.hasDerivAt_neg_serG
+#print axioms RvMBridge30.sum_serF_ge
+#print axioms RvMBridge30.psiR_ge_series
+#print axioms RvMBridge30.serG_bounds
+#print axioms RvMBridge30.psiR_ge_rational
+#print axioms RvMBridge30.eulerMascheroni_le
+#print axioms RvMBridge30.psiR_floor_0
+#print axioms RvMBridge30.psiR_floor_1
+#print axioms RvMBridge30.psiR_floor_2
+#print axioms RvMBridge30.psiR_floor_3
+#print axioms RvMBridge30.psiR_floor_4
+#print axioms RvMBridge30.psiR_floor_5
+#print axioms RvMBridge30.psiR_floor_6
+#print axioms RvMBridge30.psiR_floor_7
+#print axioms RvMBridge30.psiR_floor_8
+#print axioms RvMBridge30.cake_base
+#print axioms RvMBridge30.cake_step
+#print axioms RvMBridge30.cake_integral
+#print axioms RvMBridge30.integral_bumpR_mul_psiR_ge_bands
+#print axioms RvMBridge30.re_weilForm_gauss_nonneg_1e3
+#print axioms RvMBridge30.gaussian_positivity_small_lam_1e3
+#print axioms RvMBridge30.gaussian_positivity_small_lam_explicit_1e3
+#print axioms RvMBridge30.gaussian_positivity_small_lam'
+#print axioms RvMBridge30.psiR_floor_s1
+#print axioms RvMBridge30.psiR_floor_s12
+#print axioms RvMBridge30.integral_bumpR_mul_psiR_ge_bands12
+#print axioms RvMBridge30.re_weilForm_gauss_nonneg_3e3
+#print axioms RvMBridge30.gaussian_positivity_small_lam_3e3
+#print axioms RvMBridge30.gaussian_positivity_small_lam_explicit_3e3

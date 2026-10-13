@@ -1,0 +1,146 @@
+name = "Quasicrystal"
+defaultTargets = ["LeeYangCore", "KSConstruction", "BoundaryLemmas", "CharacterizationStatements", "TwoFreqRigidity", "RationalFreqReduction", "InvolutionDictionary", "TorusSectionLadder", "OfflineDiscs", "OfflineDiscsInstances", "EulerFactorOffline", "SelfInversiveOfflineInstances", "EulerFactorSectionOffline", "LeakageDictionary", "LeakageInstances", "LeakageNode", "SatakeDegreeTwo", "DedekindQuadratic", "LemmaO", "LemmaOWitnesses"]
+
+# PROGRAM MIRRORMERE (reverse-Dyson) QC-1 island: formalize the Lee-Yang /
+# stable-polynomial classification frontier.  conjecture1_proved = False --
+# this is NOT a proof of RH; every kernel claim is finite/unconditional.
+#
+# Same Mathlib pin (v4.32.0) as the sibling reflection + zeta_zero_localization
+# islands, so the CoW-cloned .lake shares the on-disk Mathlib build cache.
+
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+rev = "v4.32.0"
+
+# In-corpus RvM / N(T) counting machinery lives in the zeta_zero_localization
+# island; required by relative path (same Mathlib rev, cache shared) for the
+# increment-(iv) boundary lemmas.  Mirrors the reflection island's require.
+
+[[lean_lib]]
+name = "LeeYangCore"
+roots = ["LeeYangCore"]
+
+[[lean_lib]]
+name = "KSConstruction"
+roots = ["KSConstruction"]
+
+[[lean_lib]]
+name = "BoundaryLemmas"
+roots = ["BoundaryLemmas"]
+
+[[lean_lib]]
+name = "CharacterizationStatements"
+roots = ["CharacterizationStatements"]
+
+[[lean_lib]]
+name = "TwoFreqRigidity"
+roots = ["TwoFreqRigidity"]
+
+# Telperion selfinversive_rigidity emitter example (2026-09-14): equal-modulus
+# real-rootedness instances applying twoFreq_realRooted_iff, emitted by
+# examples/selfinversive_rigidity/generate.py.
+[[lean_lib]]
+name = "SelfInversiveRigidityInstances"
+roots = ["SelfInversiveRigidityInstances"]
+
+# Telperion twofreq_offline emitter example (2026-09-18): the COMPLEMENT of the
+# rigidity instances -- certified OFF-line displacement of the Euler-factor sections
+# 1 - p^(-s) on s = 1/2 + i x (MIRRORMERE ladder rung T2), emitted by
+# examples/twofreq_offline/generate.py.  In defaultTargets: it is the proof-link artifact
+# of MM_euler_factor_section_offline, so a bare `lake build` must compile it.
+[[lean_lib]]
+name = "EulerFactorSectionOffline"
+roots = ["EulerFactorSectionOffline"]
+
+[[lean_lib]]
+name = "RationalFreqReduction"
+roots = ["RationalFreqReduction"]
+
+[[lean_lib]]
+name = "InvolutionDictionary"
+roots = ["InvolutionDictionary"]
+
+# MIRRORMERE torus-section ladder T1 (2026-09-18): the registry nodes
+# MM_torus_section_dictionary + MM_torus_section_n2_rigidity, stated verbatim,
+# discharged as vocabulary bridges over TwoFreqRigidity (simp-grade; not a win).
+[[lean_lib]]
+name = "TorusSectionLadder"
+roots = ["TorusSectionLadder"]
+# PROGRAM MIRRORMERE E4b isolation lemma (2026-09-18): registry node
+# MM_offline_disjoint_discs stated verbatim and proved (pure Mathlib metric
+# topology).  conjecture1_proved = False.
+[[lean_lib]]
+name = "OfflineDiscs"
+roots = ["OfflineDiscs"]
+
+# Telperion disjoint_discs emitter example (2026-09-18): concrete isolation
+# instances applying OfflineDiscs, emitted by examples/disjoint_discs/generate.py.
+[[lean_lib]]
+name = "OfflineDiscsInstances"
+roots = ["OfflineDiscsInstances"]
+# MIRRORMERE torus-section ladder rung T2, THE NEGATIVE CONTROL (2026-09-18): registry node
+# MM_euler_factor_section_offline -- the p = 2 Euler-factor section is NOT real-rooted, with the
+# explicit off-line witness x = i/2.  conjecture1_proved = False.
+[[lean_lib]]
+name = "EulerFactorOffline"
+roots = ["EulerFactorOffline"]
+
+# Telperion selfinversive_rigidity emitter, mode="offline" (2026-09-18): the p = 2, 3, 5
+# Euler-factor sections certified NOT real-rooted from the exact normSq INEQUALITY, emitted by
+# examples/selfinversive_rigidity/generate.py (the T2 dogfood; p = 3, 5 are not nodes).
+[[lean_lib]]
+name = "SelfInversiveOfflineInstances"
+roots = ["SelfInversiveOfflineInstances"]
+
+[[lean_lib]]
+name = "LeakageDictionary"
+roots = ["LeakageDictionary"]
+
+# Telperion leakage_dictionary emitter example (2026-09-19, ROUTE A item A2b): the
+# re-derived log-derivative coefficient rows at the composite frequency log 6 --
+# chi_5 vanishes (positive control), Davenport-Heilbronn leaks (negative control),
+# emitted by examples/leakage_dictionary/generate.py.
+[[lean_lib]]
+name = "LeakageInstances"
+roots = ["LeakageInstances"]
+
+# MIRRORMERE ROUTE A item A2b registry node (2026-09-19): MM_leakage_composite_zero
+# stated verbatim and proved -- the dictionary, its non-vacuity, the certified DH
+# instance b(6) = +1.9364, and the falsification twin.  conjecture1_proved = False.
+[[lean_lib]]
+name = "LeakageNode"
+roots = ["LeakageNode"]
+
+# PROGRAM MIRRORMERE ROUTE A milestone A1b (2026-09-19): the GL(2) Satake
+# FALSIFICATION of clause (B-mult-twisted) -- registry node
+# MM_satake_degree_two_rejects_delta.  L(s, Delta) is a degree-2 Selberg element,
+# tempered by Deligne, and the island's own arithmetic clause list REJECTS it.
+# A negative result about this program's working definition, NOT about RH.
+# conjecture1_proved = False.
+[[lean_lib]]
+name = "SatakeDegreeTwo"
+roots = ["SatakeDegreeTwo"]
+
+# The Dedekind product-closure control (2026-09-23): zeta_K for Q(sqrt(-5)) = zeta * L(chi_-20)
+# is rejected by clause (B-mult-twisted) although both factors pass it.  Python twin:
+# zoo.py `_load_dedekind`.  conjecture1_proved = False.
+[[lean_lib]]
+name = "DedekindQuadratic"
+roots = ["DedekindQuadratic"]
+
+# LEMMA O (2026-09-25): the log-derivative coefficients are supported on prime powers IFF
+# the amplitude is multiplicative (Mathlib ArithmeticFunction form, abstract completely
+# additive weight, instantiated at Real.log over R and C), plus the generation-law
+# refinement (complete multiplicativity).  Kernel justification of zoo.py
+# `check_multiplicativity`.  conjecture1_proved = False.
+[[lean_lib]]
+name = "LemmaO"
+roots = ["LemmaO"]
+
+# The n = 6 witnesses for Lemma O: zeta (positive control, b(6) = 0), Davenport-Heilbronn
+# (b(6) = (1 + kappa^2) log 6 > 0) and the Epstein form x^2 + 5y^2 (b(6) = 2 log 6), the
+# latter two NOT multiplicative by Lemma O.  conjecture1_proved = False.
+[[lean_lib]]
+name = "LemmaOWitnesses"
+roots = ["LemmaOWitnesses"]

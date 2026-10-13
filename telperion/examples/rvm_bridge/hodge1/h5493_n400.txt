@@ -1,0 +1,7 @@
+P5493 Nser=400 even N=32: head eigenvalue 0.00063070522 (lam 0.00055) dT 0.8456 kapT 1.772e-03 EheadP 9.27e-08 tailCondP True  (3s)
+   psdCertR(R=65) at lam = 11/20000: True (4s)
+   NEGATIVE CONTROL lam = 79/125000: psdCertR = False
+P5493 Nser=400 odd N=31: head eigenvalue 0.013785804 (lam 0.013) dT 0.8456 kapT 5.242e-03 EheadP 2.68e-08 tailCondP True  (3s)
+   psdCertR(R=65) at lam = 13/1000: True (3s)
+NEGATIVE CONTROL q = 2.1 (a0 = 7419373447293773/10000000000000000, c0 = 10239708175753177/10000000000000000): even head eigenvalue -0.071609346; psdCertR at lam 11/20000: False
+NEGATIVE CONTROL 1.05 c2 (a0 = 6931471805599453/10000000000000000, c0 = 5146355253209873/5000000000000000): even head eigenvalue -0.006844891; psdCertR at lam 11/20000: False

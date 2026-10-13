@@ -1,0 +1,8 @@
+H45 even N=16: head eigenvalue 0.037847916 (lam = 0.033), dT' = 0.562746, kapT = 1.445e-02, EheadP = 2.690e-07, tailCondP = True   (0.4s)
+   psdCertR(headMatP, N, 40) = True  (0.1s)
+   NEGATIVE CONTROL lam = 19/500 > head eigenvalue: psdCertR = False  (0.1s)
+H45 odd N=15: head eigenvalue 0.35450861 (lam = 0.31), dT' = 0.480583, kapT = 4.414e-02, EheadP = 6.602e-08, tailCondP = True   (0.3s)
+   psdCertR(headMatP, N, 40) = True  (0.0s)
+   NEGATIVE CONTROL lam = 3547/10000 > head eigenvalue: psdCertR = False  (0.1s)
+NEGATIVE CONTROL w2up * 13/10, even: head eigenvalue -0.036638577; psdCertR at lam = 33/1000: False
+negative-control levels: even 19/500, odd 3547/10000

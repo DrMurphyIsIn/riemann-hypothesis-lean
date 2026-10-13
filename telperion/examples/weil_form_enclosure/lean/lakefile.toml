@@ -1,0 +1,59 @@
+name = "WeilFormEnclosure"
+defaultTargets = ["WeilFormDefs", "WeilFormEnclosure", "WindowFormFloorInstances", "AxiomGuardWeilForm", "AxiomGuardWindowFormFloor", "RRSquare", "RRSquareFF", "RRSquareLink", "AxiomGuardRRSquare"]
+
+# Telperion weil_form_enclosure dogfood island (2026-09-18): the E8 Weil pairing
+# (RH_limit_explicit_formula / WeilExplicit) evaluated by Arb and emitted as a
+# NAMED-HYPOTHESIS trust seam whose kernel consequence is positivity of a certified
+# autocorrelation pairing / positive-definiteness of a 2x2 Weil-Gram block.
+# conjecture1_proved = False -- no RH progress is claimed.
+#
+# Same Mathlib pin (v4.32.0) as the sibling quasicrystal / zeta_zero_localization
+# islands, so the .lake build cache is shared.
+
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+rev = "v4.32.0"
+
+[[lean_lib]]
+name = "WeilFormDefs"
+roots = ["WeilFormDefs"]
+
+[[lean_lib]]
+name = "WeilFormEnclosure"
+roots = ["WeilFormEnclosure"]
+
+# Telperion window_form_floor dogfood (2026-09-19): Zhu arXiv:2608.24827 Thm 1.1 window-floor
+# certificates, emitted by examples/window_form_floor/generate.py.  Lives here rather than in its
+# own island so it can reuse the WeilExplicit / WeilForm vocabulary of WeilFormDefs (and this
+# island's Mathlib v4.32.0 olean cache) instead of a fragile cross-package require.
+[[lean_lib]]
+name = "WindowFormFloorInstances"
+roots = ["WindowFormFloorInstances"]
+
+# The CI axiom guard, declared as a lib so `lake build` compiles it (and thus all its imports).
+[[lean_lib]]
+name = "AxiomGuardWeilForm"
+roots = ["AxiomGuardWeilForm"]
+
+# The window_form_floor axiom guard, likewise declared as a lib so `lake build` compiles it.
+[[lean_lib]]
+name = "AxiomGuardWindowFormFloor"
+roots = ["AxiomGuardWindowFormFloor"]
+
+# RR-square (e9, 2026-10-12): Conjecture RR-square made precise. Abstract Grothendieck argument (degree-bound and
+# no-zero-divisor forms), the countermodel showing the degree-bound/domain clause is load-bearing, the collapse lemma
+# (Div = V version <=> Hodge index), function-field instances (genus-2 over F_5 and two fakes; RRSquareFF is generated
+# by ../rr_square/gen_lean.py), and the link to Weil positivity via this island's WeilFormDefs.
+# Research statement, AI work, not reviewed. Not progress on RH. conjecture1_proved = False.
+[[lean_lib]]
+name = "RRSquare"
+
+[[lean_lib]]
+name = "RRSquareFF"
+
+[[lean_lib]]
+name = "RRSquareLink"
+
+[[lean_lib]]
+name = "AxiomGuardRRSquare"
