@@ -99,7 +99,8 @@ jobs:
           ../../../../scripts/axiom_check.sh rvm.out 45 RvMBridgePF.weil_positivity_poleFree_implies_rh \
             RvMBridgePF.rh_iff_poleFree_weil_positivity RvMBridgePF.rh_of_rr_windows \
             RvMBridgePF.weighted_approx RvMBridgePF.weighted_dominance rr_square_hodge_index \
-            rr_square_hodge_index_domain rr_square_collapse polefree_weil_converse rr_windows_imply_rh
+            rr_square_hodge_index_domain rr_square_collapse polefree_weil_converse rr_windows_imply_rh \
+            RvMBridgePF.rr_windows_of_rh RvMBridgePF.rh_iff_exists_rr_windows
 
   hodge1-heavy:
     if: github.event_name == 'workflow_dispatch' && inputs.heavy

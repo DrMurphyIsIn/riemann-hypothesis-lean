@@ -294,6 +294,7 @@ import ArchS5_HSRank
 import ArchS8_Kernel
 import ArchPipeline_Rung80
 import PFConverseC
+import PFConverseD
 import Hodge1_RegOnePrime
 import RegRRChain
 
@@ -2422,6 +2423,10 @@ import RegRRChain
 #print axioms RvMBridgePF.RRSquare.hodge_index
 #print axioms RvMBridgePF.RRSquare.hodge_index_of_domain
 #print axioms RvMBridgePF.rh_of_rr_windows
+-- Part D (2026-10-13): the trivial converse, so RH <=> RR-square windows exist (existence form is circular).
+#print axioms RvMBridgePF.RRSquare.collapse_bounded
+#print axioms RvMBridgePF.rr_windows_of_rh
+#print axioms RvMBridgePF.rh_iff_exists_rr_windows
 #print axioms re_weilForm_eq_archW_sub_prime
 
 -- RR-square conditional chain (registry anchors)

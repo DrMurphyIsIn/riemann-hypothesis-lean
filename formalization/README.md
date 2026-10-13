@@ -18,7 +18,7 @@ its own Lean and Mathlib pins, because the upstream projects they build on use d
 | `weil_form_enclosure` | v4.32.0 | Mathlib v4.32.0 |
 | `quasicrystal` | v4.32.0 | Mathlib v4.32.0 (supporting work; no headline theorem below) |
 
-The files are those of the Arda development repository at commit `8fc6a33e6eede73bdfee31c130aa0aa16841c594`
+The files are those of the Arda development repository at commit `50b1000254c6bb74bf12d21fa66483bd9fc14aeb`
 (`ARDA_SOURCE`), with comments reworded in ten Lean files (`../CENSORING.md`). `../scripts/materialize.sh`
 clones that commit and checks the claim: every Lean file must be byte-identical or identical once comments
 are stripped. The theorems, definitions and proofs are untouched.
@@ -80,12 +80,15 @@ which is RH.
 | `RRSquare.FF.G2F5_hodge`, `G2F5_model`, `FK3_*`, `FK2_*` | `weil_form_enclosure/lean/RRSquareFF.lean` | function-field instances: a genus-2 curve over F₅ and two fakes | unconditional (finite) | standard |
 | `RRSquare.weil_positive_of_rr` | `weil_form_enclosure/lean/RRSquareLink.lean` | RR-square on one window ⇒ Weil positivity for the pole-free tests in it | **conditional** on the window | standard |
 | `RvMBridgePF.rh_of_rr_windows` | `rvm_bridge/lean/PFConverseC.lean` | a family of RR-square windows covering every pole-free test ⇒ `RiemannHypothesis` | **conditional**: no such family has been constructed | standard; node `MM_rr_windows_imply_rh` granted (#729), AI read-back by a separate session, Comparator record not yet made |
+| `RvMBridgePF.rh_iff_exists_rr_windows` (with `RvMBridgePF.rr_windows_of_rh`) | `rvm_bridge/lean/PFConverseD.lean` | `RiemannHypothesis ↔` a family of RR-square windows covering every pole-free test exists | **equivalence**; the existence form is empty by design, the content is a construction | standard; CI guard, not a registry node |
 
 The registry shapes of the five RR-chain theorems (`rr_square_hodge_index`, `rr_square_hodge_index_domain`,
 `rr_square_collapse`, `polefree_weil_converse`, `rr_windows_imply_rh`) are in `rvm_bridge/lean/RegRRChain.lean` and were
-granted on 2026-10-13 (#727-#729). The converse direction (RH ⇒ such a family exists, trivially, by the collapse lemma;
-`rr_windows_of_rh`, `rh_iff_exists_rr_windows` in `PFConverseD.lean`) is in open Arda PR #726, not in this snapshot, and is not
-claimed here.
+granted on 2026-10-13 (#727-#729); their Comparator records are pending. The converse direction is in `rvm_bridge/lean/PFConverseD.lean`
+(merged in #726): `RvMBridgePF.rr_windows_of_rh` (RH ⇒ a covering family exists) and `RvMBridgePF.rh_iff_exists_rr_windows`
+(RH ⇔ such a family exists). It is trivial by design: the windows are read off from Weil positivity, with no sections,
+divisors or ample class, so the existence form is Weil's criterion restated. The open content is a construction of windows
+defined without reference to the zeros.
 
 ## Checking it yourself
 

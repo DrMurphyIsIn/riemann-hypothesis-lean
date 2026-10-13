@@ -8,7 +8,7 @@
   which is which.
 - **Origin.** The Lean islands and the Telperion engine were developed in the author's development
   repository, Arda (<https://github.com/DrMurphyIsIn/Arda>), and are copied here from commit
-  `8fc6a33e6eede73bdfee31c130aa0aa16841c594`. Only comments, docstrings and prose were reworded
+  `50b1000254c6bb74bf12d21fa66483bd9fc14aeb`. Only comments, docstrings and prose were reworded
   (`CENSORING.md`), and `scripts/materialize.sh` checks this against that commit.
 - **The de Bruijn–Newman constant.** N. G. de Bruijn, *The roots of trigonometric integrals*, Duke Math. J.
   17 (1950). C. M. Newman, *Fourier transforms with only real zeros*, Proc. AMS 61 (1976). Newman's conjecture

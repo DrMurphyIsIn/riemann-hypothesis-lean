@@ -22,7 +22,7 @@ exact Lean names, files, pull requests, judge runs and review status for everyth
 | zeros up to height 8000 | every zero with 0 < Im ρ ≤ 8000 is on the line, with no numerical oracle | unconditional finite verification |
 | RH ⇔ pole-free Weil positivity | Weil's criterion, including the converse on pole-free tests | **equivalence** |
 | the HODGE-1 frontier | RH ⇔ positivity for tests reaching outside [−0.5493, 0.5493] | **equivalence**: exactly what is open |
-| the RR-square criterion | a family of Riemann–Roch-square windows covering all pole-free tests ⇒ RH | **conditional**: no such family is known |
+| the RR-square criterion | windows covering all pole-free tests ⇒ RH, and RH ⇔ such windows exist | **conditional / equivalence**: the content is a construction, and none is known |
 | research notes | the 7/8 method's limit, gates 0–10, SCALE-1, LY-1 | **not proofs**; mostly negative results |
 
 ## 1. Where RH stands
@@ -85,7 +85,9 @@ note records why an effective Newman theorem is out of reach on that route.
     construction.
   - Function-field instances test the axioms.
   - `rh_of_rr_windows`: windows covering every pole-free test would imply RH. **No one has constructed them.**
-  - The trivial converse, RH ⇒ windows exist, is in open pull request #726. It is not part of this snapshot.
+  - The trivial converse is kernel-checked too (`rh_iff_exists_rr_windows`, merged in #726), so RH ⇔ RR-square windows exist.
+    That equivalence is deliberately empty: the windows built from RH are read off from Weil positivity and carry no
+    geometry. The content of the criterion is a *construction* of windows defined without reference to the zeros.
 - **Li's criterion and the Li/Weil dictionary.** Bombieri–Lagarias's explicit formula, the ξ partial fraction, and Li's
   forward half. The "Li ladder" turns verified zeros into nonnegative Li coefficients.
 
@@ -202,7 +204,7 @@ OpenAI's and Liu's Lean code is never stored here. The island scripts fetch it a
 ## 10. Provenance, AI assistance and review status
 
 The Lean developments and the engine were written in the author's development repository, Arda
-(<https://github.com/DrMurphyIsIn/Arda>). They are copied here from commit `8fc6a33e6` of 2026-10-13. References to an
+(<https://github.com/DrMurphyIsIn/Arda>). They are copied here from commit `50b100025` of 2026-10-13. References to an
 unrelated private project and private file paths were reworded in comments only. [`CENSORING.md`](CENSORING.md) lists every
 file, and `scripts/check_telperion_copy.py` proves mechanically that no code changed.
 

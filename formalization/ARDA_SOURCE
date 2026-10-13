@@ -1,7 +1,7 @@
 # The development repository and commit this repository's telperion/ copy (engine, tests, examples and the
 # six Lean islands) was taken from. scripts/materialize.sh clones it and checks the copy against it.
 source_repo=https://github.com/DrMurphyIsIn/Arda.git
-source_commit=8fc6a33e6eede73bdfee31c130aa0aa16841c594
+source_commit=50b1000254c6bb74bf12d21fa66483bd9fc14aeb
 source_date=2026-10-13
-source_title="Merge pull request #729 from DrMurphyIsIn/registry/grant-rr-chain"
+source_title="Merge pull request #726 from DrMurphyIsIn/lean/rr-windows-iff"
 islands="dbn oai_qrh_bridge liu_dbn_bridge rvm_bridge weil_form_enclosure quasicrystal"

@@ -1,7 +1,7 @@
 # Progress record: everything done on the Riemann Hypothesis programme to date
 
 This document is the complete record behind the repository's README. It was checked against the Arda development
-repository at commit `8fc6a33e6eede73bdfee31c130aa0aa16841c594` (2026-10-13), the commit `telperion/` is copied from. Every
+repository at commit `50b1000254c6bb74bf12d21fa66483bd9fc14aeb` (2026-10-13), the commit `telperion/` is copied from. Every
 "merged" below is a merge into Arda's `main` that can be found in its history. Every theorem name was found in the source at
 that commit. Anything not on `main` is marked as such.
 
@@ -149,9 +149,11 @@ surface. The RR-square criterion states abstractly what an analogue over ℚ wou
 | function-field instances: a genus-2 curve over F₅ satisfies the axioms; two fake zeta functions | `RRSquare.FF.G2F5_hodge`, `G2F5_model`, `FK3_*`, `FK2_*` | `RRSquareFF.lean` (generated) | #711 | unconditional |
 | RR-square on one window ⇒ Weil positivity on its pole-free tests | `RRSquare.weil_positive_of_rr` | `RRSquareLink.lean` | #711 | **conditional** |
 | **a family of RR-square windows covering every pole-free test ⇒ RH** | `RvMBridgePF.rh_of_rr_windows` / `rr_windows_imply_rh` | `PFConverseC.lean`, `RegRRChain.lean` | #712, #727 | **conditional**: no such family has been constructed; node `MM_rr_windows_imply_rh` granted (#729), AI read-back by a separate session |
-| the converse, RH ⇒ such a family exists (trivially, by collapse), hence RH ⇔ windows exist | `rr_windows_of_rh`, `rh_iff_exists_rr_windows` (`PFConverseD.lean`) | — | **not merged: open PR #726** | not in this snapshot |
+| the trivial converse, RH ⇒ such a family exists, hence **RH ⇔ RR-square windows exist** | `RvMBridgePF.rr_windows_of_rh`, `RvMBridgePF.rh_iff_exists_rr_windows` (with `RvMBridgePF.RRSquare.collapse_bounded`, `lineWindow`) | `rvm_bridge/lean/PFConverseD.lean` | #726 (50b100025) | **equivalence**: the windows it builds are read off from Weil positivity and carry no geometry (no sections, no effective divisors, no ample class), so the existence form is Weil's criterion in another notation. The open content is a *construction* of windows defined without reference to the zeros. Axiom-guarded in CI; not a registry node |
 
-The five RR-chain nodes were granted on 2026-10-13. Their Comparator records have not been made yet.
+The five RR-chain nodes were granted on 2026-10-13 (#729). Their Comparator records are pending from main's judge run. The
+converse (#726) is what makes the equivalence literal, and it is also what shows that existence alone is empty: everything
+turns on the construction.
 
 ### 3.3 The HODGE-1 frontier
 

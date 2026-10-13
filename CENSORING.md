@@ -1,7 +1,7 @@
 # What was changed in the Telperion copy, and why
 
 `telperion/` is copied from the Arda development repository at commit
-`8fc6a33e6eede73bdfee31c130aa0aa16841c594` (2026-10-13). Before publishing, the copy was scanned for five
+`50b1000254c6bb74bf12d21fa66483bd9fc14aeb` (2026-10-13). Before publishing, the copy was scanned for five
 kinds of material that do not belong in a public repository, and the hits were reworded:
 
 - **(i) private project**: references to an unrelated private software project of the author's;
