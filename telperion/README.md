@@ -525,7 +525,7 @@ provenance-and-drift — is written up in [`docs/METHODOLOGY.md`](docs/METHODOLO
 
 This directory is a vendored snapshot of Telperion, version 0.1.6, taken on 2026-10-13 from the separate
 repository where the engine is developed (<https://github.com/DrMurphyIsIn/Arda>, commit
-`b17b3c68fe67e314e1051f4dab46f7d527a7b62a`, recorded in `SYNC`). It carries the complete engine source,
+`8fc6a33e6eede73bdfee31c130aa0aa16841c594`, recorded in `SYNC`). It carries the complete engine source,
 including every emitter. It differs from the development version only in comments, docstrings and prose,
 which were reworded to remove references to an unrelated private project, private file paths, and
 unpublished working notes. No code or mathematics was changed. `../CENSORING.md` lists every reworded file

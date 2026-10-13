@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Check that telperion/ differs from the development repository only where CENSORING.md says it does.
 
-Usage:  python3 scripts/check_telperion_copy.py <path-to-an-Arda-checkout>
+Usage:  python3 scripts/check_telperion_copy.py <path-to-an-Arda-checkout> [--show-diff]
 
 The Arda checkout must be at the commit recorded in telperion/SYNC (scripts/materialize.sh makes one in
 work/arda). Every file under telperion/ is compared with the file at the same path in Arda's telperion/:
@@ -13,7 +13,8 @@ work/arda). Every file under telperion/ is compared with the file at the same pa
     same once every string constant is blanked     -> "text of an emitted comment only";
   * a Lean file that is the same once comments are removed
                                                      -> "comments only";
-  * anything else (prose, logs, data)                -> must be listed in CENSORING.md, and the diff is shown;
+  * anything else (prose, logs, data)                -> must be listed in CENSORING.md (--show-diff prints the diff;
+                                                        it is off by default so the removed text stays out of logs);
   * a file with no counterpart in Arda               -> must be listed in CENSORING.md as added.
 
 It exits non-zero if any code changed or any difference is unlisted.
@@ -69,9 +70,11 @@ def strip_lean_comments(text):
 
 
 def main():
-    if len(sys.argv) != 2:
+    args = [a for a in sys.argv[1:] if a != "--show-diff"]
+    show = "--show-diff" in sys.argv[1:]
+    if len(args) != 1:
         sys.exit(__doc__)
-    arda = Path(sys.argv[1]).resolve() / "telperion"
+    arda = Path(args[0]).resolve() / "telperion"
     censoring = (HERE / "CENSORING.md").read_text()
     listed = set(re.findall(r"`(telperion/[^`]+)`", censoring))
     emitted = set(re.findall(r"`(telperion/[^`]+\.py)`[^\n]*emitted-comment exception", censoring))
@@ -106,7 +109,9 @@ def main():
             bad.append(f"DIFFERS, not listed in CENSORING.md: {name}")
             continue
         counts["comments" if same else "listed"] += 1
-        if same is None:
+        if same is None and not show:
+            print(f"prose reworded (listed): {name}")
+        elif same is None:
             print(f"--- prose diff: {name}")
             sys.stdout.writelines(difflib.unified_diff(a.decode().splitlines(True), b.decode().splitlines(True),
                                                        f"arda/{name}", name, n=0))

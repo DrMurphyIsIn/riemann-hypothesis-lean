@@ -8,7 +8,7 @@
   "version": "v0.1.0",
   "related_identifiers": [
     {"identifier": "https://github.com/DrMurphyIsIn/riemann-hypothesis-lean", "relation": "isSupplementTo", "scheme": "url"},
-    {"identifier": "https://github.com/DrMurphyIsIn/Arda/tree/b17b3c68fe67e314e1051f4dab46f7d527a7b62a", "relation": "isDerivedFrom", "scheme": "url"},
+    {"identifier": "https://github.com/DrMurphyIsIn/Arda/tree/8fc6a33e6eede73bdfee31c130aa0aa16841c594", "relation": "isDerivedFrom", "scheme": "url"},
     {"identifier": "10.5281/zenodo.23269134", "relation": "references", "scheme": "doi"},
     {"identifier": "10.5281/zenodo.23287832", "relation": "references", "scheme": "doi"},
     {"identifier": "arXiv:2005.05142", "relation": "references", "scheme": "arxiv"},

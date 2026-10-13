@@ -295,6 +295,7 @@ import ArchS8_Kernel
 import ArchPipeline_Rung80
 import PFConverseC
 import Hodge1_RegOnePrime
+import RegRRChain
 
 #print axioms RvMBridge.rvm_unbounded_mean_density
 #print axioms RvMBridge.eventually_Ncount_ge
@@ -2422,3 +2423,10 @@ import Hodge1_RegOnePrime
 #print axioms RvMBridgePF.RRSquare.hodge_index_of_domain
 #print axioms RvMBridgePF.rh_of_rr_windows
 #print axioms re_weilForm_eq_archW_sub_prime
+
+-- RR-square conditional chain (registry anchors)
+#print axioms rr_square_hodge_index
+#print axioms rr_square_hodge_index_domain
+#print axioms rr_square_collapse
+#print axioms polefree_weil_converse
+#print axioms rr_windows_imply_rh

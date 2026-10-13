@@ -8,7 +8,7 @@
   which is which.
 - **Origin.** The Lean islands and the Telperion engine were developed in the author's development
   repository, Arda (<https://github.com/DrMurphyIsIn/Arda>), and are copied here from commit
-  `b17b3c68fe67e314e1051f4dab46f7d527a7b62a`. Only comments, docstrings and prose were reworded
+  `8fc6a33e6eede73bdfee31c130aa0aa16841c594`. Only comments, docstrings and prose were reworded
   (`CENSORING.md`), and `scripts/materialize.sh` checks this against that commit.
 - **The de Bruijn–Newman constant.** N. G. de Bruijn, *The roots of trigonometric integrals*, Duke Math. J.
   17 (1950). C. M. Newman, *Fourier transforms with only real zeros*, Proc. AMS 61 (1976). Newman's conjecture
@@ -36,7 +36,8 @@
   Comparator (Lean FRO and OpenAI), lean4export and nanoda (C. Kernan) were used for the independent judging
   recorded in the development repository.
 - **Machine assistance.** The formalization, the tooling, the audit trail and the papers were produced with
-  extensive use of an AI coding assistant (Claude, Anthropic) under the direction of the author. Several of
-  the read-backs recorded in the development repository's registry are AI read-backs by a separate session,
-  labelled as such. The Lean kernel is the sole trusted component: every claim here is either a
-  kernel-checked theorem or explicitly labelled otherwise. None of this work has been refereed.
+  extensive use of AI coding assistants (Claude, Anthropic), running as parallel sessions under the direction of
+  the author. The ten de Bruijn–Newman and half-plane statements were read back by the author (a human); eleven
+  further statements by a separate AI session; the rest only by the AI session that wrote them
+  (`docs/PROGRESS.md`, section 10). The Lean kernel is the sole trusted component: every claim here is either a
+  kernel-checked theorem or explicitly labelled otherwise. None of this work has had external review or been refereed.

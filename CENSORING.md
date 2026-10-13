@@ -1,7 +1,7 @@
 # What was changed in the Telperion copy, and why
 
 `telperion/` is copied from the Arda development repository at commit
-`b17b3c68fe67e314e1051f4dab46f7d527a7b62a` (2026-10-13). Before publishing, the copy was scanned for five
+`8fc6a33e6eede73bdfee31c130aa0aa16841c594` (2026-10-13). Before publishing, the copy was scanned for five
 kinds of material that do not belong in a public repository, and the hits were reworded:
 
 - **(i) private project**: references to an unrelated private software project of the author's;
@@ -19,7 +19,8 @@ Only comments, docstrings and prose were changed. No code, definition, statement
 `scripts/check_telperion_copy.py` checks this against a checkout of the source commit, and
 `scripts/materialize.sh` makes that checkout and runs the check. It compares every file: Python by syntax tree
 with docstrings removed, Lean with comments removed. Any other difference must be listed here. The removed
-text is not quoted in this file; anyone with access to the source commit can see it with the checker.
+text is not quoted in this file, and the checker prints it only when asked (`--show-diff`); it is in the
+public history of the source repository.
 
 ## Reworded files
 

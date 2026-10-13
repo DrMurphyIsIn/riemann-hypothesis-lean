@@ -1,151 +1,227 @@
 # Kernel-checked results on the Riemann Hypothesis: de Bruijn–Newman bounds and a conditional Riemann–Roch-square criterion
 
-**The Riemann Hypothesis is open, and nothing in this repository proves it.** This repository collects Lean 4
-theorems *around* RH that the Lean kernel has checked: some are unconditional facts strictly weaker than RH,
-some are equivalences that restate what remains open, and one is a criterion that would imply RH if someone
-could construct the object it asks for. Every theorem is labelled as one of these, here and in
-[`formalization/README.md`](formalization/README.md).
+**The Riemann Hypothesis is open, and nothing in this repository proves it.** What is here is a body of Lean 4 work *around*
+RH, every piece checked by the Lean kernel. Some of it is unconditional and strictly weaker than RH. Some of it is
+equivalences that restate exactly what remains open. One piece is a criterion that would imply RH if anyone could construct
+the object it asks for. The rest is a research record, including the routes we tried and closed. Each item below is labelled
+as one of these.
 
-It brings together the Lean developments, the three papers written about them, and a copy of Telperion, the
-certificate engine that produced a good part of the Lean.
+The repository brings together the Lean developments, the three papers written about them, and a copy of Telperion, the
+certificate engine that produced much of the Lean. [`docs/PROGRESS.md`](docs/PROGRESS.md) is the complete record. It has
+exact Lean names, files, pull requests, judge runs and review status for everything summarised here, plus an inventory of all
+142 registry nodes.
 
-## Where things stand
+## At a glance
 
-The Riemann Hypothesis says that every non-trivial zero of ζ(s) lies on the line Re s = 1/2. It has been open
-since 1859. There are many equivalent forms. Three of them organise this repository.
+| | what | status |
+|---|---|---|
+| **0 ≤ Λ ≤ 0.2811857** | the de Bruijn–Newman constant, both bounds | unconditional; kernel-checked; judged by two kernels; human read-back |
+| Newman for the Selberg class | Dobner's theorem for every element of the extended Selberg class | unconditional; judged; human read-back |
+| Λ ≤ 1/2, Hadamard, effective Theorem 4 | de Bruijn 1950 and the heat-flow foundations | unconditional; kernel-checked |
+| Weil positivity on windows | outright positivity for tests supported in [−L, L], up to L = 0.5493 | unconditional, finite-window; not progress on RH |
+| zeros up to height 8000 | every zero with 0 < Im ρ ≤ 8000 is on the line, with no numerical oracle | unconditional finite verification |
+| RH ⇔ pole-free Weil positivity | Weil's criterion, including the converse on pole-free tests | **equivalence** |
+| the HODGE-1 frontier | RH ⇔ positivity for tests reaching outside [−0.5493, 0.5493] | **equivalence**: exactly what is open |
+| the RR-square criterion | a family of Riemann–Roch-square windows covering all pole-free tests ⇒ RH | **conditional**: no such family is known |
+| research notes | the 7/8 method's limit, gates 0–10, SCALE-1, LY-1 | **not proofs**; mostly negative results |
 
-**The de Bruijn–Newman constant.** De Bruijn (1950) deformed Riemann's ξ function along the backward heat
-equation into a family H_t. He proved that every zero of H_t is real once t ≥ 1/2. Newman (1976) showed there
-is a constant Λ such that the zeros of H_t are all real exactly when t ≥ Λ, and RH is the statement Λ ≤ 0.
-Newman conjectured Λ ≥ 0, "RH, if true, is only barely true". Rodgers and Tao proved it in 2018. So RH is
-exactly Λ = 0, and every upper bound on Λ measures how far the known zero-free regions are from RH.
+## 1. Where RH stands
 
-Here, kernel-checked: **0 ≤ Λ ≤ 0.2811857**.
+The Riemann Hypothesis says every non-trivial zero of ζ(s) lies on the line Re s = 1/2. It has been open since 1859.
 
-- The lower bound `dbn_newman` follows Dobner's 2020 proof of Newman's conjecture. It comes with Dobner's
-  extension to the whole extended Selberg class (`selberg_newman`, `selberg_newman_sharp`), with the class
-  stated as a Lean structure and ζ as the control instance.
-- The upper bound combines a formalization of de Bruijn's theorem with a converter: a zero-free half-plane
-  Re s > θ for ζ gives real zeros of H_t for t ≥ 2(θ − 1/2)². Fed OpenAI's quasi-Riemann hypothesis (θ = 7/8),
-  it gives Λ ≤ 9/32. Fed Baiying Liu's improved half-plane (θ ≈ 0.874957), it gives Λ ≤ 0.2811857.
-- These bounds are weaker than the best numerical bounds
-  (Λ ≤ 0.22 by Polymath15, Λ ≤ 0.2 by Platt and Trudgian), which are not formalized. Each theorem was also
-  replayed by a second, independent kernel (nanoda) through Comparator, against a challenge whose type is
-  the registered statement.
+This programme is a sustained, machine-checked effort around the problem, run by one author directing parallel AI sessions.
+Its development repository keeps a flag, `conjecture1_proved`, and the flag is `False`.
 
-**Weil's positivity criterion.** Weil showed that RH is equivalent to the positivity of a quadratic form, the
-explicit formula evaluated on autocorrelations g ∗ g̃ of test functions. In Lean:
+The project's own assessment is blunt. Every proved item is one of three things:
 
-- RH is equivalent to Weil positivity on *pole-free* tests, those whose transform vanishes at ±i/2
+- a finite-window statement;
+- a converter applied to someone else's zero-free half-plane;
+- a formalization of known mathematics.
+
+None of them touches the part of RH that is hard. The value is elsewhere:
+
+- exact, checkable statements of what is known;
+- equivalences that isolate what is not known;
+- a record of which roads are closed.
+
+## 2. Headline kernel-checked results
+
+**The de Bruijn–Newman constant.** De Bruijn (1950) deformed Riemann's ξ along the backward heat equation into a family
+H_t. Newman (1976) showed there is a constant Λ such that the zeros of H_t are all real exactly when t ≥ Λ. RH is the
+statement Λ ≤ 0, and Rodgers and Tao proved Λ ≥ 0 in 2018. So RH is exactly Λ = 0, and every upper bound on Λ measures how
+far the known zero-free regions are from RH. Here, kernel-checked:
+
+- **Λ ≥ 0**: `dbn_newman`, following Dobner's 2020 proof.
+- **Λ ≤ 9/32**: `dbn_real_zeros_of_qrh_unconditional`, from OpenAI's quasi-Riemann hypothesis (ζ ≠ 0 for Re s > 7/8)
+  through a formalized converter. A zero-free half-plane Re s > θ gives real zeros for t ≥ 2(θ − 1/2)².
+- **Λ ≤ 0.2811857**: `dbn_real_zeros_ge_2811857`, from Baiying Liu's slightly larger half-plane (θ ≈ 0.874957).
+- Each was judged by Comparator with a second kernel (nanoda), and each was read back by the author.
+
+These bounds are weaker than the best numerical bounds, Λ ≤ 0.22 (Polymath15) and Λ ≤ 0.2 (Platt–Trudgian), which are not
+formalized.
+
+**Newman's conjecture for the Selberg class.** Dobner proved Λ ≥ 0 for every element of the extended Selberg class. This is
+formalized in full, with the class stated as a Lean structure and ζ as the control instance (`selberg_newman`,
+`selberg_newman_sharp`).
+
+**De Bruijn's Λ ≤ 1/2** (`dbn_debruijn_real_zeros`), together with Hadamard factorisation for even functions of order below 2,
+H_0 = ξ/8, and the RH ⇔ real-zeros equivalences. An **effective Theorem 4** makes Dobner's height explicit. Its accompanying
+note records why an effective Newman theorem is out of reach on that route.
+
+## 3. Criteria and reductions (conditional or equivalences)
+
+- **Weil's criterion, both halves.** It includes a new converse on *pole-free* tests: test functions whose transform
+  vanishes at ±i/2, which kills both pole terms. Statement: RH ⇔ Weil positivity on pole-free tests
   (`rh_iff_poleFree_weil_positivity`).
-- The HODGE-1 work proves that positivity outright for every pole-free test supported in [−0.5493, 0.5493],
-  a window just short of (log 3)/2, so that 2 is the only prime that enters. The proof is an exact kernel
-  certificate.
-- Combining the two gives the honest frontier: RH is equivalent to Weil positivity for the pole-free tests
-  whose support reaches *outside* that window (`rh_iff_poleFree2_outside_window5493`).
+- **The HODGE-1 frontier.** Positivity is proved outright for pole-free tests supported in [−0.5493, 0.5493], a window just
+  short of (log 3)/2, where 2 is the only prime that enters. So RH is equivalent to positivity for the tests whose support
+  reaches outside it (`rh_iff_poleFree2_outside_window5493`). That is a precise statement of the open content. It is not
+  progress.
+- **The Riemann–Roch-square criterion.** For curves over finite fields, Weil's proof runs through the Hodge index on C × C,
+  which follows from Riemann–Roch on the surface. The RR-square criterion asks what an analogue over ℚ would have to supply.
+  - Kernel-checked: abstract RR axioms with a degree bound, or with no zero divisors, imply the Hodge index.
+  - A countermodel shows that condition is needed.
+  - A collapse lemma shows that merely asserting such a structure exists is circular, so the content has to be a
+    construction.
+  - Function-field instances test the axioms.
+  - `rh_of_rr_windows`: windows covering every pole-free test would imply RH. **No one has constructed them.**
+  - The trivial converse, RH ⇒ windows exist, is in open pull request #726. It is not part of this snapshot.
+- **Li's criterion and the Li/Weil dictionary.** Bombieri–Lagarias's explicit formula, the ξ partial fraction, and Li's
+  forward half. The "Li ladder" turns verified zeros into nonnegative Li coefficients.
 
-The window theorem is real, checked mathematics, but it is verification on a fixed finite window. The
-frontier theorem is a reformulation of RH, not progress towards it.
+## 4. Weil positivity, proved on windows
 
-**The Riemann–Roch-square criterion.** For curves over finite fields, Weil's proof of the analogue of RH runs
-through the Hodge index theorem on the surface C × C, and that theorem follows from Riemann–Roch on the
-surface. The RR-square criterion asks what an analogue for ζ would have to provide, and makes that precise
-enough to check.
+Weil's form is shown positive outright for every test supported in [−L, L]:
 
-- The kernel-checked part: abstract Riemann–Roch-type axioms on a "window" imply the Hodge index. This works
-  with either a degree bound or a no-zero-divisors condition (`RRSquare.hodge_index`,
-  `hodge_index_of_domain`).
-- A countermodel shows the extra condition is necessary.
-- A collapse lemma shows that merely asserting such a structure exists is circular, so the content has to be
-  an actual construction.
-- Function-field instances: a genus-2 curve over F₅ satisfies the axioms; two fake zeta functions show what
-  the axioms can and cannot see.
-- `rh_of_rr_windows`: a family of RR-square windows covering every pole-free test would imply RH.
-- The converse, that RH gives such a family, is trivial by the collapse lemma. It is formalized in the
-  RR-square paper's development and is not part of this snapshot.
+- **2L ≤ log 2**: the prime-free window, full test class, exact kernel certificates.
+- **2L ≤ 4/5**: the first prime present and accounted for exactly.
+- **L ≤ 9/20 and L ≤ 0.5493** on pole-free tests (HODGE-1).
+- Connes and Consani's archimedean positivity (their Corollary 2.3), formalized for every support.
+- L ≤ 1/2 is proved in a heavy module on the development repository. It is not built by CI and not registered, so it is
+  listed but not counted.
 
-**The criterion is conditional, and its hypothesis is open: nobody has constructed the windows.**
+The project measured why windows cannot become a route. The positivity margin on a window *is* the sum over zeros, so a
+window of half-width L only verifies RH up to a height of roughly e^{2L}.
 
-## What is not proved
+The explicit-formula machinery these rest on is also formalized: unconditional Riemann–von Mangoldt, the corridor bound, the
+limit explicit formula, the local count sum, and Zhu's window inputs.
 
-- The Riemann Hypothesis, or equivalently Λ = 0.
-- Weil positivity for pole-free tests supported beyond the HODGE-1 window.
-- The existence of an RR-square family covering all pole-free tests.
+## 5. Other formalizations
 
-These are all the same open problem in different clothes.
+- **Every zero up to height 8000 lies on the line.** These are compact kernel certificates with no hypothesis and no
+  numerical oracle, replayed independently. There is also a zero in (14, 15) computed by the kernel alone. This is finite
+  verification. Classical computation goes much higher.
+- **Zero-free regions.** The effective de la Vallée Poussin region, an elementary γ⁻⁵ region and a polylog improvement, the
+  near-line bound |ζ| ≤ 6(1 + log|t|), and low-height boxes.
+- **The Dyson quasicrystal island.** Lee–Yang core, Kurasov–Sarnak construction, two-frequency rigidity, off-line Euler
+  factors as negative controls, Satake degree two.
+- **BraggDefect.** The explicit formula in diffraction form, and a certified defect witness with no remaining numerical
+  hypothesis.
+- **The Euler-model strip.** No zeros near the line above an explicit height for the finite Euler-product model. Open pull
+  request #725, **not merged**.
+- **Complementary-series positivity for PGL₂(ℂ)**, built on AxiomMath's metaplectic library.
 
-## The papers
+## 6. Verification infrastructure
+
+- **The missions registry.** Every formal statement has a status, an artifact, a read-back record, a grant and a Comparator
+  record.
+  - The grant gate checks hashes.
+  - Since 2026-09-23 it refuses a read-back from the same session or identity as the author.
+  - Earlier read-backs were relabelled `unverified` after an audit found they were not independent.
+- **The Comparator judge.** For each node, a challenge whose *type* is the registered statement, replayed in Lean's kernel and
+  nanoda. A separate heavy judge runs the Lean kernel alone, for certificates nanoda cannot handle.
+- **Independent replays.**
+  - OpenAI's quasi-Riemann-hypothesis challenges: accepted by both kernels.
+  - Liu's Lean: replayed before composition.
+  - AxiomMath's Dedekind zero-free library (Cureton–Thorner): the proof replays, but its shipped Comparator challenge fails.
+    An instance path, `instCommCStarAlgebraComplex`, makes the challenge and solution syntactically different though
+    definitionally equal, and a one-line fix makes it pass.
+- **Axiom guards** on every island, enforced in CI.
+- **The Telperion registry explorer** at <https://drmurphyisin.github.io/Arda/explorer/>, including its "Riemann's missing
+  surface" tab.
+
+## 7. Research programme and negative results
+
+These are research notes, not proofs: AI work, most of it without human review. The main findings:
+
+- **OpenAI's 7/8 method is exhausted.** Its boundary comes from the order-6 apparatus (Gauss sums and cubic theta
+  coefficients exist in usable form only there), not from a tunable constant. With proved inputs, its best value is exactly
+  Liu's 0.874957.
+- **The strip survey.** No known technique gives a half-plane strong enough to beat the numerical Λ bounds.
+- **Effective Newman: NO-GO** on Dobner's route.
+- **Gates 0–10** tested whether any geometry could supply Weil's sign for ℚ: function-field controls, automorphic forms,
+  Connes–Consani's arithmetic site, tropical and local "star" constructions, eighteen candidate geometries, and the
+  archimedean end of the adele class space. Every candidate either reduced to Weil's criterion or failed. The common pattern
+  is **modulus versus phase**: every sign mechanism found controls the size √p of the Frobenius return maps, never their
+  phases.
+- **SCALE-1.** A three-way obstruction: the needed cohomology, nef cone and non-toric H¹ never coexist in any known object.
+- **LY-1.** Torus-wide Lee–Yang conditions cannot single out ζ, because they are invariant under twisting the primes'
+  phases.
+- **TWOLEG**, in progress: the search for a "two-leg" object over ℚ, an analogue of C × C whose sign constrains phases.
+
+## 8. Papers
 
 | | paper | DOI |
 |---|---|---|
-| 1 | *A kernel-checked bound Λ ≤ 9/32 for the de Bruijn–Newman constant from OpenAI's quasi-Riemann hypothesis* (v1.1.0 adds Λ ≤ 0.2811857 from Liu's half-plane), [`papers/qrh-debruijn-newman/`](papers/qrh-debruijn-newman/) | [10.5281/zenodo.23269134](https://doi.org/10.5281/zenodo.23269134) (all versions; v1.1.0: 10.5281/zenodo.23324360) |
-| 2 | *Newman's conjecture, kernel-checked: Λ ≥ 0 for the de Bruijn–Newman constant in Lean 4 along Dobner's proof* (v1.1.0 adds the extended Selberg class), [`papers/newman-lambda-nonneg/`](papers/newman-lambda-nonneg/) | [10.5281/zenodo.23287832](https://doi.org/10.5281/zenodo.23287832) (all versions; v1.1.0: 10.5281/zenodo.23292885) |
+| 1 | *A kernel-checked bound Λ ≤ 9/32 for the de Bruijn–Newman constant from OpenAI's quasi-Riemann hypothesis* (v1.1.0 adds Λ ≤ 0.2811857), [`papers/qrh-debruijn-newman/`](papers/qrh-debruijn-newman/) | [10.5281/zenodo.23269134](https://doi.org/10.5281/zenodo.23269134) (all versions; v1.1.0: 10.5281/zenodo.23324360) |
+| 2 | *Newman's conjecture, kernel-checked: Λ ≥ 0 for the de Bruijn–Newman constant in Lean 4 along Dobner's proof* (v1.1.0 adds the Selberg class), [`papers/newman-lambda-nonneg/`](papers/newman-lambda-nonneg/) | [10.5281/zenodo.23287832](https://doi.org/10.5281/zenodo.23287832) (all versions; v1.1.0: 10.5281/zenodo.23292885) |
 | 3 | The Riemann–Roch-square criterion, [`papers/rr-square-criterion/`](papers/rr-square-criterion/) | not yet released |
 
-Each paper directory has the LaTeX source, the PDF, the build script and its arXiv submission sheet. The first
-two papers were released with their own repositories,
-[qrh-debruijn-newman](https://github.com/DrMurphyIsIn/qrh-debruijn-newman) and
-[newman-lambda-nonneg](https://github.com/DrMurphyIsIn/newman-lambda-nonneg). Those repositories also carry
-the Comparator judge bundles and CI transcripts for the de Bruijn–Newman results.
+## 9. How to build and check
 
-## What is in this repository
-
-```
-papers/          the three papers (LaTeX, PDF, build script)
-formalization/   the theorem index (README.md) and the pinned source commit (ARDA_SOURCE)
-telperion/       the Telperion engine, its tests, and the Lean islands under telperion/examples/
-scripts/         materialize.sh (clone the source commit, check the copy), the copy checker, the axiom checker
-CENSORING.md     every comment that was reworded in the Telperion copy, and why
-```
-
-The Lean lives in six islands under `telperion/examples/`: `dbn`, `oai_qrh_bridge`, `liu_dbn_bridge`,
-`rvm_bridge`, `weil_form_enclosure` and `quasicrystal`. Each is its own Lake project, because the upstream work
-each one builds on is pinned to a different Lean. OpenAI's and Liu's Lean code is never stored here. The
-island scripts fetch it at pinned commits and check every file by hash.
-
-## Checking it
-
-The trust model is the usual one for formal proofs: **the Lean kernel is the only trusted component.** You
-still have to read the statements and decide whether they say what the prose says. `formalization/README.md`
-gives each one in plain words next to its exact Lean name, to make that easier.
+The trust model is the usual one for formal proofs: **the Lean kernel is the only trusted component.** You still have to read
+the statements and decide whether they say what the prose says. [`formalization/README.md`](formalization/README.md) gives
+each headline theorem in plain words next to its exact Lean name.
 
 ```sh
-scripts/materialize.sh          # clone the development repository at the pinned commit and check that
-                                # telperion/ differs from it only in comments, docstrings and listed prose
+scripts/materialize.sh          # clone the development repository at the pinned commit and check that telperion/
+                                # differs from it only in comments, docstrings and listed prose
 
 cd telperion/examples/weil_form_enclosure/lean
 lake exe cache get && lake build
 lake env lean AxiomGuardRRSquare.lean   # every line: [propext, Classical.choice, Quot.sound] or a subset
 ```
 
-The other islands work the same way; `formalization/README.md` has the commands. On GitHub,
-`.github/workflows/verify.yml` builds the RR-square, dbn and rvm_bridge islands on every change. On manual
-dispatch it also builds the HODGE-1 certificates and the two half-plane bridges, which take hours.
-`.github/workflows/telperion.yml` runs the engine's test suite: about 3,600 tests, with 131 that need the
-development repository skipped and listed.
+The other islands work the same way. `.github/workflows/verify.yml` builds the RR-square, dbn and rvm_bridge islands on
+every change. On manual dispatch it also builds the HODGE-1 certificates and the two half-plane bridges, which take hours.
+`.github/workflows/telperion.yml` runs the engine's test suite.
 
-## Provenance and machine assistance
+The repository is laid out as follows:
+
+```
+papers/          the three papers (LaTeX, PDF, build script)
+docs/            PROGRESS.md: the complete record
+formalization/   the theorem index and the pinned source commit
+telperion/       the Telperion engine, its tests, and six Lean islands under telperion/examples/
+scripts/         materialize.sh, the copy checker, the axiom checker
+CENSORING.md     every comment that was reworded in the Telperion copy, and why
+```
+
+OpenAI's and Liu's Lean code is never stored here. The island scripts fetch it at pinned commits and check every file by hash.
+
+## 10. Provenance, AI assistance and review status
 
 The Lean developments and the engine were written in the author's development repository, Arda
-(<https://github.com/DrMurphyIsIn/Arda>). They are copied here from commit `b17b3c68f` of 2026-10-13. Before
-publishing, the copy was scanned for references to an unrelated private project and for private file paths,
-and those comments were reworded. No code, statement or proof changed. [`CENSORING.md`](CENSORING.md) lists
-every file, and `scripts/check_telperion_copy.py` proves the claim mechanically against that commit.
+(<https://github.com/DrMurphyIsIn/Arda>). They are copied here from commit `8fc6a33e6` of 2026-10-13. References to an
+unrelated private project and private file paths were reworded in comments only. [`CENSORING.md`](CENSORING.md) lists every
+file, and `scripts/check_telperion_copy.py` proves mechanically that no code changed.
 
-All of this work was produced with extensive use of an AI coding assistant (Claude, Anthropic) under the
-direction of the author: the Lean, the certificates, the engine, the audits and the papers. Several of the
-read-backs of registered statements were done by a separate AI session; they are labelled as such in the
-development repository's registry. None of the work has been refereed. The mathematics being formalized is,
-in the main, other people's: de Bruijn, Newman, Rodgers and Tao, Dobner, Weil, OpenAI and Baiying Liu.
-[`NOTICE.md`](NOTICE.md) gives the credits.
+All of this work was produced with extensive use of AI coding assistants (Claude, Anthropic), running as parallel sessions
+under the author's direction: the Lean, the certificates, the engine, the audits, the research notes and the papers. The
+review is mostly AI review, and we want to be precise about how much:
 
-## Licensing
+- **Human read-back.** The ten de Bruijn–Newman and zero-free half-plane statements behind 0 ≤ Λ ≤ 0.2811857 and the Selberg
+  class were read back by the author, a human. This is the strongest review here.
+- **AI read-back by a separate session.** Eleven statements, including the HODGE-1 frontier and the RR-square chain.
+- **AI read-back by the authoring session.** The remaining 109 registry statements. The registry labels them `unverified`.
+- **No external review.** No mathematician outside the project has reviewed any of it, and none of it has been refereed.
+- **The research notes** have had no human review.
 
-The mathematics (Lean, scripts, certificates) is Apache-2.0. The papers and prose are CC-BY-4.0. The Telperion
-engine is under the Business Source License 1.1, free for research, teaching and evaluation. See
-[`LICENSING.md`](LICENSING.md).
+The mathematics being formalized is, in the main, other people's: de Bruijn, Newman, Rodgers and Tao, Dobner, Weil, Bombieri
+and Lagarias, Li, Connes and Consani, OpenAI, Baiying Liu, Alpöge and Furman. [`NOTICE.md`](NOTICE.md) gives the credits.
 
-## Citing
+## Licensing and citing
 
-See [`CITATION.cff`](CITATION.cff). Please also cite the papers above and the original authors in
-[`NOTICE.md`](NOTICE.md).
+The mathematics (Lean, scripts, certificates) is Apache-2.0. The papers and prose are CC-BY-4.0. The Telperion engine is under
+the Business Source License 1.1, free for research, teaching and evaluation. See [`LICENSING.md`](LICENSING.md) and
+[`CITATION.cff`](CITATION.cff).

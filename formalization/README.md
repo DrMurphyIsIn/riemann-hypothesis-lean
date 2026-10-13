@@ -18,7 +18,7 @@ its own Lean and Mathlib pins, because the upstream projects they build on use d
 | `weil_form_enclosure` | v4.32.0 | Mathlib v4.32.0 |
 | `quasicrystal` | v4.32.0 | Mathlib v4.32.0 (supporting work; no headline theorem below) |
 
-The files are those of the Arda development repository at commit `b17b3c68fe67e314e1051f4dab46f7d527a7b62a`
+The files are those of the Arda development repository at commit `8fc6a33e6eede73bdfee31c130aa0aa16841c594`
 (`ARDA_SOURCE`), with comments reworded in ten Lean files (`../CENSORING.md`). `../scripts/materialize.sh`
 clones that commit and checks the claim: every Lean file must be byte-identical or identical once comments
 are stripped. The theorems, definitions and proofs are untouched.
@@ -30,6 +30,9 @@ upstream library, and replayed the proof through Lean's kernel. Where it says na
 kernel replayed it as well.
 
 ## Headline theorems
+
+This is the short index. `../docs/PROGRESS.md` has every result of the programme, including those on islands not vendored
+here, and the full registry inventory.
 
 ### The de Bruijn–Newman constant: 0 ≤ Λ ≤ 0.2811857
 
@@ -55,7 +58,7 @@ means `paperFT g (±i/2) = 0`, so that both pole terms vanish. `RiemannHypothesi
 
 | theorem | file | statement | status | axioms / checks |
 |---|---|---|---|---|
-| `RvMBridgePF.weil_positivity_poleFree_implies_rh` | `rvm_bridge/lean/PFConverseC.lean` | Weil positivity on every pole-free test ⇒ `RiemannHypothesis` | **conditional** (the hypothesis is equivalent to RH) | standard; CI guard, not judged |
+| `RvMBridgePF.weil_positivity_poleFree_implies_rh` | `rvm_bridge/lean/PFConverseC.lean` | Weil positivity on every pole-free test ⇒ `RiemannHypothesis` | **conditional** (the hypothesis is equivalent to RH) | standard; registry node `MM_polefree_weil_converse` granted (#729), AI read-back by a separate session, Comparator record not yet made |
 | `RvMBridgePF.rh_iff_poleFree_weil_positivity` | `rvm_bridge/lean/PFConverseC.lean` | `RiemannHypothesis ↔` Weil positivity on every pole-free test | an equivalence (a reformulation) | standard; CI guard, not judged |
 | `Hodge1.re_weilForm_eq_archW_sub_prime` | `rvm_bridge/lean/Hodge1_Reduction.lean` (registry shape `Hodge1_RegOnePrime.lean`) | exact one-prime identity on the window 2L ≤ log 3 | unconditional | standard; judged, nanoda (run 38402969515) |
 | `Hodge1.weil_positivity_poleFree2_window45` | `rvm_bridge/lean/Hodge1_Window45.lean` | Weil positivity for pole-free tests supported in [−L, L], L ≤ 9/20 | unconditional (a finite-window statement) | standard; judged, Lean kernel only (heavy certificates; run 38404702485) |
@@ -76,10 +79,13 @@ which is RH.
 | `RRSquare.collapse` | same | with `Div = V`, the bounded axioms are satisfiable iff the Hodge index holds (so an existence statement is circular; the content must be a construction) | unconditional | standard |
 | `RRSquare.FF.G2F5_hodge`, `G2F5_model`, `FK3_*`, `FK2_*` | `weil_form_enclosure/lean/RRSquareFF.lean` | function-field instances: a genus-2 curve over F₅ and two fakes | unconditional (finite) | standard |
 | `RRSquare.weil_positive_of_rr` | `weil_form_enclosure/lean/RRSquareLink.lean` | RR-square on one window ⇒ Weil positivity for the pole-free tests in it | **conditional** on the window | standard |
-| `RvMBridgePF.rh_of_rr_windows` | `rvm_bridge/lean/PFConverseC.lean` | a family of RR-square windows covering every pole-free test ⇒ `RiemannHypothesis` | **conditional**: no such family has been constructed | standard; CI guard, not judged |
+| `RvMBridgePF.rh_of_rr_windows` | `rvm_bridge/lean/PFConverseC.lean` | a family of RR-square windows covering every pole-free test ⇒ `RiemannHypothesis` | **conditional**: no such family has been constructed | standard; node `MM_rr_windows_imply_rh` granted (#729), AI read-back by a separate session, Comparator record not yet made |
 
-The converse direction (RH ⇒ such a family exists, trivially, by the collapse lemma) is part of the RR-square
-paper's Lean development. It is not in this snapshot of Arda and is not claimed here.
+The registry shapes of the five RR-chain theorems (`rr_square_hodge_index`, `rr_square_hodge_index_domain`,
+`rr_square_collapse`, `polefree_weil_converse`, `rr_windows_imply_rh`) are in `rvm_bridge/lean/RegRRChain.lean` and were
+granted on 2026-10-13 (#727-#729). The converse direction (RH ⇒ such a family exists, trivially, by the collapse lemma;
+`rr_windows_of_rh`, `rh_iff_exists_rr_windows` in `PFConverseD.lean`) is in open Arda PR #726, not in this snapshot, and is not
+claimed here.
 
 ## Checking it yourself
 
