@@ -8,11 +8,11 @@ repository-code: "https://github.com/DrMurphyIsIn/riemann-hypothesis-lean"
 license: Apache-2.0
 version: v1.0.0
 date-released: 2026-10-13
-doi: 10.5281/zenodo.PLACEHOLDER
+doi: 10.5281/zenodo.23352050
 identifiers:
   - type: doi
-    value: 10.5281/zenodo.PLACEHOLDER
-    description: "Zenodo archive of this release (placeholder until the deposition is made)"
+    value: 10.5281/zenodo.23352050
+    description: "Zenodo archive, all versions (concept DOI); v1.0.0 is 10.5281/zenodo.23352051"
   - type: doi
     value: 10.5281/zenodo.23269134
     description: "qrh-debruijn-newman, all versions (Lambda <= 9/32 and Lambda <= 0.2811857)"

@@ -1,5 +1,7 @@
 # Kernel-checked results on the Riemann Hypothesis: de Bruijn–Newman bounds and a conditional Riemann–Roch-square criterion
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23352050.svg)](https://doi.org/10.5281/zenodo.23352050)
+
 **The Riemann Hypothesis is open, and nothing in this repository proves it.** What is here is a body of Lean 4 work *around*
 RH, every piece checked by the Lean kernel. Some of it is unconditional and strictly weaker than RH. Some of it is
 equivalences that restate exactly what remains open. One piece is a criterion that would imply RH if anyone could construct
@@ -171,7 +173,7 @@ These are research notes, not proofs: AI work, most of it without human review. 
 |---|---|---|
 | 1 | *A kernel-checked bound Λ ≤ 9/32 for the de Bruijn–Newman constant from OpenAI's quasi-Riemann hypothesis* (v1.1.0 adds Λ ≤ 0.2811857), [`papers/qrh-debruijn-newman/`](papers/qrh-debruijn-newman/) | [10.5281/zenodo.23269134](https://doi.org/10.5281/zenodo.23269134) (all versions; v1.1.0: 10.5281/zenodo.23324360) |
 | 2 | *Newman's conjecture, kernel-checked: Λ ≥ 0 for the de Bruijn–Newman constant in Lean 4 along Dobner's proof* (v1.1.0 adds the Selberg class), [`papers/newman-lambda-nonneg/`](papers/newman-lambda-nonneg/) | [10.5281/zenodo.23287832](https://doi.org/10.5281/zenodo.23287832) (all versions; v1.1.0: 10.5281/zenodo.23292885) |
-| 3 | *A kernel-checked Riemann–Roch-square criterion for the Riemann Hypothesis*, [`papers/rr-square-criterion/`](papers/rr-square-criterion/) | this repository's Zenodo record (below) |
+| 3 | *A kernel-checked Riemann–Roch-square criterion for the Riemann Hypothesis*, [`papers/rr-square-criterion/`](papers/rr-square-criterion/) | [10.5281/zenodo.23352050](https://doi.org/10.5281/zenodo.23352050) (this repository; v1.0.0: 10.5281/zenodo.23352051) |
 
 **arXiv: staged, not yet submitted.** Each paper has an arXiv source package and a submission sheet, and the author
 submits them. See [`papers/ARXIV_STAGING.md`](papers/ARXIV_STAGING.md). No arXiv identifiers exist yet; cite the Zenodo DOIs.
