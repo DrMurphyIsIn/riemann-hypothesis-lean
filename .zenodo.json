@@ -17,7 +17,7 @@
     "Lean 4",
     "formal verification"
   ],
-  "version": "v1.0.0",
+  "version": "v1.0.1",
   "related_identifiers": [
     {
       "identifier": "https://github.com/DrMurphyIsIn/riemann-hypothesis-lean",
