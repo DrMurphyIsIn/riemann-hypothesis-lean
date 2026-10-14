@@ -84,7 +84,7 @@ which is RH.
 
 The registry shapes of the five RR-chain theorems (`rr_square_hodge_index`, `rr_square_hodge_index_domain`,
 `rr_square_collapse`, `polefree_weil_converse`, `rr_windows_imply_rh`) are in `rvm_bridge/lean/RegRRChain.lean` and were
-granted on 2026-10-13 (#727-#729); their Comparator records are pending. The converse direction is in `rvm_bridge/lean/PFConverseD.lean`
+granted on 2026-10-13 (#727-#729); they were judged by Comparator with nanoda (run 38457305451) and recorded in #731. The converse direction is in `rvm_bridge/lean/PFConverseD.lean`
 (merged in #726): `RvMBridgePF.rr_windows_of_rh` (RH ⇒ a covering family exists) and `RvMBridgePF.rh_iff_exists_rr_windows`
 (RH ⇔ such a family exists). It is trivial by design: the windows are read off from Weil positivity, with no sections,
 divisors or ample class, so the existence form is Weil's criterion restated. The open content is a construction of windows

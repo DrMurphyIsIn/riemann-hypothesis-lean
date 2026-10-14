@@ -151,7 +151,7 @@ surface. The RR-square criterion states abstractly what an analogue over ℚ wou
 | **a family of RR-square windows covering every pole-free test ⇒ RH** | `RvMBridgePF.rh_of_rr_windows` / `rr_windows_imply_rh` | `PFConverseC.lean`, `RegRRChain.lean` | #712, #727 | **conditional**: no such family has been constructed; node `MM_rr_windows_imply_rh` granted (#729), AI read-back by a separate session |
 | the trivial converse, RH ⇒ such a family exists, hence **RH ⇔ RR-square windows exist** | `RvMBridgePF.rr_windows_of_rh`, `RvMBridgePF.rh_iff_exists_rr_windows` (with `RvMBridgePF.RRSquare.collapse_bounded`, `lineWindow`) | `rvm_bridge/lean/PFConverseD.lean` | #726 (50b100025) | **equivalence**: the windows it builds are read off from Weil positivity and carry no geometry (no sections, no effective divisors, no ample class), so the existence form is Weil's criterion in another notation. The open content is a *construction* of windows defined without reference to the zeros. Axiom-guarded in CI; not a registry node |
 
-The five RR-chain nodes were granted on 2026-10-13 (#729). Their Comparator records are pending from main's judge run. The
+The five RR-chain nodes were granted on 2026-10-13 (#729). Their Comparator records (nanoda, run 38457305451) were merged in #731. The
 converse (#726) is what makes the equivalence literal, and it is also what shows that existence alone is empty: everything
 turns on the construction.
 
