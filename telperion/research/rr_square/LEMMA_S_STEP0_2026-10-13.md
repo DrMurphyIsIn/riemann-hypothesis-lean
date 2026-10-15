@@ -1,6 +1,6 @@
 # Lemma S, step 0: the single-orbit square hinges on the cone-point excess (e9, 2026-10-13)
 
-User: "proceed" (Lemma S assigned to e9; the geometry session concurs). Inputs: the gate-8 note `g8_cc_square.md` (unpublished) §4
+Approved by the author (Lemma S assigned to e9; the geometry session concurs). Inputs: the gate-8 note `g8_cc_square.md` (unpublished) §4
 (statement) and §2(e) (counterexample). Script: `s0_mixed_area.py`. AI work, not reviewed. conjecture1_proved = False.
 
 ## Result

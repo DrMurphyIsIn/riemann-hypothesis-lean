@@ -2,17 +2,24 @@
 
 ## v1.0.2 (2026-10-14)
 
-This release corrects the vendored copy of Telperion. Two defects in the engine were found after v1.0.1 by an independent
-AI audit, run in a different session from the one that wrote the code. No human review found them. Both are fixed in the
-development repository, Arda, by pull requests #740 and #739. `telperion/` is now copied from Arda commit
+This release corrects the vendored copy of Telperion. Three defects were found after v1.0.1 by an independent AI audit,
+run in a different session from the one that wrote the code. No human review found them:
+
+1. Telperion's winding-number zero counts were evaluated only at sample points on each box's edge, so they were
+   heuristic, although documented as rigorous.
+2. The Davenport–Heilbronn inventory missed a fifth off-line zero below height 300. The cause was the off-line scan its
+   documentation promised but which had never been written, not the sampler.
+3. The Báez-Duarte emitter's old family carried a false "RH ⟺ d²_N → 0" label.
+
+All three are fixed in the development repository, Arda, by pull requests #740 (the first two) and #739 (the third). `telperion/` is now copied from Arda commit
 `5d1c8c579be7c3a1fdf43a2a5aeef37f1d8bb4fa` (2026-10-14), which contains both fixes. v1.0.0 and v1.0.1 used
 `50b1000254c6bb74bf12d21fa66483bd9fc14aeb` (2026-10-13).
 
-**None of the repository's own claims depended on either defect.** The three papers and `docs/PROGRESS.md` make no claim
+**None of the repository's own claims depended on any of them.** The three papers and `docs/PROGRESS.md` make no claim
 about how many zeros the Davenport–Heilbronn function has, and they do not use the Báez-Duarte emitter. Every theorem they
 state is unchanged, and so is every Lean file they cite. The papers are unchanged in this release.
 
-### The winding-number zero counts were not rigorous
+### 1. The winding-number zero counts were not rigorous
 
 Telperion counts the zeros of an analytic function in a box with the argument principle: it adds up how far the function's
 argument turns around the box's boundary. In v1.0.0 and v1.0.1 the default backend for this, `arb_dh.winding_number`, used
@@ -28,6 +35,8 @@ segment is accepted only when the enclosure proves the function's values stay in
 argument change along it is known exactly. A segment that fails is split, and past a depth limit the routine refuses
 instead of guessing. These counts are rigorous in Arb's interval arithmetic. They are not kernel-checked.
 
+### 2. The Davenport–Heilbronn inventory missed an off-line zero
+
 The Davenport–Heilbronn inventory, `telperion/examples/quasicrystal/zoo_data/dh_zeros.json`, was built with those
 counts, and it was also incomplete. It listed 4 off-line zeros up to height 300, taken from published tables. There are 5.
 The one it missed, ρ ≈ 0.8695305796 + 240.4046723514i, is not in those tables, and the off-line scan the inventory's
@@ -38,7 +47,7 @@ mirror images, 214 = 204 + 2·5.
 `dh_inventory.py` and `zoo_verdicts.json`, which said "certification is rigorous" and "4 off-line pairs certified", now say
 what is true.
 
-### The Báez-Duarte family label was false
+### 3. The Báez-Duarte family label was false
 
 The `BaezDuarte` emitter certifies upper bounds on the distance d²_N in the Nyman–Beurling–Báez-Duarte criterion, where RH
 holds exactly when d²_N → 0. Up to v1.0.1 it used the family {1/(kx)}, k ≥ 2, in L²(0, 1), and labelled it with "RH ⟺
@@ -68,7 +77,8 @@ islands' build files and axiom guards at the new commit name it:
 
 Every file that is new or changed since the old commit was scanned again for the five kinds of material listed in
 [`CENSORING.md`](CENSORING.md). The earlier rewordings were re-applied where their files changed. The scan found two more
-private paths, one in a Lean comment and one in a research memo. Both were reworded and are listed in `CENSORING.md`.
+private paths, one in a Lean comment and one in a research memo. Both were reworded, and the two Lemma S memos'
+quotations of the author's instructions became "Approved by the author"; all are listed in `CENSORING.md`.
 `scripts/check_telperion_copy.py` passes against the new commit: no code, definition, statement or proof differs from Arda.
 
 ### Documentation corrections

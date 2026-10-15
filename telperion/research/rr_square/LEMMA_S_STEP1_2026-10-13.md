@@ -1,6 +1,6 @@
 # Lemma S, step 1: graphs carry no Cartier divisor on the single-orbit square (e9, 2026-10-13)
 
-User: "Proceed". Follows step 0 (`LEMMA_S_STEP0_2026-10-13.md`). Check script: `s1_no_graph_divisors.py`. AI work, not
+Approved by the author. Follows step 0 (`LEMMA_S_STEP0_2026-10-13.md`). Check script: `s1_no_graph_divisors.py`. AI work, not
 reviewed. conjecture1_proved = False.
 
 ## Proposition (PROVED, elementary; numerical check in s1)

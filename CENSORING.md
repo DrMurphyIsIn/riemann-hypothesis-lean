@@ -77,7 +77,8 @@ The first six use the same wording as the Brualdi–Goldwasser repository's copy
 | `telperion/docs/LIU_DBN_BRIDGE_2026-10-11.md` | (ii) | local tool paths, private note paths and session names containing the local user name made generic |
 | `telperion/docs/SECOND_PASS_EMITTER_CATALOG.md` | (ii) | a private plan file becomes "the build plan, not published" |
 | `telperion/research/rr_square/RR_SQUARE_STATEMENT_2026-10-12.md` | (ii) | a private note path becomes the note's file name, marked unpublished |
-| `telperion/research/rr_square/LEMMA_S_STEP0_2026-10-13.md` | (ii) | same: a private note path becomes the note's file name, marked unpublished (v1.0.2) |
+| `telperion/research/rr_square/LEMMA_S_STEP0_2026-10-13.md` | (ii) | same: a private note path becomes the note's file name, marked unpublished; a quoted instruction from the author becomes "Approved by the author" (v1.0.2) |
+| `telperion/research/rr_square/LEMMA_S_STEP1_2026-10-13.md` | (ii) | a quoted instruction from the author becomes "Approved by the author" (v1.0.2) |
 | `telperion/examples/liu_dbn_bridge/README.md` | (ii) | a private note path and two command lines with local directories made generic |
 | `telperion/examples/oai_qrh_bridge/README.md` | (ii) | one command line with a local directory made generic |
 | `telperion/examples/liu_dbn_bridge/logs/comparator_2026-10-11.txt` | (ii) | the two header lines of a run log no longer name local tool directories; the recorded output is unchanged |
