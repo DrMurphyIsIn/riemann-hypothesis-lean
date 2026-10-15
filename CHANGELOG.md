@@ -12,7 +12,7 @@ run in a different session from the one that wrote the code. No human review fou
 3. The Báez-Duarte emitter's old family carried a false "RH ⟺ d²_N → 0" label.
 
 All three are fixed in the development repository, Arda, by pull requests #740 (the first two) and #739 (the third). `telperion/` is now copied from Arda commit
-`5d1c8c579be7c3a1fdf43a2a5aeef37f1d8bb4fa` (2026-10-14), which contains both fixes. v1.0.0 and v1.0.1 used
+`5d1c8c579be7c3a1fdf43a2a5aeef37f1d8bb4fa` (2026-10-14), which contains all three fixes. v1.0.0 and v1.0.1 used
 `50b1000254c6bb74bf12d21fa66483bd9fc14aeb` (2026-10-13).
 
 **None of the repository's own claims depended on any of them.** The three papers and `docs/PROGRESS.md` make no claim
