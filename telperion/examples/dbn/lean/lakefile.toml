@@ -5,7 +5,7 @@ name = "DBN"
 # xi vocabulary across the two islands. AxiomGuardDBN is a defaultTarget so bare `lake build`
 # compiles the guard and, transitively, every module it imports (cf. the li_positivity lakefile
 # rationale, #448/#451).
-defaultTargets = ["DBNDefs", "DBNRealZerosIff", "DBNXiRiemann", "DBNGKernel", "DBNXiCos", "DBNXiIBP", "DBNXi", "DBNRealZerosIffFinal", "DBNStrip", "DBNStep", "DBNStepControls", "DBNHurwitz", "DBNHeatApprox", "DBNDeBruijnReduction", "DBNHadamardCount", "DBNHadamardProduct", "DBNHadamardMean", "DBNHadamardLinear", "DBNHadamard", "DBNHadamardApprox", "DBNM1Approx", "DBNM1Parametric", "DBNM1RHIff", "DBNM1Controls", "DBNM4P15Defs", "DBNM4LocalStep", "DBNM4HeatUniform", "DBNM4P15Criterion", "M6gapEMZeta", "M6gapEMZetaComplex", "M6gapEMZetaTail", "M6gapZetaEMSum", "M6gapHeightFloorCheck", "M6gapHeightFloorTrig", "M6gapHeightFloorEM", "M6gapHeightFloorBoxes", "M6gapZetaZeroConfinement", "M6gapDlvpZetaSymmetry", "M6gapHeightFloor", "M6gapImAxis", "M6gapP15ZeroFree", "DBNM5Alpha", "DBNM5Target", "DBNP15Wired", "DBNZeroFreeHalfplane", "DBNBohr", "DBNFtZero", "DBNFtZeroHigh", "DBNStirling", "DBNGaussConv", "DBNSaddleAlg", "DBNSaddleBounds", "DBNSaddleSum", "DBNTheorem4", "DBNNewman", "DBNTheorem4Effective", "DBNSelbergData", "DBNSelbergGauss", "DBNSelbergSaddleAlg", "DBNSelbergSaddleBounds", "DBNSelbergFtZero", "DBNSelbergSaddleSum", "DBNSelbergNewman", "DBNSelbergZeta", "DBNGammaVertical", "DBNSelbergSharp", "DBNSelbergSharpXi", "DBNSelbergSharpStrip", "DBNSelbergSharpZeta", "DBNWeakFESelfDual", "AxiomGuardDBN"]
+defaultTargets = ["DBNDefs", "DBNRealZerosIff", "DBNXiRiemann", "DBNGKernel", "DBNXiCos", "DBNXiIBP", "DBNXi", "DBNRealZerosIffFinal", "DBNStrip", "DBNStep", "DBNStepControls", "DBNHurwitz", "DBNHeatApprox", "DBNDeBruijnReduction", "DBNHadamardCount", "DBNHadamardProduct", "DBNHadamardMean", "DBNHadamardLinear", "DBNHadamard", "DBNHadamardApprox", "DBNM1Approx", "DBNM1Parametric", "DBNM1RHIff", "DBNM1Controls", "DBNM4P15Defs", "DBNM4LocalStep", "DBNM4HeatUniform", "DBNM4P15Criterion", "M6gapEMZeta", "M6gapEMZetaComplex", "M6gapEMZetaTail", "M6gapZetaEMSum", "M6gapHeightFloorCheck", "M6gapHeightFloorTrig", "M6gapHeightFloorEM", "M6gapHeightFloorBoxes", "M6gapZetaZeroConfinement", "M6gapDlvpZetaSymmetry", "M6gapHeightFloor", "M6gapImAxis", "M6gapP15ZeroFree", "DBNM5Alpha", "DBNM5Target", "DBNP15Wired", "DBNZeroFreeHalfplane", "DBNBohr", "DBNFtZero", "DBNFtZeroHigh", "DBNStirling", "DBNGaussConv", "DBNSaddleAlg", "DBNSaddleBounds", "DBNSaddleSum", "DBNTheorem4", "DBNNewman", "DBNTheorem4Effective", "DBNSelbergData", "DBNSelbergGauss", "DBNSelbergSaddleAlg", "DBNSelbergSaddleBounds", "DBNSelbergFtZero", "DBNSelbergSaddleSum", "DBNSelbergNewman", "DBNSelbergZeta", "DBNGammaVertical", "DBNSelbergSharp", "DBNSelbergSharpXi", "DBNSelbergSharpStrip", "DBNSelbergSharpZeta", "DBNWeakFESelfDual", "DBNEulerModelRH", "RegEulerModel", "AxiomGuardDBN"]
 
 [[require]]
 name = "LiCriterion"
@@ -416,3 +416,15 @@ name = "DBNSelbergSharpStrip"
 
 [[lean_lib]]
 name = "DBNSelbergSharpZeta"
+
+# LY-1/E: RH above an explicit height near the critical line for the finite Euler-product MODEL
+# Z_X(s) = E_X(s) + chi(s) E_X(1-s) (prime factor torus-sharp, archimedean factor via DBNStirling's
+# digamma bound, monotonicity of Lambda_X; concrete X = 2, y = 2/5, t >= 1000).  A statement about
+# the model, NOT about zeta.  Nothing here bears on RH.  conjecture1_proved = False.
+[[lean_lib]]
+name = "DBNEulerModelRH"
+
+# Registry shape of RH_dbn_euler_model_zero_free (2026-10-14): DBNEulerModel.ZX_ne_zero, fully qualified.
+# A statement about the MODEL, NOT about zeta.  conjecture1_proved = False.
+[[lean_lib]]
+name = "RegEulerModel"

@@ -297,6 +297,10 @@ import PFConverseC
 import PFConverseD
 import Hodge1_RegOnePrime
 import RegRRChain
+import PFSemibounded
+import RegSemibounded
+import SemilocalWeil
+import RegRRConverse
 
 #print axioms RvMBridge.rvm_unbounded_mean_density
 #print axioms RvMBridge.eventually_Ncount_ge
@@ -2435,3 +2439,21 @@ import RegRRChain
 #print axioms rr_square_collapse
 #print axioms polefree_weil_converse
 #print axioms rr_windows_imply_rh
+
+-- Semibounded pole-free Weil form (e9, 2026-10-14): RH iff bounded below; delta-shift independent.
+#print axioms RvMBridgePF.integral_norm_sq_eq
+#print axioms RvMBridgePF.weighted_dominance_unbounded
+#print axioms RvMBridgePF.weil_semibounded_poleFree_implies_rh
+#print axioms RvMBridgePF.rh_iff_poleFree_weil_semibounded
+#print axioms RvMBridgePF.rh_iff_poleFree_weil_shift_semibounded
+#print axioms polefree_weil_semibounded_iff_rh
+#print axioms polefree_weil_shift_semibounded_iff_rh
+
+-- Semilocal (finite-S) Weil form (e9, 2026-10-14).
+#print axioms RvMBridgePF.primeSideS_eq_of_window
+#print axioms RvMBridgePF.weilFormS_zero_eq_of_window
+#print axioms RvMBridgePF.rh_iff_semilocal_positive
+#print axioms RvMBridgePF.semilocalPositive_mono_shift
+#print axioms RvMBridgePF.semilocalHodgeIndex_iff
+#print axioms RvMBridgePF.rh_iff_semilocal_hodge_index
+#print axioms rh_implies_rr_windows

@@ -1,6 +1,7 @@
 import RRSquare
 import RRSquareFF
 import RRSquareLink
+import LemmaSCore
 
 #print axioms RRSquare.hodge_index
 #print axioms RRSquare.hodge_index_of_domain
@@ -15,3 +16,7 @@ import RRSquareLink
 #print axioms RRSquare.FF.FK2_hodge_fails
 #print axioms RRSquare.FF.FK2_no_model
 #print axioms RRSquare.weil_positive_of_rr
+#print axioms LemmaSCore.ray_jump_preserved_vertical
+#print axioms LemmaSCore.ray_jump_preserved_horizontal
+#print axioms LemmaSCore.jump_zero_of_monodromy
+#print axioms LemmaSCore.graph_coefficient_zero

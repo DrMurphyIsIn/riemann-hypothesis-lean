@@ -18,8 +18,8 @@ its own Lean and Mathlib pins, because the upstream projects they build on use d
 | `weil_form_enclosure` | v4.32.0 | Mathlib v4.32.0 |
 | `quasicrystal` | v4.32.0 | Mathlib v4.32.0 (supporting work; no headline theorem below) |
 
-The files are those of the Arda development repository at commit `50b1000254c6bb74bf12d21fa66483bd9fc14aeb`
-(`ARDA_SOURCE`), with comments reworded in ten Lean files (`../CENSORING.md`). `../scripts/materialize.sh`
+The files are those of the Arda development repository at commit `5d1c8c579be7c3a1fdf43a2a5aeef37f1d8bb4fa`
+(`ARDA_SOURCE`), with comments reworded in eleven Lean files (`../CENSORING.md`). `../scripts/materialize.sh`
 clones that commit and checks the claim: every Lean file must be byte-identical or identical once comments
 are stripped. The theorems, definitions and proofs are untouched.
 

@@ -179,7 +179,7 @@
       },
       "defect_bounded": {
         "verdict": "FAIL",
-        "detail": "unbounded defect: 4 off-line pairs certified, k(T)->inf",
+        "detail": "unbounded defect: 5 off-line pairs certified, k(T)->inf",
         "variants": [
           "D"
         ],

@@ -1,7 +1,7 @@
 # What was changed in the Telperion copy, and why
 
 `telperion/` is copied from the Arda development repository at commit
-`50b1000254c6bb74bf12d21fa66483bd9fc14aeb` (2026-10-13). Before publishing, the copy was scanned for five
+`5d1c8c579be7c3a1fdf43a2a5aeef37f1d8bb4fa` (2026-10-14). Before publishing, the copy was scanned for five
 kinds of material that do not belong in a public repository, and the hits were reworded:
 
 - **(i) private project**: references to an unrelated private software project of the author's;
@@ -14,6 +14,12 @@ kinds of material that do not belong in a public repository, and the hits were r
 The scan found nothing in categories (iii), (iv) and (v). (The only e-mail address is the author's public
 commit address, in a design note; the strings that look like credentials are the field names and dummy
 values of the API client's tests.) Everything below is category (i) or (ii).
+
+Releases v1.0.0 and v1.0.1 were copied from commit `50b1000254c6bb74bf12d21fa66483bd9fc14aeb` (2026-10-13). For v1.0.2
+the copy was re-synced to `5d1c8c579`, and every file that is new or changed since `50b100025` was scanned again for all
+five categories. The rewordings below were re-applied where their files changed. The new scan found two more
+category (ii) hits, both private paths: one in `DBNEulerModelRH.lean` and one in `LEMMA_S_STEP0_2026-10-13.md`. Both
+are listed below. It found nothing in categories (i), (iii), (iv) or (v).
 
 Only comments, docstrings and prose were changed. No code, definition, statement or proof was touched.
 `scripts/check_telperion_copy.py` checks this against a checkout of the source commit, and
@@ -52,6 +58,7 @@ The first six use the same wording as the Brualdi–Goldwasser repository's copy
 | `telperion/examples/weil_form_enclosure/lean/RRSquare.lean` | (ii) | header comment names the unpublished note by file name only |
 | `telperion/examples/weil_form_enclosure/lean/RRSquareFF.lean` | (ii) | same (generated file; see the next entry) |
 | `telperion/examples/quasicrystal/lean/Probes/AuditTorusDict_Source.lean` | (ii) | a comment says "an old local checkout" instead of naming a private directory |
+| `telperion/examples/dbn/lean/DBNEulerModelRH.lean` | (ii) | header comment cites "design notes, unpublished" instead of a private path (v1.0.2) |
 
 ### Generator (string literal that becomes an emitted Lean comment)
 
@@ -70,6 +77,7 @@ The first six use the same wording as the Brualdi–Goldwasser repository's copy
 | `telperion/docs/LIU_DBN_BRIDGE_2026-10-11.md` | (ii) | local tool paths, private note paths and session names containing the local user name made generic |
 | `telperion/docs/SECOND_PASS_EMITTER_CATALOG.md` | (ii) | a private plan file becomes "the build plan, not published" |
 | `telperion/research/rr_square/RR_SQUARE_STATEMENT_2026-10-12.md` | (ii) | a private note path becomes the note's file name, marked unpublished |
+| `telperion/research/rr_square/LEMMA_S_STEP0_2026-10-13.md` | (ii) | same: a private note path becomes the note's file name, marked unpublished (v1.0.2) |
 | `telperion/examples/liu_dbn_bridge/README.md` | (ii) | a private note path and two command lines with local directories made generic |
 | `telperion/examples/oai_qrh_bridge/README.md` | (ii) | one command line with a local directory made generic |
 | `telperion/examples/liu_dbn_bridge/logs/comparator_2026-10-11.txt` | (ii) | the two header lines of a run log no longer name local tool directories; the recorded output is unchanged |
@@ -80,7 +88,7 @@ The first six use the same wording as the Brualdi–Goldwasser repository's copy
 | file | why |
 |---|---|
 | `telperion/SYNC` | the source commit, one line |
-| `telperion/tests/conftest.py` | skips 131 tests that need files only the development repository has; see its docstring |
+| `telperion/tests/conftest.py` | skips 131 tests that need files only the development repository has; see its docstring (v1.0.2: one entry follows an upstream test rename) |
 
 ## Left out
 

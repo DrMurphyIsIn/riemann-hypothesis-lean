@@ -1081,10 +1081,11 @@ REGISTRY: dict[str, SensitivityStance] = {
         "conjecture1_proved = False"),
     "WindingBoxZeroEmitter": _S(STRUCTURALLY_NONVACUOUS,
         "Arb-trust-class winding-number box certificate (the turing_band sidecar trust class): the "
-        "rigorous zero count of an analytic function on a rational-cornered box, via the "
-        "quadrant-advance argument principle over Arb-ball boundary samples. Ships NO kernel theorem "
+        "zero count of an analytic function on a rational-cornered box, via the argument principle "
+        "with Arb segment enclosures by default (arb_winding; node sampling until 2026-10-14 was a "
+        "heuristic). Ships NO kernel theorem "
         "(nthm=0) — only a .cert.json sidecar + a documentation stub — so there is no Lean identity "
-        "to corrupt; the winding integer is RE-VERIFIED at doubled precision + density at certify "
+        "to corrupt; the winding integer is RE-RUN at doubled precision + subdivision at certify "
         "time and a claimed count the argument principle does not support is REFUSED (the negative "
         "control). conjecture1_proved = False"),
     # --- 2026-09-19: the Face-7 pilot's Lipschitz-net ZERO-FREENESS emitter
@@ -1196,12 +1197,14 @@ REGISTRY: dict[str, SensitivityStance] = {
         "n ≤ 5040 (outside Robin's range) refused at certify time (negative control); "
         "no separately-supplied corruptible cofactor"),
     "BaezDuarteEmitter": _S(STRUCTURALLY_NONVACUOUS,
-        "Báez-Duarte rung d²_N ≤ U with d²_N carried as hypothesis hval : Q ≤ U and Q "
-        "the exact quadratic-form value of the chosen coefficient vector (the analytic "
-        "trust seam is d²_N ≤ Q, the closed-form Gram evaluation): the exact rational Q "
-        "and the readable upper bound U ARE the statement, Q ≤ U re-decided by norm_num "
-        "and closed by le_trans; a U below the exact Q refused at certify time (negative "
-        "control); no separately-supplied corruptible cofactor"),
+        "Báez-Duarte rung d²_N ≤ U (Bagchi family g_k = {1/(kx)} − {1/x}/k) with d²_N "
+        "carried as hypothesis hval : d²_N ≤ Uexact; Uexact bounds the form value "
+        "Q(c) = Σ_n h_n²/(n(n+1)) of the chosen coefficient vector by an exact-rational "
+        "head n < Y (each term rounded up, no transcendental values) plus a rigorous "
+        "rational period-mean tail bound (the trust seam is d²_N ≤ Q ≤ Uexact): Uexact "
+        "and the readable upper bound U ARE the statement, Uexact ≤ U re-decided by "
+        "norm_num and closed by le_trans; a U below Uexact refused at certify time "
+        "(negative control); no separately-supplied corruptible cofactor"),
     "LehmerPairEmitter": _S(STRUCTURALLY_NONVACUOUS,
         "certified Lehmer-pair quality inequality quality_short ≤ qcap (< 1) with "
         "quality = δ²·C_n the exact rational Lehmer signature from a close consecutive-"

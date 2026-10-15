@@ -90,6 +90,8 @@ import DBNSelbergSharpXi
 import DBNSelbergSharpStrip
 import DBNSelbergSharpZeta
 import DBNWeakFESelfDual
+import DBNEulerModelRH
+import RegEulerModel
 
 -- theta moments
 #print axioms DBN.summable_thetaTerm
@@ -1037,3 +1039,29 @@ example : M6gap.HeightFloor.DI.checkAB
 -- self-dual weak FE-pairs (internal copy of closed Mathlib PR #44807)
 #print axioms WeakFEPair.symm_Λ_eq_of_selfDual
 #print axioms WeakFEPair.functional_equation_of_selfDual
+
+-- LY-1/E: RH above an explicit height near the line for the finite Euler-product MODEL
+-- Z_X = E_X + chi E_X(1 - .).  About the model, NOT zeta.  conjecture1_proved = False.
+#print axioms DBNEulerModel.factor_bound
+#print axioms DBNEulerModel.norm_eulerX_one_sub_le
+#print axioms DBNEulerModel.norm_chiM_eq
+#print axioms DBNEulerModel.phiChi_half
+#print axioms DBNEulerModel.hasDerivAt_phiChi
+#print axioms DBNEulerModel.re_digamma_ge
+#print axioms DBNEulerModel.norm_chiM_le
+#print axioms DBNEulerModel.convexOn_sinh
+#print axioms DBNEulerModel.sinh_mul_le
+#print axioms DBNEulerModel.sinh_div_mono
+#print axioms DBNEulerModel.hasSum_log_ratio
+#print axioms DBNEulerModel.log_ratio_div_mono
+#print axioms DBNEulerModel.LamX_monotoneOn
+#print axioms DBNEulerModel.eulerX_ne_zero
+#print axioms DBNEulerModel.ZX_ne_zero_right
+#print axioms DBNEulerModel.chiM_mul_chiM_one_sub
+#print axioms DBNEulerModel.ZX_one_sub
+#print axioms DBNEulerModel.ZX_ne_zero_of_abs
+#print axioms DBNEulerModel.ZX_ne_zero
+#print axioms DBNEulerModel.LamX_two_lt
+#print axioms DBNEulerModel.height_gt_five
+#print axioms DBNEulerModel.ZX_two_ne_zero
+#print axioms euler_model_ZX_ne_zero

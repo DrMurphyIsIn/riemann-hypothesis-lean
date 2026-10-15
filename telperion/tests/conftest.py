@@ -58,7 +58,7 @@ _NEEDS_DEVELOPMENT_REPOSITORY = {
     "tests/test_emit_affine_hull_dominance.py::test_frozen_dogfood_matches_regeneration",
     "tests/test_emit_affine_hull_dominance.py::test_no_emoji_or_local_paths_in_sources",
     "tests/test_emit_anchored_monotone_extension.py::test_dogfood_is_frozen",
-    "tests/test_emit_baez_duarte.py::test_generated_example_decreasing_sequence",
+    "tests/test_emit_baez_duarte.py::test_generated_example_names_and_monotone_bounds",
     "tests/test_emit_bagchi_recurrence.py::test_generated_example_builds",
     "tests/test_emit_complex_re_im_split.py::test_cast_site_gates_restate_the_island_verbatim",
     "tests/test_emit_complex_re_im_split.py::test_dogfood_consumer_gates_retire_the_e6bridge7_hand_haves",

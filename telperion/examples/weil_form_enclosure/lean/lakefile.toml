@@ -1,5 +1,5 @@
 name = "WeilFormEnclosure"
-defaultTargets = ["WeilFormDefs", "WeilFormEnclosure", "WindowFormFloorInstances", "AxiomGuardWeilForm", "AxiomGuardWindowFormFloor", "RRSquare", "RRSquareFF", "RRSquareLink", "AxiomGuardRRSquare"]
+defaultTargets = ["WeilFormDefs", "WeilFormEnclosure", "WindowFormFloorInstances", "AxiomGuardWeilForm", "AxiomGuardWindowFormFloor", "RRSquare", "RRSquareFF", "RRSquareLink", "LemmaSCore", "AxiomGuardRRSquare"]
 
 # Telperion weil_form_enclosure dogfood island (2026-09-18): the E8 Weil pairing
 # (RH_limit_explicit_formula / WeilExplicit) evaluated by Arb and emitted as a
@@ -54,6 +54,13 @@ name = "RRSquareFF"
 
 [[lean_lib]]
 name = "RRSquareLink"
+
+# Lemma S step 1, abstract core (e9, 2026-10-13): on the single-orbit square C_p x C_p, a crease along a graph ray
+# keeps its normal jump across fibre crossings (balancing), and the diagonal loop returns it divided by p, so graph
+# coefficients of Cartier divisors supported on fibres + graphs vanish.  Write-up:
+# telperion/research/rr_square/LEMMA_S_STEP1_2026-10-13.md.  conjecture1_proved = False.
+[[lean_lib]]
+name = "LemmaSCore"
 
 [[lean_lib]]
 name = "AxiomGuardRRSquare"
