@@ -121,8 +121,8 @@ limit explicit formula, the local count sum, and Zhu's window inputs.
   factors as negative controls, Satake degree two.
 - **BraggDefect.** The explicit formula in diffraction form, and a certified defect witness with no remaining numerical
   hypothesis.
-- **The Euler-model strip.** No zeros near the line above an explicit height for the finite Euler-product model. Open pull
-  request #725, **not merged**.
+- **The Euler-model strip.** No zeros near the line above an explicit height for the finite Euler-product model. Pull
+  request #725, merged into Arda on 2026-10-14 and vendored in `dbn` since v1.0.2.
 - **Complementary-series positivity for PGL₂(ℂ)**, built on AxiomMath's metaplectic library.
 
 ## 6. Verification infrastructure
@@ -173,7 +173,7 @@ These are research notes, not proofs: AI work, most of it without human review. 
 |---|---|---|
 | 1 | *A kernel-checked bound Λ ≤ 9/32 for the de Bruijn–Newman constant from OpenAI's quasi-Riemann hypothesis* (v1.1.0 adds Λ ≤ 0.2811857), [`papers/qrh-debruijn-newman/`](papers/qrh-debruijn-newman/) | [10.5281/zenodo.23269134](https://doi.org/10.5281/zenodo.23269134) (all versions; v1.1.0: 10.5281/zenodo.23324360) |
 | 2 | *Newman's conjecture, kernel-checked: Λ ≥ 0 for the de Bruijn–Newman constant in Lean 4 along Dobner's proof* (v1.1.0 adds the Selberg class), [`papers/newman-lambda-nonneg/`](papers/newman-lambda-nonneg/) | [10.5281/zenodo.23287832](https://doi.org/10.5281/zenodo.23287832) (all versions; v1.1.0: 10.5281/zenodo.23292885) |
-| 3 | *A kernel-checked Riemann–Roch-square criterion for the Riemann Hypothesis*, [`papers/rr-square-criterion/`](papers/rr-square-criterion/) | [10.5281/zenodo.23352050](https://doi.org/10.5281/zenodo.23352050) (this repository; v1.0.1: 10.5281/zenodo.23365216) |
+| 3 | *A kernel-checked Riemann–Roch-square criterion for the Riemann Hypothesis*, [`papers/rr-square-criterion/`](papers/rr-square-criterion/) | [10.5281/zenodo.23352050](https://doi.org/10.5281/zenodo.23352050) (this repository; v1.0.2: 10.5281/zenodo.PLACEHOLDER) |
 
 **arXiv: staged, not yet submitted.** Each paper has an arXiv source package and a submission sheet, and the author
 submits them. See [`papers/ARXIV_STAGING.md`](papers/ARXIV_STAGING.md). No arXiv identifiers exist yet; cite the Zenodo DOIs.
@@ -206,6 +206,7 @@ formalization/   the theorem index and the pinned source commit
 telperion/       the Telperion engine, its tests, and six Lean islands under telperion/examples/
 scripts/         materialize.sh, the copy checker, the axiom checker
 CENSORING.md     every comment that was reworded in the Telperion copy, and why
+CHANGELOG.md     what changed in each release
 ```
 
 OpenAI's and Liu's Lean code is never stored here. The island scripts fetch it at pinned commits and check every file by hash.
@@ -213,7 +214,8 @@ OpenAI's and Liu's Lean code is never stored here. The island scripts fetch it a
 ## 10. Provenance, AI assistance and review status
 
 The Lean developments and the engine were written in the author's development repository, Arda
-(<https://github.com/DrMurphyIsIn/Arda>). They are copied here from commit `50b100025` of 2026-10-13. References to an
+(<https://github.com/DrMurphyIsIn/Arda>). They are copied here from commit `5d1c8c579` of 2026-10-14. v1.0.0 and v1.0.1
+used `50b100025` of 2026-10-13, and [`CHANGELOG.md`](CHANGELOG.md) gives the reasons for the re-sync. References to an
 unrelated private project and private file paths were reworded in comments only. [`CENSORING.md`](CENSORING.md) lists every
 file, and `scripts/check_telperion_copy.py` proves mechanically that no code changed.
 

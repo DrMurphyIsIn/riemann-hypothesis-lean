@@ -1,7 +1,9 @@
 # Progress record: everything done on the Riemann Hypothesis programme to date
 
 This document is the complete record behind the repository's README. It was checked against the Arda development
-repository at commit `50b1000254c6bb74bf12d21fa66483bd9fc14aeb` (2026-10-13), the commit `telperion/` is copied from. Every
+repository at commit `50b1000254c6bb74bf12d21fa66483bd9fc14aeb` (2026-10-13), the commit `telperion/` was copied from in
+v1.0.0 and v1.0.1. Since v1.0.2, `telperion/` is copied from the later commit `5d1c8c579` (2026-10-14); `../CHANGELOG.md`
+says why and what that adds, and this record has not been extended to the work merged in between. Every
 "merged" below is a merge into Arda's `main` that can be found in its history. Every theorem name was found in the source at
 that commit. Anything not on `main` is marked as such.
 
@@ -267,7 +269,8 @@ All are proved and kernel-checked. Most were read back only by AI, not independe
   Its last numerical hypothesis was discharged in the kernel by the `scaled_interval_eval` emitter (#689; node
   `MM_bragg_defect_witness_sie`, AI read-back by a separate session).
 
-**The Euler-model strip** (`DBNEulerModelRH.lean`, **open PR #725, not merged**). It shows that the holomorphic finite
+**The Euler-model strip** (`DBNEulerModelRH.lean`, PR #725: open at `50b100025`, merged into Arda on 2026-10-14, and
+vendored in `dbn` since v1.0.2). It shows that the holomorphic finite
 Euler-product model Z_X = E_X + χE_X(1 − s) has no zeros near the critical line above an explicit height. This is a
 folklore-grade companion to Gonek's 2012 model theorem. A forward-citation search is still needed before any claim of novelty.
 
