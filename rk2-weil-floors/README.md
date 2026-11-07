@@ -83,3 +83,29 @@ nanoda with permitted axioms {propext, Classical.choice, Quot.sound}. It ABORTS 
 the export is under 1 MB, or when nanoda's rc is non-zero or it reports "Checked 0 declarations" (`scripts/check_export.sh`;
 `scripts/test_export_guard.sh` tests it). A guard is needed: nanoda passes an empty export with rc 0. nanoda needs about 21 GB
 of RSS for the Refusals export (the EP5 refusal, m = 215) and 1–4 GB for the field exports.
+
+## About this copy (riemann-hypothesis-lean v1.1.0)
+
+This directory is the package as reviewed (its `MANIFEST.md`, md5 34c17910, is unchanged), with the differences
+listed in [`RELEASE_ASSETS.md`](RELEASE_ASSETS.md):
+
+- **Four certificates are release assets, not git files.** `lean/K3_L2_{even,odd}.lean` and `lean/K4_L2_{even,odd}.lean`
+  are 80–150 MB each, over GitHub's file limit. They are attached to the GitHub release v1.1.0 as `.xz` files.
+  `scripts/fetch_assets.sh` downloads them, decompresses them into `lean/` and checks every sha256 (and the MANIFEST md5).
+  Run it before building.
+- **`scripts/run_export.sh` logs the tools it uses.** Each export block in `logs/nanoda.log` now starts with the basename and
+  md5 of the lean4export and nanoda binaries. The recorded run (the log in `logs/`) predates this line. Its scripts named two
+  binaries, whose md5s on 2026-11-07 are: nanoda 37cb87b7 (`nanoda_bin`, arm64 macOS) fe6d48cff124683888904b2cc35e29af,
+  and lean4export 076e8e57 built for Lean v4.34.1 (arm64 macOS) b8b81a76f7622ddc89d0c55ebe1382cc. A binary built elsewhere
+  has a different md5, so check the commit instead.
+- **One docstring is reworded.** The docstring of `scripts/exp_emit.py` no longer names a local directory. Its code is
+  unchanged.
+- **This section** is added.
+
+Names such as `rk1/MEMO.md`, `rk1/out/...`, `rk2/C/...`, `rec1/kr_build` and `rh-team` in comments, JSON and logs refer to
+the project's working tree, which is not published. So do the default source paths in `scripts/pgc_emit.py` and
+`scripts/exp_emit.py`, which you override with `RK1_SCRIPTS` and `TELPERION_SRC`. This repository's `telperion/src` has the
+same `emit_exp_enclosure.py` that `exp_emit.py` used.
+
+In particular, the paper proof of Theorem RK (the hypothesis `hchain`) is in `rk1/MEMO.md` §2, which is not part of this
+release. In Lean, `hchain` is a named hypothesis of every `rk_floor`, never an axiom.

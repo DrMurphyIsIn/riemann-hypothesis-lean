@@ -1,5 +1,6 @@
 """RK-2 C: e^{L^2/8} brackets (the pole factor of the Zhu (13) tail bound K_2 inside eps_C) at every certified L, by Telperion's
-exp_enclosure emitter, imported read-only and UNMODIFIED from ~/telperion-tools/research-main/src.  eps_C as a whole stays ARB.
+exp_enclosure emitter, imported read-only and UNMODIFIED from a Telperion source tree (TELPERION_SRC; this repository's telperion/src has the same
+emit_exp_enclosure.py).  eps_C as a whole stays ARB.
 conjecture1_proved = False."""
 import sys
 import os

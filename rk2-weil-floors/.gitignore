@@ -1,0 +1,12 @@
+# fetched by scripts/fetch_assets.sh from the GitHub release (RELEASE_ASSETS.md); too large for git
+lean/K3_L2_even.lean
+lean/K3_L2_odd.lean
+lean/K4_L2_even.lean
+lean/K4_L2_odd.lean
+# build products of scripts/run1.sh and scripts/run_export.sh
+build/
+exp/
+work/
+logs/*.DONE
+logs/*.XDONE
+logs/*.QDONE
