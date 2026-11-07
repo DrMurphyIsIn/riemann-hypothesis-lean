@@ -6,8 +6,8 @@ authors:
     given-names: Peter W.
 repository-code: "https://github.com/DrMurphyIsIn/riemann-hypothesis-lean"
 license: Apache-2.0
-version: v1.0.2
-date-released: 2026-10-14
+version: v1.1.0
+date-released: 2026-11-07
 doi: 10.5281/zenodo.23352050
 identifiers:
   - type: doi
@@ -25,6 +25,7 @@ keywords:
   - Newman's conjecture
   - Weil's positivity criterion
   - Hodge index
+  - Dedekind zeta function
   - Lean 4
   - formal verification
 abstract: >-
@@ -34,4 +35,6 @@ abstract: >-
   theorem), and pole-free Weil positivity on the window of half-width 0.5493. Conditional or equivalences:
   RH is equivalent to Weil positivity on pole-free tests and to that positivity outside the window, and a
   family of Riemann-Roch-square windows covering every pole-free test would imply RH; no such family is
-  constructed. Packaged with the three papers and a vendored copy of the Telperion certificate engine.
+  constructed. v1.1.0 adds a package of fixed-window floors of Weil's form R_K for four imaginary quadratic
+  fields (finite-window, conditional on named Arb and paper hypotheses; not progress on RH or GRH). Packaged
+  with the three papers and a vendored copy of the Telperion certificate engine.

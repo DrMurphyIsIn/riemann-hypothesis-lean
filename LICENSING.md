@@ -4,10 +4,10 @@ This repository uses a split licensing model, the same one as the Brualdi–Gold
 
 ## The mathematics: Apache-2.0 / CC-BY-4.0
 
-Everything outside `telperion/` (`formalization/`, `scripts/`, `.github/`) is licensed under the
+Everything outside `telperion/` (`formalization/`, `scripts/`, `.github/`, `rk2-weil-floors/`) is licensed under the
 [Apache License 2.0](LICENSE). So are the Lean islands, generators and emitted certificates under
 `telperion/examples/` (see the next section). The papers (`papers/`) and the prose documents (`README.md`,
-`NOTICE.md`, `CENSORING.md`, `formalization/README.md`) are licensed under
+`NOTICE.md`, `CENSORING.md`, `formalization/README.md`, `rk2-weil-floors/README.md`, `rk2-weil-floors/RELEASE_ASSETS.md`) are licensed under
 [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/).
 
 ## The Telperion engine: Business Source License 1.1

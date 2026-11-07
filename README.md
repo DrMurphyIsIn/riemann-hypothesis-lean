@@ -25,6 +25,7 @@ exact Lean names, files, pull requests, judge runs and review status for everyth
 | RH ⇔ pole-free Weil positivity | Weil's criterion, including the converse on pole-free tests | **equivalence** |
 | the HODGE-1 frontier | RH ⇔ positivity for tests reaching outside [−0.5493, 0.5493] | **equivalence**: exactly what is open |
 | the RR-square criterion | windows covering all pole-free tests ⇒ RH, and RH ⇔ such windows exist | **conditional / equivalence**: the content is a construction, and none is known |
+| Weil floors for imaginary quadratic fields (v1.1.0) | R_K(g) ≥ c‖g‖² on fixed windows −L < x < L, for 4 fields at L from 1 to 2.4 | finite-window; **conditional** on named Arb and paper hypotheses; not progress on RH or GRH ([§11](#11-weil-floors-for-imaginary-quadratic-fields-on-fixed-windows-v110)) |
 | research notes | the 7/8 method's limit, gates 0–10, SCALE-1, LY-1 | **not proofs**; mostly negative results |
 
 ## 1. Where RH stands
@@ -109,6 +110,9 @@ window of half-width L only verifies RH up to a height of roughly e^{2L}.
 
 The explicit-formula machinery these rest on is also formalized: unconditional Riemann–von Mangoldt, the corridor bound, the
 limit explicit formula, the local count sum, and Zhu's window inputs.
+
+For imaginary quadratic fields, floors of Weil's form on fixed windows up to L = 2.4 are in
+[§11](#11-weil-floors-for-imaginary-quadratic-fields-on-fixed-windows-v110) (new in v1.1.0).
 
 ## 5. Other formalizations
 
@@ -204,6 +208,7 @@ papers/          the three papers (LaTeX, PDF, build script, arXiv package and s
 docs/            PROGRESS.md: the complete record
 formalization/   the theorem index and the pinned source commit
 telperion/       the Telperion engine, its tests, and six Lean islands under telperion/examples/
+rk2-weil-floors/ the RK-2 package (§11): Lean certificates, generators, logs, manifest, asset fetcher
 scripts/         materialize.sh, the copy checker, the axiom checker
 CENSORING.md     every comment that was reworded in the Telperion copy, and why
 CHANGELOG.md     what changed in each release
@@ -228,10 +233,72 @@ review is mostly AI review, and we want to be precise about how much:
 - **AI read-back by a separate session.** Eleven statements, including the HODGE-1 frontier and the RR-square chain.
 - **AI read-back by the authoring session.** The remaining 109 registry statements. The registry labels them `unverified`.
 - **No external review.** No mathematician outside the project has reviewed any of it, and none of it has been refereed.
+- **The RK-2 package** (§11, v1.1.0) was reviewed by a separate AI session. No human has read it back.
 - **The research notes** have had no human review.
 
 The mathematics being formalized is, in the main, other people's: de Bruijn, Newman, Rodgers and Tao, Dobner, Weil, Bombieri
 and Lagarias, Li, Connes and Consani, OpenAI, Baiying Liu, Alpöge and Furman. [`NOTICE.md`](NOTICE.md) gives the credits.
+
+## 11. Weil floors for imaginary quadratic fields on fixed windows (v1.1.0)
+
+**This is not progress on RH or on GRH.** Every statement covers one fixed window, and no statement covers all windows at
+once. In the programme's development repository the flag `conjecture1_proved` is still `False`.
+
+[`rk2-weil-floors/`](rk2-weil-floors/) is the kernel-checked package of the project's RK-2 round. For an imaginary
+quadratic field K, R_K is Weil's quadratic form for the Dedekind zeta function ζ_K. By Weil's criterion, R_K(g) ≥ 0 for every
+compactly supported test g is equivalent to GRH for ζ_K. The package fixes a window V_L = C_c^∞(−L, L) and proves an explicit
+rational floor c:
+
+    c ≤ Qinf,   where Qinf stands for inf R_K(g)/‖g‖² over complex g ∈ V_L.
+
+That is `RK2.Asm_<cell>.rk_floor` for 18 cells:
+
+| field | L = 1 | 1.45 | 1.493945 | 2 | 2.25 | 2.4 |
+|---|---|---|---|---|---|---|
+| ℚ(√−23) | 0.2604 | | | 1.9×10⁻⁸ | 5.6×10⁻¹³ † | 4.7×10⁻¹⁶ † |
+| ℚ(√−5) | 0.0672 | 0.0100 | 0.00415 | 2.2×10⁻⁹ | 2.6×10⁻¹⁴ † | 2.6×10⁻¹⁷ † |
+| ℚ(i) | 4.6×10⁻⁶ | | | 2.2×10⁻²⁹ | 3.7×10⁻⁴⁰ † | 4.0×10⁻⁴⁸ † |
+| ℚ(√−3) | 8.9×10⁻⁸ | | | 7.1×10⁻³⁵ | 6.8×10⁻⁴⁸ † | |
+| EP5 (control) | | 0.00484 | | | | |
+
+The floors are rounded down here; the exact rationals are in the Lean. They fall steeply as L grows. EP5 is the Epstein zeta
+function of m² + 5n². It has no Euler product, and by Davenport and Heilbronn it has zeros off the line. Below its crossing
+(L = 1.45) it is certified. At its crossing, L = 1.493945, the method refuses it: the kernel checks a negative direction of its
+head matrix, so there is no floor, while ℚ(√−5) passes at the same window. A refusal for the Davenport–Heilbronn function at
+L = 1.75 is included too. The method certifies windows. It does not detect zeros.
+
+**Trust classes.** Each `rk_floor` is an implication. The kernel checks that the named hypotheses imply the floor, and the
+hypotheses are never asserted:
+
+- **KERNEL:** the floors of the two head matrices (even and odd parity), for every real matrix in a box with exact rational centre and radius, by a new
+  certificate shape, PGC (packed rows, unique signed-digit decoding, `decide +kernel`; [`RK2PGC.lean`](rk2-weil-floors/lean/RK2PGC.lean)),
+  together with all the rational arithmetic. This holds in 11 of the 18 cells: 22 of 36 heads, matrices up to 983 × 983.
+- **ARB** (Arb interval arithmetic, not kernel-checked):
+  - the box around each head (`hbe`, `hbo`);
+  - the bounds λ_D ≥ d (`hD`) and ε_C ≤ e (`hC`);
+  - in the 7 cells marked †, at L = 2.25 and 2.4, the head floor itself (`hAe`, `hAo`, from a verified Cholesky
+    factorisation).
+- **PAPER** (`hchain`): Theorem RK, which turns any common floor a of the two head forms into min(a, λ_D) − ε_C ≤ Qinf. It is
+  proved on paper in a project memo that is not published here. That proof is AI-written and AI-reviewed, and it has not been
+  refereed.
+
+Axioms: only `propext`, `Classical.choice` and `Quot.sound`. There is no `native_decide`, `sorry`, `admit` or `skipKernelTC`.
+The package was checked by the Lean 4.34.1 kernel and by nanoda on lean4export exports. Must-reject controls are included: a
+forged certificate per field fails in Lean, and a planted digit fails in nanoda. Review: one separate AI session (PASS). No
+human read-back.
+
+**Fetch and verify.** Four certificates (the L = 2 heads of ℚ(√−3) and ℚ(i), 80–150 MB each) are too large for git. They are
+attached to the GitHub release v1.1.0 as `.xz` files.
+
+```sh
+cd rk2-weil-floors
+scripts/fetch_assets.sh     # download, decompress into lean/, check every sha256 and the MANIFEST md5; any mismatch is fatal
+```
+
+[`RELEASE_ASSETS.md`](rk2-weil-floors/RELEASE_ASSETS.md) lists the hashes and the few files that differ from the reviewed
+manifest. The build needs Lean v4.34.1 with Mathlib `d13f23b`, plain `lean` with no lake, and nanoda for the second kernel.
+The order and the scripts are in [`rk2-weil-floors/README.md`](rk2-weil-floors/README.md). nanoda needs about 21 GB of memory
+for the refusals export.
 
 ## Licensing and citing
 

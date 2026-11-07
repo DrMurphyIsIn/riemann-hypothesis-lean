@@ -1,5 +1,34 @@
 # Changelog
 
+## v1.1.0 (2026-11-07)
+
+This release adds one package, [`rk2-weil-floors/`](rk2-weil-floors/), described in README §11. Apart from it, the README and the release metadata, nothing changes: the
+papers, `docs/PROGRESS.md`, `telperion/` (still copied from Arda `5d1c8c579`) and every existing Lean file are as in v1.0.2.
+
+**It is not progress on RH or on GRH.** `conjecture1_proved` is still `False`.
+
+What the package proves: floors c ≤ inf R_K(g)/‖g‖² of Weil's form R_K, for g supported in one fixed window (−L, L). There are
+18 cells: ℚ(√−3), ℚ(i), ℚ(√−5) and ℚ(√−23) at windows L from 1 to 2.4, plus the Epstein control EP5 at L = 1.45. Each
+theorem `RK2.Asm_<cell>.rk_floor` is an implication from named hypotheses, never asserted, of two kinds:
+
+- **ARB**, Arb interval arithmetic: the head boxes, λ_D and ε_C, and in 7 cells the head floor itself;
+- **PAPER**, Theorem RK: proved in an unpublished project memo, not refereed.
+
+The kernel proves the rest: the head floors for every matrix in its box in 11 cells, by a new certificate shape (PGC), and
+all the arithmetic. The package also carries the earlier round's kernel refusals (EP5 at its crossing, Davenport–Heilbronn
+at L = 1.75) and must-reject controls. It was checked by the Lean 4.34.1 kernel and by nanoda. Review: one separate AI
+session, PASS. No human read-back.
+
+Packaging:
+
+- **Four certificates are release assets.** `lean/K3_L2_{even,odd}.lean` and `lean/K4_L2_{even,odd}.lean` are 80–150 MB
+  each, too large for git. They are attached to the GitHub release as `.xz` files.
+  `rk2-weil-floors/scripts/fetch_assets.sh` downloads them and checks every sha256. The hashes are in
+  `rk2-weil-floors/RELEASE_ASSETS.md`.
+- **`run_export.sh` logs its tools.** It now records the md5 of the lean4export and nanoda binaries it runs (from the review).
+- **One docstring is reworded.** In `scripts/exp_emit.py`, the docstring no longer names a local directory.
+- The package's `MANIFEST.md` is the reviewed one, unchanged. `RELEASE_ASSETS.md` lists the files that differ from it.
+
 ## v1.0.2 (2026-10-14)
 
 This release corrects the vendored copy of Telperion. Three defects were found after v1.0.1 by an independent AI audit,
