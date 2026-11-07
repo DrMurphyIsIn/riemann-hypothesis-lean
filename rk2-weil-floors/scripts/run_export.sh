@@ -6,6 +6,11 @@ G="$PKG/scripts/check_export.sh"; E=$PKG/exp; LOG=$PKG/logs/nanoda.log
 MOD=$1; TAG=$2; shift 2
 cd "$PKG/build"
 echo "=== export $TAG ($MOD: $*) $(date +%T)" >> "$LOG"
+# log which binaries were used (basename + md5, never the full path); README "How to check" names the expected ones.  bb nit 11-07.
+for T in "$LEAN4EXPORT" "$NANODA"; do
+  B=$(command -v "$T") || { echo "FAIL tool not found: $(basename "$T")" >> "$LOG"; echo "nanoda $TAG NOT RUN: tool not found $(date +%T)" >> "$LOG"; echo FAIL > "$PKG/logs/$TAG.XDONE"; exit 1; }
+  echo "tool $(basename "$B") md5 $(md5 -q "$B")" >> "$LOG"
+done
 ( /usr/bin/time -p env LEAN_ABORT_ON_PANIC=1 $LOCK "$PKG/scripts/leanrun.sh" "$LEAN4EXPORT" $MOD -- "$@" > "$E/$TAG.ndjson" ) 2> "$E/$TAG.err"
 erc=$?
 echo "export rc $erc bytes $(stat -f %z "$E/$TAG.ndjson") md5 $(md5 -q "$E/$TAG.ndjson")" >> "$LOG"
