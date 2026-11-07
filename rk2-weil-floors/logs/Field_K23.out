@@ -1,0 +1,22 @@
+'RK2.Asm_K23_L1.rk_floor' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RK2.Asm_K23_L2.rk_floor' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RK2.Asm_K23_L225.rk_floor' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RK2.Asm_K23_L24.rk_floor' depends on axioms: [propext, Classical.choice, Quot.sound]
+        5.11 real         1.71 user         2.35 sys
+          5842550784  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+              437931  page reclaims
+                  14  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+               12752  voluntary context switches
+                5269  involuntary context switches
+            33372575  instructions retired
+            17393390  cycles elapsed
+             1556816  peak memory footprint

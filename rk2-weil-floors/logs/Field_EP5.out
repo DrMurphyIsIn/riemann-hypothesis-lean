@@ -1,0 +1,19 @@
+'RK2.Asm_EP5_L145.rk_floor' depends on axioms: [propext, Classical.choice, Quot.sound]
+        4.84 real         1.60 user         2.11 sys
+          5807144960  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+              435723  page reclaims
+                  43  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+               13822  voluntary context switches
+                 979  involuntary context switches
+            33152145  instructions retired
+            14236654  cycles elapsed
+             1540432  peak memory footprint

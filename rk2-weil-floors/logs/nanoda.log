@@ -1,0 +1,66 @@
+=== export ep5 (Field_EP5: RK2.Asm_EP5_L145.rk_floor) 15:26:35
+export rc 0 bytes 75682046 md5 bfb6453ed0eff215d752d8af9a6ef084
+real 14.95
+Checked 17654 declarations with no errors
+        9.68 real         9.32 user         0.31 sys
+          1289748480  maximum resident set size
+nanoda ep5 rc 0 15:27:00
+=== export k3 (Field_K3: RK2.Asm_K3_L1.rk_floor RK2.Asm_K3_L2.rk_floor RK2.Asm_K3_L225.rk_floor) 15:27:07
+export rc 0 bytes 72859912 md5 4b377671aed33f005997ada3785162b0
+real 10.02
+Checked 17240 declarations with no errors
+        4.91 real         4.78 user         0.10 sys
+           778059776  maximum resident set size
+nanoda k3 rc 0 15:27:22
+=== export k23 (Field_K23: RK2.Asm_K23_L1.rk_floor RK2.Asm_K23_L2.rk_floor RK2.Asm_K23_L225.rk_floor RK2.Asm_K23_L24.rk_floor) 15:27:22
+export rc 0 bytes 127990768 md5 84601bec0f72b670de02fcc865671bb4
+real 259.16
+Checked 20015 declarations with no errors
+       68.75 real        65.64 user         2.94 sys
+          2118795264  maximum resident set size
+nanoda k23 rc 0 15:32:50
+=== export k20 (Field_K20: RK2.Asm_K20_L1.rk_floor RK2.Asm_K20_L145.rk_floor RK2.Asm_K20_L1494.rk_floor RK2.Asm_K20_L2.rk_floor RK2.Asm_K20_L225.rk_floor RK2.Asm_K20_L24.rk_floor) 15:32:50
+export rc 0 bytes 127186009 md5 abf96ee75373ec863aba1ffdfa156cf5
+real 181.07
+Checked 21997 declarations with no errors
+       82.63 real        78.63 user         3.79 sys
+          2302525440  maximum resident set size
+nanoda k20 rc 0 15:37:14
+=== export k4 (Field_K4: RK2.Asm_K4_L1.rk_floor RK2.Asm_K4_L2.rk_floor RK2.Asm_K4_L225.rk_floor RK2.Asm_K4_L24.rk_floor) 16:05:31
+export rc 0 bytes 198480317 md5 cde6a28686f42deff344ee98d9a5eb2d
+real 191.20
+Checked 20995 declarations with no errors
+      165.46 real       158.75 user         6.45 sys
+          3529228288  maximum resident set size
+nanoda k4 rc 0 16:11:28
+=== export refusals (Refusals: RK1.EP5_E1_even_neg.neg RK1.DH_L175_even_neg80.neg RK1.DH_L175_odd_neg80.neg RK2.T4.exp_L1 RK2.T4.exp_L145 RK2.T4.exp_L1494 RK2.T4.exp_L2 RK2.T4.exp_L225 RK2.T4.exp_L24) 16:17:50
+export rc 1 bytes 0 md5 d41d8cd98f00b204e9800998ecf8427e
+real 0.30
+Checked 0 declarations with no errors
+        0.02 real         0.00 user         0.00 sys
+             2326528  maximum resident set size
+nanoda refusals rc 0 16:17:51
+=== export k3 (Field_K3: RK2.Asm_K3_L1.rk_floor RK2.Asm_K3_L2.rk_floor RK2.Asm_K3_L225.rk_floor) 16:53:42
+export rc 0 bytes 281198012 md5 7eb5c75cff3520191f57122fee701740
+real 277.94
+Checked 21922 declarations with no errors
+      273.31 real       264.66 user         8.60 sys
+          4096212992  maximum resident set size
+nanoda k3 rc 0 17:02:54
+=== export refusals (Refusals: RK1.EP5_E1_even_neg.neg RK1.DH_L175_even_neg80.neg RK1.DH_L175_odd_neg80.neg RK2.T4.exp_L1 RK2.T4.exp_L145 RK2.T4.exp_L1494 RK2.T4.exp_L2 RK2.T4.exp_L225 RK2.T4.exp_L24) 17:03:59
+export rc 0 bytes 64256916 md5 04cd471aec8bd844e44f23d921448f40
+real 6.42
+Checked 13851 declarations with no errors
+      154.29 real       150.21 user         4.02 sys
+         21304197120  maximum resident set size
+nanoda refusals rc 0 17:06:40
+=== export guardtest_e2e (NoSuchModule: RK2.nothing) 17:39:09
+export rc 1 bytes 0 md5 d41d8cd98f00b204e9800998ecf8427e
+real 0.52
+FAIL export rc 1 (rk2/C/exp/guardtest_e2e.ndjson)
+nanoda guardtest_e2e NOT RUN: export guard FAIL 17:39:10
+=== export guardtest_e2e (NoSuchModule: RK2.nothing) 13:56:45
+export rc 2 bytes 0 md5 d41d8cd98f00b204e9800998ecf8427e
+real 0.18
+FAIL export rc 2 (guardtest_e2e.ndjson)
+nanoda guardtest_e2e NOT RUN: export guard FAIL 13:56:45

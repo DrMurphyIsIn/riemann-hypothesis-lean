@@ -1,0 +1,25 @@
+=== planted ep5 (MUST FAIL) 15:37:40
+thread 'main' panicked at src/tc.rs:981:71:
+assertion failed: self.def_eq(u, v)
+real 574.30
+=== rc 101 15:47:14
+=== planted k3 (MUST FAIL) 15:47:14
+thread 'main' panicked at src/tc.rs:981:71:
+assertion failed: self.def_eq(u, v)
+real 2.97
+=== rc 101 15:47:17
+=== planted k20 (MUST FAIL) 15:47:17
+thread 'main' panicked at src/tc.rs:981:71:
+assertion failed: self.def_eq(u, v)
+real 3.63
+=== rc 101 15:47:21
+=== planted k23 (MUST FAIL) 15:47:21
+thread 'main' panicked at src/tc.rs:981:71:
+assertion failed: self.def_eq(u, v)
+real 3.91
+=== rc 101 15:47:25
+=== planted k4 (MUST FAIL) 16:11:47
+thread 'main' panicked at src/tc.rs:981:71:
+assertion failed: self.def_eq(u, v)
+real 3082.76
+=== rc 101 17:03:10

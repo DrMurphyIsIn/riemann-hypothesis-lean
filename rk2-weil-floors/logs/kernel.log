@@ -1,0 +1,376 @@
+=== K20_L2_even 14:02:48
+      597.16 real       592.13 user         6.81 sys
+          9394257920  maximum resident set size
+=== exit 0 14:12:45
+=== K20_L1_even 14:27:32
+        8.27 real         5.36 user         2.25 sys
+          6361677824  maximum resident set size
+=== exit 0 14:27:41
+=== K20_L2_even 14:27:48
+=== Asm_K20_L225 14:30:23
+     1322.65 real      1315.41 user         8.95 sys
+         10237394944  maximum resident set size
+=== exit 0 14:49:51
+     1176.91 real         2.20 user         2.64 sys
+          5964333056  maximum resident set size
+=== exit 0 14:50:00
+=== Asm_K23_L225 14:50:00
+        4.50 real         1.88 user         2.06 sys
+          5962514432  maximum resident set size
+=== exit 0 14:50:04
+=== Asm_K4_L225 14:50:04
+        4.68 real         1.88 user         2.04 sys
+          5963186176  maximum resident set size
+=== exit 0 14:50:09
+=== Asm_K3_L225 14:50:09
+        4.56 real         1.92 user         2.05 sys
+          5965135872  maximum resident set size
+=== exit 0 14:50:14
+=== Asm_K20_L24 14:50:14
+        4.63 real         1.93 user         2.09 sys
+          5962612736  maximum resident set size
+=== exit 0 14:50:18
+=== Asm_K23_L24 14:50:18
+        4.77 real         1.91 user         2.13 sys
+          5964267520  maximum resident set size
+=== exit 0 14:50:23
+=== Asm_K4_L24 14:50:23
+        4.54 real         1.91 user         2.04 sys
+          5964316672  maximum resident set size
+=== exit 0 14:50:28
+=== PROF_K20_L145_even 14:50:28
+       49.84 real        47.50 user         2.51 sys
+          7501905920  maximum resident set size
+=== exit 0 14:51:18
+=== PROF2_K20_L145_even 14:51:34
+       10.46 real         8.01 user         2.30 sys
+          6024216576  maximum resident set size
+=== exit 0 14:51:44
+=== PROF3_K20_L145_even 14:52:11
+       49.49 real        46.73 user         2.51 sys
+          7505248256  maximum resident set size
+=== exit 0 14:53:01
+=== PROF4 14:54:38
+       11.76 real         8.33 user         2.38 sys
+          6030655488  maximum resident set size
+=== exit 0 14:54:50
+=== PROF5 14:55:08
+       10.35 real         7.92 user         2.26 sys
+          6012321792  maximum resident set size
+=== exit 0 14:55:18
+=== PROF6 14:55:32
+       10.58 real         8.11 user         2.35 sys
+          6016122880  maximum resident set size
+=== exit 0 14:55:43
+=== PB0 14:56:16
+       10.15 real         7.65 user         2.18 sys
+          5863866368  maximum resident set size
+=== exit 0 14:56:26
+=== PB1 14:56:26
+       10.65 real         8.14 user         2.17 sys
+          6108626944  maximum resident set size
+=== exit 0 14:56:36
+=== PB2 14:56:36
+       10.28 real         7.77 user         2.20 sys
+          6007537664  maximum resident set size
+=== exit 0 14:56:47
+=== PB3 14:56:47
+       10.50 real         8.03 user         2.19 sys
+          6004916224  maximum resident set size
+=== exit 0 14:56:57
+=== PC0 14:57:08
+      163.55 real       162.22 user         2.96 sys
+          6008291328  maximum resident set size
+=== exit 0 14:59:51
+=== PC1 14:59:51
+      167.66 real       166.06 user         3.19 sys
+          6420168704  maximum resident set size
+=== exit 0 15:02:39
+=== PC2 15:02:39
+      166.80 real       165.66 user         3.15 sys
+          6211862528  maximum resident set size
+=== exit 0 15:05:26
+=== K4_L1_even 15:07:23
+       27.09 real         5.72 user         4.40 sys
+          6089293824  maximum resident set size
+=== exit 0 15:07:50
+=== K4_L1_odd 15:07:50
+        7.65 real         5.09 user         2.62 sys
+          6079660032  maximum resident set size
+=== exit 0 15:07:58
+=== K3_L1_even 15:07:58
+        9.24 real         6.53 user         2.79 sys
+          6106152960  maximum resident set size
+=== exit 0 15:08:07
+=== K3_L1_odd 15:08:07
+        8.77 real         6.01 user         2.80 sys
+          6096977920  maximum resident set size
+=== exit 0 15:08:16
+=== K20_L1_even 15:08:16
+        7.09 real         4.34 user         2.55 sys
+          6073958400  maximum resident set size
+=== exit 0 15:08:23
+=== K20_L1_odd 15:08:23
+        7.21 real         4.46 user         2.64 sys
+          6066536448  maximum resident set size
+=== exit 0 15:08:30
+=== K23_L1_even 15:08:30
+        6.81 real         4.02 user         2.50 sys
+          6055116800  maximum resident set size
+=== exit 0 15:08:37
+=== K23_L1_odd 15:08:37
+        6.93 real         4.10 user         2.61 sys
+          6045712384  maximum resident set size
+=== exit 0 15:08:44
+=== K20_L145_even 15:08:44
+       16.76 real        14.41 user         3.93 sys
+          6232948736  maximum resident set size
+=== exit 0 15:09:01
+=== K20_L145_odd 15:09:01
+       15.91 real        13.66 user         3.93 sys
+          6224740352  maximum resident set size
+=== exit 0 15:09:17
+=== EP5_L145_even 15:09:17
+       17.04 real        14.67 user         3.75 sys
+          6237929472  maximum resident set size
+=== exit 0 15:09:34
+=== EP5_L145_odd 15:09:34
+       15.90 real        13.50 user         3.85 sys
+          6241370112  maximum resident set size
+=== exit 0 15:09:49
+=== K20_L1494_even 15:09:50
+       15.67 real        13.20 user         3.76 sys
+          6221234176  maximum resident set size
+=== exit 0 15:10:05
+=== K20_L1494_odd 15:10:05
+       14.89 real        12.35 user         3.77 sys
+          6221479936  maximum resident set size
+=== exit 0 15:10:20
+=== T4_exp 15:10:20
+        5.40 real         3.46 user         2.33 sys
+          5998657536  maximum resident set size
+=== exit 0 15:10:26
+=== K20_L2_odd 15:10:26
+      198.66 real       197.66 user        17.46 sys
+          6653083648  maximum resident set size
+=== exit 0 15:13:44
+=== K23_L2_even 15:13:44
+      258.87 real       257.05 user        19.39 sys
+          6672990208  maximum resident set size
+=== exit 0 15:18:03
+=== K23_L2_odd 15:18:03
+      212.32 real       210.22 user        20.05 sys
+          6647906304  maximum resident set size
+=== exit 0 15:21:35
+=== K20_L2_even 15:21:50
+      154.37 real       153.82 user        18.17 sys
+          6854164480  maximum resident set size
+=== exit 0 15:24:25
+=== Asm_K4_L1 15:24:25
+        5.26 real         1.92 user         2.17 sys
+          5964988416  maximum resident set size
+=== exit 0 15:24:30
+=== Asm_K3_L1 15:24:30
+        5.22 real         2.01 user         2.20 sys
+          5966872576  maximum resident set size
+=== exit 0 15:24:35
+=== Asm_K20_L1 15:24:35
+        5.22 real         1.96 user         2.23 sys
+          5966577664  maximum resident set size
+=== exit 0 15:24:40
+=== Asm_K23_L1 15:24:40
+        5.09 real         1.92 user         2.16 sys
+          5966725120  maximum resident set size
+=== exit 0 15:24:45
+=== Asm_K20_L145 15:24:45
+        5.12 real         1.92 user         2.16 sys
+          5967937536  maximum resident set size
+=== exit 0 15:24:51
+=== Asm_EP5_L145 15:24:51
+        5.32 real         2.02 user         2.23 sys
+          5969313792  maximum resident set size
+=== exit 0 15:24:56
+=== Asm_K20_L1494 15:24:56
+        5.06 real         1.90 user         2.14 sys
+          5966921728  maximum resident set size
+=== exit 0 15:25:01
+=== Asm_K20_L2 15:25:01
+        5.06 real         1.89 user         2.16 sys
+          5996969984  maximum resident set size
+=== exit 0 15:25:06
+=== Asm_K23_L2 15:25:06
+        5.22 real         1.94 user         2.23 sys
+          5996560384  maximum resident set size
+=== exit 0 15:25:11
+=== Asm_K3_L2 15:25:11
+        5.31 real         2.03 user         2.19 sys
+          5966118912  maximum resident set size
+=== exit 0 15:25:17
+=== Field_EP5 15:25:17
+        4.84 real         1.60 user         2.11 sys
+          5807144960  maximum resident set size
+=== exit 0 15:25:21
+=== Field_K23 15:25:21
+        5.11 real         1.71 user         2.35 sys
+          5842550784  maximum resident set size
+=== exit 0 15:25:27
+=== Field_K20 15:25:27
+        4.95 real         1.64 user         2.26 sys
+          5846859776  maximum resident set size
+=== exit 0 15:25:32
+=== Field_K3 15:25:32
+        4.88 real         1.68 user         2.15 sys
+          5806325760  maximum resident set size
+=== exit 0 15:25:36
+=== CTRL_forged_K3_L1_even 15:25:36
+CTRL_forged_K3_L1_even.lean:295:37: error: Tactic `decide` proved that the proposition
+CTRL_forged_K3_L1_even.lean:296:38: error: Tactic `decide` proved that the proposition
+CTRL_forged_K3_L1_even.lean:297:38: error: Tactic `decide` proved that the proposition
+CTRL_forged_K3_L1_even.lean:298:38: error: Tactic `decide` proved that the proposition
+CTRL_forged_K3_L1_even.lean:299:38: error: Tactic `decide` proved that the proposition
+CTRL_forged_K3_L1_even.lean:300:38: error: Tactic `decide` proved that the proposition
+CTRL_forged_K3_L1_even.lean:301:38: error: Tactic `decide` proved that the proposition
+CTRL_forged_K3_L1_even.lean:302:38: error: Tactic `decide` proved that the proposition
+CTRL_forged_K3_L1_even.lean:303:38: error: Tactic `decide` proved that the proposition
+CTRL_forged_K3_L1_even.lean:304:38: error: Tactic `decide` proved that the proposition
+CTRL_forged_K3_L1_even.lean:305:40: error: Tactic `decide` proved that the proposition
+CTRL_forged_K3_L1_even.lean:306:40: error: Tactic `decide` proved that the proposition
+CTRL_forged_K3_L1_even.lean:307:40: error: Tactic `decide` proved that the proposition
+CTRL_forged_K3_L1_even.lean:308:39: error: Tactic `decide` proved that the proposition
+       10.17 real         7.53 user         2.81 sys
+          5985861632  maximum resident set size
+=== exit 1 15:25:47
+=== CTRL_forged_K4_L1_even 15:25:47
+CTRL_forged_K4_L1_even.lean:271:37: error: Tactic `decide` proved that the proposition
+CTRL_forged_K4_L1_even.lean:272:38: error: Tactic `decide` proved that the proposition
+CTRL_forged_K4_L1_even.lean:273:38: error: Tactic `decide` proved that the proposition
+CTRL_forged_K4_L1_even.lean:274:38: error: Tactic `decide` proved that the proposition
+CTRL_forged_K4_L1_even.lean:275:38: error: Tactic `decide` proved that the proposition
+CTRL_forged_K4_L1_even.lean:276:38: error: Tactic `decide` proved that the proposition
+CTRL_forged_K4_L1_even.lean:277:38: error: Tactic `decide` proved that the proposition
+CTRL_forged_K4_L1_even.lean:278:38: error: Tactic `decide` proved that the proposition
+CTRL_forged_K4_L1_even.lean:279:38: error: Tactic `decide` proved that the proposition
+CTRL_forged_K4_L1_even.lean:280:38: error: Tactic `decide` proved that the proposition
+CTRL_forged_K4_L1_even.lean:281:40: error: Tactic `decide` proved that the proposition
+CTRL_forged_K4_L1_even.lean:282:40: error: Tactic `decide` proved that the proposition
+CTRL_forged_K4_L1_even.lean:283:39: error: Tactic `decide` proved that the proposition
+        8.58 real         6.04 user         2.64 sys
+          5971460096  maximum resident set size
+=== exit 1 15:25:55
+=== CTRL_forged_K20_L1_even 15:25:55
+CTRL_forged_K20_L1_even.lean:255:37: error: Tactic `decide` proved that the proposition
+CTRL_forged_K20_L1_even.lean:256:38: error: Tactic `decide` proved that the proposition
+CTRL_forged_K20_L1_even.lean:257:38: error: Tactic `decide` proved that the proposition
+CTRL_forged_K20_L1_even.lean:258:38: error: Tactic `decide` proved that the proposition
+CTRL_forged_K20_L1_even.lean:259:38: error: Tactic `decide` proved that the proposition
+CTRL_forged_K20_L1_even.lean:260:38: error: Tactic `decide` proved that the proposition
+CTRL_forged_K20_L1_even.lean:261:38: error: Tactic `decide` proved that the proposition
+CTRL_forged_K20_L1_even.lean:262:38: error: Tactic `decide` proved that the proposition
+CTRL_forged_K20_L1_even.lean:263:38: error: Tactic `decide` proved that the proposition
+CTRL_forged_K20_L1_even.lean:264:38: error: Tactic `decide` proved that the proposition
+CTRL_forged_K20_L1_even.lean:265:40: error: Tactic `decide` proved that the proposition
+CTRL_forged_K20_L1_even.lean:266:39: error: Tactic `decide` proved that the proposition
+        7.42 real         4.98 user         2.68 sys
+          5910511616  maximum resident set size
+=== exit 1 15:26:03
+=== CTRL_forged_K23_L1_even 15:26:03
+CTRL_forged_K23_L1_even.lean:241:37: error: Tactic `decide` proved that the proposition
+CTRL_forged_K23_L1_even.lean:242:38: error: Tactic `decide` proved that the proposition
+CTRL_forged_K23_L1_even.lean:243:38: error: Tactic `decide` proved that the proposition
+CTRL_forged_K23_L1_even.lean:244:38: error: Tactic `decide` proved that the proposition
+CTRL_forged_K23_L1_even.lean:245:38: error: Tactic `decide` proved that the proposition
+CTRL_forged_K23_L1_even.lean:246:38: error: Tactic `decide` proved that the proposition
+CTRL_forged_K23_L1_even.lean:247:38: error: Tactic `decide` proved that the proposition
+CTRL_forged_K23_L1_even.lean:248:38: error: Tactic `decide` proved that the proposition
+CTRL_forged_K23_L1_even.lean:249:38: error: Tactic `decide` proved that the proposition
+CTRL_forged_K23_L1_even.lean:250:38: error: Tactic `decide` proved that the proposition
+CTRL_forged_K23_L1_even.lean:251:39: error: Tactic `decide` proved that the proposition
+        7.03 real         4.17 user         2.68 sys
+          5879775232  maximum resident set size
+=== exit 1 15:26:10
+=== CTRL_forged_EP5_L145_even 15:26:10
+CTRL_forged_EP5_L145_even.lean:475:37: error: Tactic `decide` proved that the proposition
+CTRL_forged_EP5_L145_even.lean:476:38: error: Tactic `decide` proved that the proposition
+CTRL_forged_EP5_L145_even.lean:477:38: error: Tactic `decide` proved that the proposition
+CTRL_forged_EP5_L145_even.lean:478:38: error: Tactic `decide` proved that the proposition
+CTRL_forged_EP5_L145_even.lean:479:38: error: Tactic `decide` proved that the proposition
+CTRL_forged_EP5_L145_even.lean:480:38: error: Tactic `decide` proved that the proposition
+CTRL_forged_EP5_L145_even.lean:481:38: error: Tactic `decide` proved that the proposition
+CTRL_forged_EP5_L145_even.lean:482:38: error: Tactic `decide` proved that the proposition
+CTRL_forged_EP5_L145_even.lean:483:38: error: Tactic `decide` proved that the proposition
+CTRL_forged_EP5_L145_even.lean:484:38: error: Tactic `decide` proved that the proposition
+CTRL_forged_EP5_L145_even.lean:485:40: error: Tactic `decide` proved that the proposition
+CTRL_forged_EP5_L145_even.lean:486:40: error: Tactic `decide` proved that the proposition
+CTRL_forged_EP5_L145_even.lean:487:40: error: Tactic `decide` proved that the proposition
+CTRL_forged_EP5_L145_even.lean:488:40: error: Tactic `decide` proved that the proposition
+CTRL_forged_EP5_L145_even.lean:489:40: error: Tactic `decide` proved that the proposition
+CTRL_forged_EP5_L145_even.lean:490:40: error: Tactic `decide` proved that the proposition
+CTRL_forged_EP5_L145_even.lean:491:40: error: Tactic `decide` proved that the proposition
+CTRL_forged_EP5_L145_even.lean:492:40: error: Tactic `decide` proved that the proposition
+CTRL_forged_EP5_L145_even.lean:493:40: error: Tactic `decide` proved that the proposition
+CTRL_forged_EP5_L145_even.lean:494:40: error: Tactic `decide` proved that the proposition
+=== exit 1 15:26:28
+=== K4_L2_even 15:37:22
+K4_L2_even.lean:1834:199: error: unsolved goals
+      544.55 real       524.03 user        33.62 sys
+          7845838848  maximum resident set size
+=== exit 1 15:46:27
+=== K4_L2_odd 15:46:27
+=== exit 143 15:47:01
+=== K4_L2_even 15:48:19
+      516.08 real       515.16 user        32.01 sys
+          7906459648  maximum resident set size
+=== exit 0 15:56:55
+=== K4_L2_odd 15:56:55
+      504.89 real       504.00 user        31.13 sys
+          7726333952  maximum resident set size
+=== exit 0 16:05:20
+=== Asm_K4_L2 16:05:20
+        5.57 real         2.07 user         2.34 sys
+          6028640256  maximum resident set size
+=== exit 0 16:05:25
+=== Field_K4 16:05:25
+        5.07 real         1.69 user         2.36 sys
+          5870796800  maximum resident set size
+=== exit 0 16:05:31
+=== RK1Floor 16:11:30
+       39.27 real         3.96 user         5.08 sys
+          6023331840  maximum resident set size
+=== exit 0 16:12:09
+=== EP5_E1_even_neg 16:12:09
+      284.00 real       282.25 user         8.64 sys
+         56603377664  maximum resident set size
+=== exit 0 16:16:53
+=== DH_L175_even_neg80 16:16:53
+       25.80 real        23.88 user         2.55 sys
+          9043722240  maximum resident set size
+=== exit 0 16:17:19
+=== DH_L175_odd_neg80 16:17:19
+       26.35 real        24.33 user         2.63 sys
+          9038217216  maximum resident set size
+=== exit 0 16:17:45
+=== Refusals 16:17:45
+Refusals.lean:13:14: error(lean.unknownIdentifier): Unknown constant `RK2.pgc_floor`
+        5.14 real         1.72 user         2.25 sys
+          5811404800  maximum resident set size
+=== exit 1 16:17:50
+=== K3_L2_even 16:18:00
+      943.99 real       945.75 user        48.41 sys
+         10320576512  maximum resident set size
+=== exit 0 16:33:44
+=== K3_L2_odd 16:33:44
+     1188.51 real      1186.92 user        51.72 sys
+          9452437504  maximum resident set size
+=== exit 0 16:53:32
+=== Asm_K3_L2 16:53:32
+        5.20 real         1.89 user         2.15 sys
+          6038798336  maximum resident set size
+=== exit 0 16:53:37
+=== Field_K3 16:53:37
+        4.85 real         1.59 user         2.11 sys
+          5882707968  maximum resident set size
+=== exit 0 16:53:42
+=== Refusals 17:03:08
+       51.23 real         1.79 user         4.91 sys
+          5817008128  maximum resident set size
+=== exit 0 17:03:59

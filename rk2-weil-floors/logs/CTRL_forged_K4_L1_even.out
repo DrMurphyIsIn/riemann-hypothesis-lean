@@ -1,0 +1,57 @@
+CTRL_forged_K4_L1_even.lean:271:37: error: Tactic `decide` proved that the proposition
+  blk D 0 10 = true
+is false
+CTRL_forged_K4_L1_even.lean:272:38: error: Tactic `decide` proved that the proposition
+  blk D 10 10 = true
+is false
+CTRL_forged_K4_L1_even.lean:273:38: error: Tactic `decide` proved that the proposition
+  blk D 20 10 = true
+is false
+CTRL_forged_K4_L1_even.lean:274:38: error: Tactic `decide` proved that the proposition
+  blk D 30 10 = true
+is false
+CTRL_forged_K4_L1_even.lean:275:38: error: Tactic `decide` proved that the proposition
+  blk D 40 10 = true
+is false
+CTRL_forged_K4_L1_even.lean:276:38: error: Tactic `decide` proved that the proposition
+  blk D 50 10 = true
+is false
+CTRL_forged_K4_L1_even.lean:277:38: error: Tactic `decide` proved that the proposition
+  blk D 60 10 = true
+is false
+CTRL_forged_K4_L1_even.lean:278:38: error: Tactic `decide` proved that the proposition
+  blk D 70 10 = true
+is false
+CTRL_forged_K4_L1_even.lean:279:38: error: Tactic `decide` proved that the proposition
+  blk D 80 10 = true
+is false
+CTRL_forged_K4_L1_even.lean:280:38: error: Tactic `decide` proved that the proposition
+  blk D 90 10 = true
+is false
+CTRL_forged_K4_L1_even.lean:281:40: error: Tactic `decide` proved that the proposition
+  blk D 100 10 = true
+is false
+CTRL_forged_K4_L1_even.lean:282:40: error: Tactic `decide` proved that the proposition
+  blk D 110 10 = true
+is false
+CTRL_forged_K4_L1_even.lean:283:39: error: Tactic `decide` proved that the proposition
+  blk D 120 4 = true
+is false
+        8.58 real         6.04 user         2.64 sys
+          5971460096  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+              448773  page reclaims
+                  10  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+               12306  voluntary context switches
+               24927  involuntary context switches
+            33172372  instructions retired
+            15106279  cycles elapsed
+             1540432  peak memory footprint

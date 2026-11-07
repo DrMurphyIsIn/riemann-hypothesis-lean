@@ -1,0 +1,11 @@
+PASS (fail): scripts/check_export.sh export work/guardtest/empty.ndjson 0 -> FAIL export empty.ndjson has 0 bytes (< 1 MB)
+PASS (fail): scripts/check_export.sh export work/guardtest/empty.ndjson 1 -> FAIL export rc 1 (empty.ndjson)
+PASS (fail): scripts/check_export.sh export work/guardtest/big.ndjson 1 -> FAIL export rc 1 (big.ndjson)
+PASS (ok): scripts/check_export.sh export work/guardtest/big.ndjson 0 -> OK export 2000000 bytes
+nanoda on the empty export: rc 0, Checked 0 declarations with no errors
+PASS (fail): scripts/check_export.sh nanoda work/guardtest/empty.ndjson work/guardtest/empty.nanoda 0 -> FAIL nanoda checked 0 declarations (empty.ndjson)
+PASS (ok): scripts/check_export.sh nanoda work/guardtest/big.ndjson work/guardtest/good.nanoda 0 -> OK nanoda checked 5 declarations
+PASS (fail): scripts/check_export.sh nanoda work/guardtest/big.ndjson work/guardtest/good.nanoda 101 -> FAIL nanoda rc 101 (big.ndjson)
+PASS (fail): scripts/run_export.sh NoSuchModule guardtest_e2e RK2.nothing -> 
+PASS: e2e logged NOT RUN
+guard tests: 9 passed, 0 failed

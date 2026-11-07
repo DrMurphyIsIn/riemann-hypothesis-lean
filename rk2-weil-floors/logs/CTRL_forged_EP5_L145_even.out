@@ -1,0 +1,87 @@
+CTRL_forged_EP5_L145_even.lean:475:37: error: Tactic `decide` proved that the proposition
+  blk D 0 10 = true
+is false
+CTRL_forged_EP5_L145_even.lean:476:38: error: Tactic `decide` proved that the proposition
+  blk D 10 10 = true
+is false
+CTRL_forged_EP5_L145_even.lean:477:38: error: Tactic `decide` proved that the proposition
+  blk D 20 10 = true
+is false
+CTRL_forged_EP5_L145_even.lean:478:38: error: Tactic `decide` proved that the proposition
+  blk D 30 10 = true
+is false
+CTRL_forged_EP5_L145_even.lean:479:38: error: Tactic `decide` proved that the proposition
+  blk D 40 10 = true
+is false
+CTRL_forged_EP5_L145_even.lean:480:38: error: Tactic `decide` proved that the proposition
+  blk D 50 10 = true
+is false
+CTRL_forged_EP5_L145_even.lean:481:38: error: Tactic `decide` proved that the proposition
+  blk D 60 10 = true
+is false
+CTRL_forged_EP5_L145_even.lean:482:38: error: Tactic `decide` proved that the proposition
+  blk D 70 10 = true
+is false
+CTRL_forged_EP5_L145_even.lean:483:38: error: Tactic `decide` proved that the proposition
+  blk D 80 10 = true
+is false
+CTRL_forged_EP5_L145_even.lean:484:38: error: Tactic `decide` proved that the proposition
+  blk D 90 10 = true
+is false
+CTRL_forged_EP5_L145_even.lean:485:40: error: Tactic `decide` proved that the proposition
+  blk D 100 10 = true
+is false
+CTRL_forged_EP5_L145_even.lean:486:40: error: Tactic `decide` proved that the proposition
+  blk D 110 10 = true
+is false
+CTRL_forged_EP5_L145_even.lean:487:40: error: Tactic `decide` proved that the proposition
+  blk D 120 10 = true
+is false
+CTRL_forged_EP5_L145_even.lean:488:40: error: Tactic `decide` proved that the proposition
+  blk D 130 10 = true
+is false
+CTRL_forged_EP5_L145_even.lean:489:40: error: Tactic `decide` proved that the proposition
+  blk D 140 10 = true
+is false
+CTRL_forged_EP5_L145_even.lean:490:40: error: Tactic `decide` proved that the proposition
+  blk D 150 10 = true
+is false
+CTRL_forged_EP5_L145_even.lean:491:40: error: Tactic `decide` proved that the proposition
+  blk D 160 10 = true
+is false
+CTRL_forged_EP5_L145_even.lean:492:40: error: Tactic `decide` proved that the proposition
+  blk D 170 10 = true
+is false
+CTRL_forged_EP5_L145_even.lean:493:40: error: Tactic `decide` proved that the proposition
+  blk D 180 10 = true
+is false
+CTRL_forged_EP5_L145_even.lean:494:40: error: Tactic `decide` proved that the proposition
+  blk D 190 10 = true
+is false
+CTRL_forged_EP5_L145_even.lean:495:40: error: Tactic `decide` proved that the proposition
+  blk D 200 10 = true
+is false
+CTRL_forged_EP5_L145_even.lean:496:40: error: Tactic `decide` proved that the proposition
+  blk D 210 10 = true
+is false
+CTRL_forged_EP5_L145_even.lean:497:39: error: Tactic `decide` proved that the proposition
+  blk D 220 6 = true
+is false
+       17.87 real        15.89 user         4.30 sys
+          6125355008  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+              459874  page reclaims
+                  10  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+               12981  voluntary context switches
+               57540  involuntary context switches
+            33285972  instructions retired
+            14860373  cycles elapsed
+             1540432  peak memory footprint

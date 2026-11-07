@@ -1,0 +1,51 @@
+CTRL_forged_K23_L1_even.lean:241:37: error: Tactic `decide` proved that the proposition
+  blk D 0 10 = true
+is false
+CTRL_forged_K23_L1_even.lean:242:38: error: Tactic `decide` proved that the proposition
+  blk D 10 10 = true
+is false
+CTRL_forged_K23_L1_even.lean:243:38: error: Tactic `decide` proved that the proposition
+  blk D 20 10 = true
+is false
+CTRL_forged_K23_L1_even.lean:244:38: error: Tactic `decide` proved that the proposition
+  blk D 30 10 = true
+is false
+CTRL_forged_K23_L1_even.lean:245:38: error: Tactic `decide` proved that the proposition
+  blk D 40 10 = true
+is false
+CTRL_forged_K23_L1_even.lean:246:38: error: Tactic `decide` proved that the proposition
+  blk D 50 10 = true
+is false
+CTRL_forged_K23_L1_even.lean:247:38: error: Tactic `decide` proved that the proposition
+  blk D 60 10 = true
+is false
+CTRL_forged_K23_L1_even.lean:248:38: error: Tactic `decide` proved that the proposition
+  blk D 70 10 = true
+is false
+CTRL_forged_K23_L1_even.lean:249:38: error: Tactic `decide` proved that the proposition
+  blk D 80 10 = true
+is false
+CTRL_forged_K23_L1_even.lean:250:38: error: Tactic `decide` proved that the proposition
+  blk D 90 10 = true
+is false
+CTRL_forged_K23_L1_even.lean:251:39: error: Tactic `decide` proved that the proposition
+  blk D 100 9 = true
+is false
+        7.03 real         4.17 user         2.68 sys
+          5879775232  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+              443094  page reclaims
+                  10  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+               12360  voluntary context switches
+               22813  involuntary context switches
+            33414814  instructions retired
+            16678917  cycles elapsed
+             1540432  peak memory footprint

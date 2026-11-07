@@ -1,0 +1,22 @@
+'RK1.EP5_E1_even_neg.neg' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RK1.DH_L175_even_neg80.neg' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RK1.DH_L175_odd_neg80.neg' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RK2.T4.exp_L24' depends on axioms: [propext, Classical.choice, Quot.sound]
+       51.23 real         1.79 user         4.91 sys
+          5817008128  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+              169116  page reclaims
+              268920  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   1  signals received
+              117179  voluntary context switches
+              212818  involuntary context switches
+            41018967  instructions retired
+            19738028  cycles elapsed
+             1540432  peak memory footprint
