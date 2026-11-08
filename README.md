@@ -263,8 +263,8 @@ That is `RK2.Asm_<cell>.rk_floor` for 18 cells:
 
 The floors are rounded down here; the exact rationals are in the Lean. They fall steeply as L grows. EP5 is the Epstein zeta
 function of m² + 5n². It has no Euler product, and by Davenport and Heilbronn it has zeros off the line. Below its crossing
-(L = 1.45) it is certified. At its crossing, L = 1.493945, the method refuses it: the kernel checks a negative direction of its
-head matrix, so there is no floor, while ℚ(√−5) passes at the same window. A refusal for the Davenport–Heilbronn function at
+(L = 1.45) it is certified. At its crossing, L = 1.493945, the method refuses it: given the ARB box, the kernel checks a negative direction
+of its head matrix, so there is no floor, while ℚ(√−5) passes at the same window. A refusal for the Davenport–Heilbronn function at
 L = 1.75 is included too. The method certifies windows. It does not detect zeros.
 
 **Trust classes.** Each `rk_floor` is an implication. The kernel checks that the named hypotheses imply the floor, and the
@@ -278,7 +278,8 @@ hypotheses are never asserted:
   - the bounds λ_D ≥ d (`hD`) and ε_C ≤ e (`hC`);
   - in the 7 cells marked †, at L = 2.25 and 2.4, the head floor itself (`hAe`, `hAo`, from a verified Cholesky
     factorisation).
-- **PAPER** (`hchain`): Theorem RK, which turns any common floor a of the two head forms into min(a, λ_D) − ε_C ≤ Qinf. It is
+- **PAPER** (`hchain`): Theorem RK, which turns any common floor a of the two head forms into min(a, λ_D) − ε_C ≤ Qinf (for the
+  EP5 control, its signed self-dual variant, Theorem RK′). It is
   proved on paper in a project memo that is not published here. That proof is AI-written and AI-reviewed, and it has not been
   refereed.
 
@@ -296,7 +297,9 @@ scripts/fetch_assets.sh     # download, decompress into lean/, check every sha25
 ```
 
 [`RELEASE_ASSETS.md`](rk2-weil-floors/RELEASE_ASSETS.md) lists the hashes and the few files that differ from the reviewed
-manifest. The build needs Lean v4.34.1 with Mathlib `d13f23b`, plain `lean` with no lake, and nanoda for the second kernel.
+manifest. The build needs Lean v4.34.1 with Mathlib `d13f23b`, plain `lean` with no lake, and nanoda for the second kernel. The check
+scripts use BSD `stat -f` and `md5 -q` (macOS); on GNU systems the 1 MB export guard degrades, though nanoda's "Checked N > 0"
+still blocks a vacuous pass.
 The order and the scripts are in [`rk2-weil-floors/README.md`](rk2-weil-floors/README.md). nanoda needs about 21 GB of memory
 for the refusals export.
 

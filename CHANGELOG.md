@@ -1,6 +1,6 @@
 # Changelog
 
-## v1.1.0 (2026-11-07)
+## v1.1.0 (2026-11-08)
 
 This release adds one package, [`rk2-weil-floors/`](rk2-weil-floors/), described in README §11. Apart from it, the README and the release metadata, nothing changes: the
 papers, `docs/PROGRESS.md`, `telperion/` (still copied from Arda `5d1c8c579`) and every existing Lean file are as in v1.0.2.
@@ -12,7 +12,7 @@ What the package proves: floors c ≤ inf R_K(g)/‖g‖² of Weil's form R_K, f
 theorem `RK2.Asm_<cell>.rk_floor` is an implication from named hypotheses, never asserted, of two kinds:
 
 - **ARB**, Arb interval arithmetic: the head boxes, λ_D and ε_C, and in 7 cells the head floor itself;
-- **PAPER**, Theorem RK: proved in an unpublished project memo, not refereed.
+- **PAPER**, Theorem RK (Theorem RK′, its signed self-dual variant, for the EP5 control): proved in an unpublished project memo. The proof is AI-written and AI-reviewed, and it has not been refereed.
 
 The kernel proves the rest: the head floors for every matrix in its box in 11 cells, by a new certificate shape (PGC), and
 all the arithmetic. The package also carries the earlier round's kernel refusals (EP5 at its crossing, Davenport–Heilbronn

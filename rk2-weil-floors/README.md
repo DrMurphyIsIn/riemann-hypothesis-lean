@@ -1,7 +1,7 @@
-# RK-2 kernel-checked package: certified floors of Weil's form R_K on fixed windows (release candidate, DRAFT)
+# rk2-weil-floors: kernel-checked floors of Weil's form R_K on fixed windows
 
-Track C of round RK-2, 2026-11-06. AI work; reviewed by bb (rk2/C/REVIEW_RK2_C.md 9fe25e97: PASS, CONFIRMED; R-1 done), not an operator
-read-back. Publication is the user's decision.
+Released in riemann-hypothesis-lean v1.1.0 (2026-11-08). AI work, reviewed by one separate AI session (PASS); there is no
+human read-back.
 
 **conjecture1_proved = False.** Nothing here is progress on RH or on GRH. Every statement covers one FIXED window
 V_L = C_c^∞(−L, L). Positivity of R_K on every window would be GRH for ζ_K, and nothing here comes near that.
